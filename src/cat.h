@@ -21,7 +21,7 @@ public:
 
     /// Ask the cat to tell you something.
     /// @return the thing the cat wants to say.
-    std::string meow();
+    std::string meow() const;
 
     /// @return the cat's name
     const std::string& name() const { return m_name; }

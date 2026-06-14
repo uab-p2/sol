@@ -20,7 +20,7 @@ void Cat::sleep() {
     m_hungry = true;
 }
 
-std::string Cat::meow() {
+std::string Cat::meow() const {
     std::string message = "Meow! (\"I am '" + m_name + "'.";
     if (m_sleepy) {
         message += " I am sleepy.";
@@ -28,6 +28,6 @@ std::string Cat::meow() {
     if (m_hungry) {
         message += " AND I'M HUNGRY!";
     }
-    message += ")";
+    message += "\")";
     return message;
 }
