@@ -11,4 +11,4 @@ clean:
 	@for d in $(SUBDIRS); do \
 		$(MAKE) -C $$d clean; \
 	done
-	rm -rf cmake-* 
+	rm -rf cmake-* out
