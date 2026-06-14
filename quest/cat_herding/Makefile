@@ -10,4 +10,4 @@ $(CMAKE_CACHE): CMakeLists.txt
 	cmake -S . -B $(BUILD_DIR)
 
 clean:
-	rm -rf build main test cmake-* out *.exe *.pdb *.ilk .vs 
+	rm -rf build main test *_main *_test cmake-* out *.exe *.pdb *.ilk .vs 
