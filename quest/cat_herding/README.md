@@ -1,8 +1,14 @@
 # Entre gatos
 
+<p align=center style="text-align: center">
+  <img src="../../doc/img/cat_herding.png" width="200" />
+</p>
+
 El objetivo de este quest es familiarizarte con la mentalidad felina
 a través del uso de *clases*, también conocido como *programación orientada a objetos (OOP)*.
 Te ofrecemos un puñado de preguntas guiadas, tras las cuales te proponemos un reto final.
+
+## Preguntas guiadas
 
 0. Descarga el proyecto SOL y abre `CMakeLists.txt` con tu IDE favorito.
    Puedes descargarlo:
@@ -41,14 +47,21 @@ Te ofrecemos un puñado de preguntas guiadas, tras las cuales te proponemos un r
     - Haz una tabla resumen con (a) la nueva sintaxis aprendida, y (b) para qué sirve.
     - ¿Hay algún aspecto todavía misterioso?
 
-Casi todos los gatos prefieren tener una persona ~~esclava~~ cuidadora.
-Modifica [main.cpp](main.cpp) (pero no modifiques [../../src/cat.h](../../src/cat.h)
-ni [../../src/cat.cpp](../../src/cat.cpp)) para que implemente una nueva demo de tu cosecha.
-Esta demo debe crear al menos una nueva clase `Caregiver` (puedes crear más clases si quieres)
-que pueda interactuar con la clase `Cat`. Antes de programar nada:
+## Reto final
 
-- Crea un diagrama de estados de `Caregiver`.
-- Dibuja un diagrama de carriles (swimlane) con el guión de tu demo.
+Casi todos los gatos prefieren tener una persona ~~esclava~~ cuidadora.
+¿Puedes crear una clase `Caregiver` que interactúe con la clase `Cat`?
+
+Antes de programar nada:
+
+* Crea un diagrama de estados de `Caregiver`.
+* Dibuja un diagrama de carriles (swimlane) con el guión de tu demo.
+
+Para la implementación:
+
+* Crea al menos `caregiver.h`, `caregiver.cpp` y define una nueva clase `Caregiver`.
+* Modifica `main.cpp` para que siga tu guión.
+* No modifiques ningún fichero de `../src` (en ningún quest).
 
 # Tags
 
