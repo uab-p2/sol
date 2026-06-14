@@ -68,9 +68,11 @@ Testing/
 .cache/
 .vs
 
+# Project SOL custom
 main
 test
 *_main
 *_test
 !test/
 Thumbs.db*
+quest/solution_*
