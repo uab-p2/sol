@@ -10,6 +10,16 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Paths
 set(ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../..")
 set(SRC_DIR "${ROOT_DIR}/src")
+
+# When included from a top-level CMake project, avoid global target name collisions.
+if (DEFINED QUEST_TARGET_PREFIX AND NOT QUEST_TARGET_PREFIX STREQUAL "")
+    set(MAIN_TARGET "${QUEST_TARGET_PREFIX}_main")
+    set(TEST_TARGET "${QUEST_TARGET_PREFIX}_test")
+else ()
+    set(MAIN_TARGET main)
+    set(TEST_TARGET test)
+endif ()
+
 file(GLOB SHARED_CPP CONFIGURE_DEPENDS
         "${SRC_DIR}/*.cpp"
 )
@@ -21,7 +31,7 @@ file(GLOB QUEST_MAIN_CPP CONFIGURE_DEPENDS
 list(REMOVE_ITEM QUEST_MAIN_CPP
         "${CMAKE_CURRENT_SOURCE_DIR}/test.cpp"
 )
-add_executable(main
+add_executable(${MAIN_TARGET}
         ${QUEST_MAIN_CPP}
         ${SHARED_CPP}
 )
@@ -33,13 +43,13 @@ file(GLOB QUEST_TEST_CPP CONFIGURE_DEPENDS
 list(REMOVE_ITEM QUEST_TEST_CPP
         "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
 )
-add_executable(test
+add_executable(${TEST_TARGET}
         ${QUEST_TEST_CPP}
         ${SHARED_CPP}
 )
 
 # Debug-friendly flags in a portable way (MSVC, GCC, Clang).
-foreach (target main test)
+foreach (target ${MAIN_TARGET} ${TEST_TARGET})
     target_compile_options(${target} PRIVATE
             $<$<AND:$<CONFIG:Debug>,$<CXX_COMPILER_ID:MSVC>>:/Od /Zi>
             $<$<AND:$<CONFIG:Debug>,$<NOT:$<CXX_COMPILER_ID:MSVC>>>:-O0 -g>
@@ -69,7 +79,7 @@ endif ()
 # Also handle multi-config generators (VS, XC, CL)
 foreach (config Debug Release RelWithDebInfo MinSizeRel)
     string(TOUPPER "${config}" config_upper)
-    foreach (target main test)
+    foreach (target ${MAIN_TARGET} ${TEST_TARGET})
         set_target_properties(${target} PROPERTIES
                 RUNTIME_OUTPUT_DIRECTORY_${config_upper} "${CMAKE_CURRENT_SOURCE_DIR}"
         )

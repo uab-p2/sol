@@ -70,5 +70,7 @@ Testing/
 
 main
 test
+*_main
+*_test
 !test/
 Thumbs.db*
