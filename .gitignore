@@ -76,3 +76,5 @@ test
 !test/
 Thumbs.db*
 quest/solution_*
+quest/quest_template
+gradescope
