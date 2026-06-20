@@ -3,6 +3,7 @@
 </p>
 
 ## Estructura
-* [quest/](quest/): retos del proyecto SOL
+
+* [quest/](quest/): módulos con retos guiados e individuales
 * [src/](src/): base de código común para todos los quests
 * [doc/](doc/): documentación del proyecto
