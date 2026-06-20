@@ -5,8 +5,8 @@ para el proyecto SOL.
 
 ## Herramientas disponibles
 
-- `tag.py`: utilidades para leer `README.md` de cada quest y extraer metadatos (`título`, `descripción`, `tags`).
-- `autoindex.py`: genera automáticamente `quest/README.md` a partir de los quests detectados.
+- `tool/tag.py`: utilidades para leer `README.md` de cada quest y extraer metadatos (`título`, `descripción`, `tags`).
+- `tool/autoindex.py`: genera automáticamente `quest/README.md` a partir de los quests detectados.
   - Construye secciones por categorías y por quests.
   - Soporta filtros (`--tag`) y exclusiones (`--ignore`).
 
@@ -23,6 +23,6 @@ para el proyecto SOL.
 
 1. Editar o crear quests en `quest/<módulo>/README.md`.
 2. Ajustar descripciones de categorías en `doc/categories.md` si hace falta.
-3. Regenerar índice con `./doc/autoindex.py`.
+3. Regenerar índice con `./doc/tool/autoindex.py`.
 4. Revisar salida en `quest/README.md`.
 

@@ -8,7 +8,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-DEFAULT_QUEST_DIR = Path("../quest")
+DEFAULT_QUEST_DIR = Path(__file__).resolve().parents[2] / "quest"
 __all__ = [
     "Tag",
     "Metadata",

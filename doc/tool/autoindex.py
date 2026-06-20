@@ -6,8 +6,11 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+import os
 from pathlib import Path
 
+# Add the parent directory to the path so we can import tag
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from tag import Metadata, list_metadata, list_tag_names
 
 LABEL_SECTION_CATEGORIES = "Categories"
@@ -22,8 +25,9 @@ QUESTS_INTRO = """\
 Listado alfabético de quests.
 """
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_CATEGORIES_PATH = Path(__file__).resolve().with_name("categories.md")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_QUEST_DIR = PROJECT_ROOT / "quest"
+DEFAULT_CATEGORIES_PATH = PROJECT_ROOT / "doc" / "categories.md"
 
 
 def _resolve_base_dir(base_dir: str | Path) -> Path:
@@ -235,7 +239,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "dir",
         nargs="?",
-        default="../quest",
+        default=DEFAULT_QUEST_DIR,
         type=Path,
         help="Base quest directory (contains module subfolders with README.md)",
     )
