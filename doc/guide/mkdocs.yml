@@ -7,14 +7,16 @@ site_dir: html
 
 nav:
   - main(): index.md
-  - Campañas:
+  - quest():
       - Intro : campaigns.md
       - Admisión : campaign_admision.md
       - Objetos celestes : campaign_oop.md
       - Pasos acelerados : campaign_algorithms.md
       - Recuerdos sintéticos : campaign_memory.md
-  - Codex:
+  - help():
       - Intro : codices.md
+      - Sintaxis : codex_oop_syntax.md
+      - Contenedores STL : codex_stl_usage.md
 
 theme:
   name: material
