@@ -66,6 +66,7 @@ plugins:
   - search
   - minify:
       minify_html: true
+  - macros
 
 extra:
   generator: false

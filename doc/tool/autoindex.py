@@ -26,9 +26,9 @@ QUESTS_INTRO = """\
 Listado alfabético de quests.
 """
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+from tag import PROJECT_ROOT, DEFAULT_QUEST_DIR, DEFAULT_TAG_DIR
+
 DEFAULT_QUEST_DIR = PROJECT_ROOT / "quest"
-DEFAULT_CATEGORIES_PATH = PROJECT_ROOT / "doc" / "categories.md"
 DEFAULT_TAG_DIR = PROJECT_ROOT / "doc" / "tag"
 
 
@@ -145,12 +145,10 @@ def list_defined_categories(categories_path: Path) -> list[str]:
 
     return sorted(read_category_descriptions(categories_path).keys())
 
-
-def build_index_markdown(
-        base_dir: Path,
+def md_list_quests(
+        base_dir: Path = DEFAULT_QUEST_DIR,
         ignored_tags: set[str] | None = None,
         tag_filter: set[str] | None = None,
-        categories_path: Path | None = None,
 ) -> str:
     """Build markdown content for the generated quest index README.
 
@@ -158,16 +156,11 @@ def build_index_markdown(
         base_dir: Base quest directory.
         ignored_tags: Set of tag names to exclude quests by (default: none).
         tag_filter: Optional set of tag names to include; if None, all categories shown alphabetically.
-        categories_path: Path to categories markdown file (default: doc/categories.md).
     """
 
     if ignored_tags is None:
         ignored_tags = set()
 
-    if categories_path is None:
-        categories_path = DEFAULT_CATEGORIES_PATH
-
-    category_descriptions = read_category_descriptions(categories_path)
     metadata_list = list_metadata(base_dir)
 
     if tag_filter:
@@ -200,23 +193,7 @@ def build_index_markdown(
             seen_names.add(tag.name)
             tag_items.append(tag)
 
-    lines: list[str] = [f"# {LABEL_QUEST_INDEX}", "", LABEL_INTRO.strip(), "", f"## {LABEL_SECTION_CATEGORIES}", "",
-                        CATEGORIES_INTRO.strip(), ""]
-
-    if tag_filter:
-        tag_items = [Tag(name=tag_name) for tag_name in tag_names]
-
-    for tag in tag_items:
-        display_name = tag.title or tag.name
-        lines.append(f"* **{display_name}**")
-        # category_description = category_descriptions.get(tag_name, "").strip()
-        # if category_description:
-        #     lines.append(category_description)
-        #     lines.append("")
-        for metadata in _members_for_tag(filtered_metadata, tag.name):
-            module_name = metadata.module_path.as_posix()
-            lines.append(f"  - [{metadata.title}](#quest-{_slug(module_name)})")
-        lines.append("")
+    lines: list[str] = []
 
     lines.extend([f"## {LABEL_SECTION_QUESTS}", "", QUESTS_INTRO.strip(), ""])
 
@@ -230,9 +207,6 @@ def build_index_markdown(
         lines.append(f"<a id=\"{anchor}\"></a>")
         lines.append("")
         lines.append(f"* **[{metadata.title}]({module_name})** ({', '.join(categories)})")
-        # if first_paragraph:
-        #     lines.append("")
-        #     lines.append(first_paragraph)
         lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
@@ -275,13 +249,6 @@ def build_parser() -> argparse.ArgumentParser:
         help="Comma-separated list of tag names to include (default: show all categories alphabetically)",
     )
 
-    parser.add_argument(
-        "--categories",
-        type=Path,
-        default=DEFAULT_CATEGORIES_PATH,
-        help="Categories markdown file",
-    )
-
     return parser
 
 
@@ -291,13 +258,12 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     base_dir = _resolve_base_dir(args.dir)
     readme_path = Path(args.readme) if args.readme is not None else base_dir / "README.md"
-    categories_path = args.categories
 
     ignored_tags = {tag_name.strip() for tag_name in args.ignore.split(",") if tag_name.strip()}
     tag_filter = {tag_name.strip() for tag_name in args.tag.split(",") if tag_name.strip()} or None
 
     try:
-        content = build_index_markdown(base_dir, ignored_tags, tag_filter, categories_path)
+        content = md_list_quests(base_dir, ignored_tags, tag_filter)
     except ValueError as error:
         print(f"Error: {error}", file=sys.stderr)
         return 1

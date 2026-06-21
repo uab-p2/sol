@@ -1,15 +1,3 @@
-# Índice de quests
-
-Índice de quests disponibles en el proyecto SOL.
-
-## Categorías
-
-Campañas y categorías de quests.
-
-* **Admisión**
-  - [Arranca tu nave](#quest-platform-setup)
-  - [Entre gatos](#quest-cat-herding)
-
 ## Quests
 
 Listado alfabético de quests.
