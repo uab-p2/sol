@@ -19,13 +19,19 @@ def define_env(env):
 
     @env.macro
     def tag_title(tag_name):
-        tag = [t for t in list_tags() if t.name == tag_name][0]
-        return tag.title
+        try:
+            tag = [t for t in list_tags() if t.name == tag_name][0]
+            return tag.title
+        except IndexError:
+            return ""
 
     @env.macro
     def tag_description(tag_name):
-        tag = [t for t in list_tags() if t.name == tag_name][0]
-        return tag.description
+        try:
+            tag = [t for t in list_tags() if t.name == tag_name][0]
+            return tag.description
+        except IndexError:
+            return ""
 
     @env.macro
     def tag_quests(tag_name):

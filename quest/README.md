@@ -9,3 +9,7 @@ Listado alfabético de quests.
 <a id="quest-entre-gatos"></a>
 
 * **[Entre gatos](entre_gatos)** (admision)
+
+<a id="quest-placeholder"></a>
+
+* **[Placeholder](placeholder)** (algorithms, memory, oop)
