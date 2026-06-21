@@ -109,42 +109,6 @@ def _members_for_tag(metadata_list: list[Metadata], tag_name: str) -> list[Metad
     return sorted(regular_matches, key=lambda metadata: metadata.module_path.as_posix())
 
 
-def read_category_descriptions(categories_path: Path) -> dict[str, str]:
-    """Read markdown category descriptions keyed by top-level `#` headings."""
-
-    if not categories_path.exists():
-        return {}
-
-    lines = categories_path.read_text(encoding="utf-8").splitlines()
-    descriptions: dict[str, str] = {}
-    current_name: str | None = None
-    current_lines: list[str] = []
-
-    def flush_current() -> None:
-        if current_name is None:
-            return
-        descriptions[current_name] = "\n".join(current_lines).strip()
-
-    for line in lines:
-        match = re.match(r"^#\s+(.+?)\s*$", line)
-        if match:
-            flush_current()
-            current_name = match.group(1).strip()
-            current_lines = []
-            continue
-
-        if current_name is not None:
-            current_lines.append(line)
-
-    flush_current()
-    return descriptions
-
-
-def list_defined_categories(categories_path: Path) -> list[str]:
-    """List category names defined in the categories markdown file."""
-
-    return sorted(read_category_descriptions(categories_path).keys())
-
 def md_list_quests(
         base_dir: Path = DEFAULT_QUEST_DIR,
         ignored_tags: set[str] | None = None,
