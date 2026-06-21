@@ -37,7 +37,12 @@ def define_env(env):
     def tag_quests(tag_name):
         """List the quests of a given tag (campaign)."""
         lines = []
+        # for quest_metadata in list_metadata_for_tag(DEFAULT_QUEST_DIR, tag_name):
+        #     lines.append("* [" + quest_metadata.title + "](" + GITHUB_QUEST_URL + "/" + os.path.basename(
+        #         quest_metadata.module_path.resolve().as_posix()) + ")")
         for quest_metadata in list_metadata_for_tag(DEFAULT_QUEST_DIR, tag_name):
-            lines.append("* [" + quest_metadata.title + "](" + GITHUB_QUEST_URL + "/" + os.path.basename(
+            lines.append("### [" + quest_metadata.title + "](" + GITHUB_QUEST_URL + "/" + os.path.basename(
                 quest_metadata.module_path.resolve().as_posix()) + ")")
+            lines.append(quest_metadata.description.strip().split("\n\n")[0])
+            lines.append("")
         return "\n".join(lines)

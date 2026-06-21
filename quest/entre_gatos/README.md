@@ -1,9 +1,5 @@
 # Entre gatos
 
-<p align=center style="text-align: center">
-  <img src="../../doc/img/cat_herding.png" width="200" />
-</p>
-
 El objetivo de este quest es familiarizarte con la mentalidad felina
 a través del uso de *clases*, también conocido como *programación orientada a objetos (OOP)*.
 Te ofrecemos un puñado de preguntas guiadas, tras las cuales te proponemos un reto final.
