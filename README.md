@@ -2,6 +2,8 @@
   <img src="doc/img/sol_logo.png" width="200" />
 </p>
 
+[Guía de estudio](https://uab-p2.github.io/sol)
+
 ## Estructura
 
 * [quest/](quest/): módulos con retos guiados e individuales

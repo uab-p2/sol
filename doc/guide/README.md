@@ -11,7 +11,7 @@ Campañas de quests y documentos de referencia.
 
 sudo apt install python3 python3-pip make 
 
-pip install mkdocs mkdocs-material pymdown-extensions mkdocs-minify-plugin
+pip install mkdocs mkdocs-material pymdown-extensions mkdocs-minify-plugin mkdocs-macros-plugin
 
 ## Añadir contenido
 
