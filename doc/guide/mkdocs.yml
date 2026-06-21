@@ -1,0 +1,71 @@
+site_name: Guía de estudio P2
+site_description: Guía de estudio P2
+site_author: Profesorado Programación 2, UAB
+
+docs_dir: sections
+site_dir: html
+
+nav:
+  - main(): index.md
+  - Campañas:
+      - Intro : campaigns.md
+      - Admisión : campaign_bootcamp.md
+      - Objetos celestes : campaign_oop.md
+      - Pasos acelerados : campaign_algorithms.md
+      - Recuerdos sintéticos : campaign_memory.md
+  - Codex:
+      - Intro : codices.md
+
+theme:
+  name: material
+
+  icon:
+#    logo: material/weather-sunny
+    logo: material/white-balance-sunny
+
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+  palette:
+    - scheme: slate
+      primary: deep orange
+      accent: amber
+      toggle:
+        icon: material/tune
+        name: Light mode
+
+    - scheme: default
+      primary: deep orange
+      accent: amber
+      toggle:
+        icon: material/tune
+        name: Dark mode
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+extra:
+  generator: false
