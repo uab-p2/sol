@@ -20,7 +20,6 @@ theme:
   name: material
 
   icon:
-#    logo: material/weather-sunny
     logo: material/white-balance-sunny
 
   features:
