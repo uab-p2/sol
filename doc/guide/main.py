@@ -18,11 +18,20 @@ def define_env(env):
         return subprocess.check_output(command, shell=True, text=True).strip()
 
     @env.macro
-    def list_quests(tag_name):
+    def tag_title(tag_name):
+        tag = [t for t in list_tags() if t.name == tag_name][0]
+        return tag.title
+
+    @env.macro
+    def tag_description(tag_name):
+        tag = [t for t in list_tags() if t.name == tag_name][0]
+        return tag.description
+
+    @env.macro
+    def tag_quests(tag_name):
         """List the quests of a given tag (campaign)."""
         lines = []
         for quest_metadata in list_metadata_for_tag(DEFAULT_QUEST_DIR, tag_name):
             lines.append("* [" + quest_metadata.title + "](" + GITHUB_QUEST_URL + "/" + os.path.basename(
                 quest_metadata.module_path.resolve().as_posix()) + ")")
-
         return "\n".join(lines)
