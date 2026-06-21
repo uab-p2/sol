@@ -2,10 +2,10 @@
 
 Listado alfabético de quests.
 
-<a id="quest-platform-setup"></a>
+<a id="quest-arranca-tu-nave"></a>
 
-* **[Arranca tu nave](platform_setup)** (admision)
+* **[Arranca tu nave](arranca_tu_nave)** (admision)
 
-<a id="quest-cat-herding"></a>
+<a id="quest-entre-gatos"></a>
 
-* **[Entre gatos](cat_herding)** (admision)
+* **[Entre gatos](entre_gatos)** (admision)
