@@ -11,15 +11,16 @@ from pathlib import Path
 
 # Add the parent directory to the path so we can import tag
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from tag import Metadata, list_metadata, list_tag_names
+from tag import Metadata, Tag, list_metadata, list_tag_names, list_tags
 
-LABEL_SECTION_CATEGORIES = "Categories"
+LABEL_SECTION_CATEGORIES = "Categorías"
 LABEL_SECTION_QUESTS = "Quests"
+LABEL_QUEST_INDEX = "Índice de quests"
 LABEL_INTRO = """\
 Índice de quests disponibles en el proyecto SOL.
 """
 CATEGORIES_INTRO = """\
-Categorías y series de quests.
+Campañas y categorías de quests.
 """
 QUESTS_INTRO = """\
 Listado alfabético de quests.
@@ -28,6 +29,7 @@ Listado alfabético de quests.
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_QUEST_DIR = PROJECT_ROOT / "quest"
 DEFAULT_CATEGORIES_PATH = PROJECT_ROOT / "doc" / "categories.md"
+DEFAULT_TAG_DIR = PROJECT_ROOT / "doc" / "tag"
 
 
 def _resolve_base_dir(base_dir: str | Path) -> Path:
@@ -190,27 +192,35 @@ def build_index_markdown(
     if tag_filter:
         tag_names = sorted(tag_filter)
     else:
-        all_tags = list_tag_names(base_dir)
-        tag_names = [tag_name for tag_name in all_tags if tag_name not in ignored_tags]
+        seen_names: set[str] = set()
+        tag_items: list[Tag] = []
+        for tag in list_tags(base_dir):
+            if tag.name in ignored_tags or tag.name in seen_names:
+                continue
+            seen_names.add(tag.name)
+            tag_items.append(tag)
 
-    lines: list[str] = ["# Quest Index", "", LABEL_INTRO.strip(), "", f"## {LABEL_SECTION_CATEGORIES}", "",
+    lines: list[str] = [f"# {LABEL_QUEST_INDEX}", "", LABEL_INTRO.strip(), "", f"## {LABEL_SECTION_CATEGORIES}", "",
                         CATEGORIES_INTRO.strip(), ""]
 
-    for tag_name in tag_names:
-        lines.append(f"### {tag_name}")
-        category_description = category_descriptions.get(tag_name, "").strip()
-        if category_description:
-            lines.append(category_description)
-            lines.append("")
+    if tag_filter:
+        tag_items = [Tag(name=tag_name) for tag_name in tag_names]
 
-        for metadata in _members_for_tag(filtered_metadata, tag_name):
+    for tag in tag_items:
+        display_name = tag.title or tag.name
+        lines.append(f"* **{display_name}**")
+        # category_description = category_descriptions.get(tag_name, "").strip()
+        # if category_description:
+        #     lines.append(category_description)
+        #     lines.append("")
+        for metadata in _members_for_tag(filtered_metadata, tag.name):
             module_name = metadata.module_path.as_posix()
-            lines.append(f"- [{module_name}](#quest-{_slug(module_name)})")
+            lines.append(f"  - [{metadata.title}](#quest-{_slug(module_name)})")
         lines.append("")
 
     lines.extend([f"## {LABEL_SECTION_QUESTS}", "", QUESTS_INTRO.strip(), ""])
 
-    for metadata in sorted(filtered_metadata, key=lambda item: item.module_path.as_posix()):
+    for metadata in sorted(filtered_metadata, key=lambda item: item.title.lower()):
         module_name = metadata.module_path.as_posix()
         anchor = f"quest-{_slug(module_name)}"
         categories = sorted({tag.name for tag in metadata.tags if tag.name not in ignored_tags})
@@ -218,11 +228,11 @@ def build_index_markdown(
         first_paragraph = _first_paragraph(metadata.description)
 
         lines.append(f"<a id=\"{anchor}\"></a>")
-        lines.append(f"### [{metadata.title}]({module_name})")
-        lines.append(f"({', '.join(categories)})")
-        if first_paragraph:
-            lines.append("")
-            lines.append(first_paragraph)
+        lines.append("")
+        lines.append(f"* **[{metadata.title}]({module_name})** ({', '.join(categories)})")
+        # if first_paragraph:
+        #     lines.append("")
+        #     lines.append(first_paragraph)
         lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
@@ -254,7 +264,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--ignore",
         type=str,
-        default="",
+        default="plantilla,solucion",
         help="Comma-separated list of tag names to exclude quests",
     )
 

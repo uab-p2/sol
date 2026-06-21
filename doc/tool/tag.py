@@ -8,12 +8,18 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-DEFAULT_QUEST_DIR = Path(__file__).resolve().parents[2] / "quest"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_QUEST_DIR = PROJECT_ROOT / "quest"
+DEFAULT_TAG_DIR = PROJECT_ROOT / "doc" / "tag"
 __all__ = [
     "Tag",
     "Metadata",
+    "parse_tags",
     "read_readme_metadata",
+    "read_tag_metadata",
     "list_metadata",
+    "list_tag_metadata",
+    "list_tags",
     "list_tag_names",
     "list_metadata_for_tag",
     "list_metadata_for_series",
@@ -22,10 +28,12 @@ __all__ = [
 
 @dataclass(slots=True)
 class Tag:
-    """A README tag name with an optional numeric index from `name:<number>`."""
+    """A tag reference, optionally enriched with metadata from `doc/tag/<name>.md`."""
 
     name: str
     index: int | None = None
+    title: str = ""
+    description: str = ""
 
     def __lt__(self, other: Tag) -> bool:
         return self.name < other.name
@@ -50,7 +58,7 @@ def format_tag(tag: Tag) -> str:
     return tag.name if tag.index is None else f"{tag.name}:{tag.index}"
 
 
-def parse_tags(tag_text: str) -> list[Tag]:
+def _parse_readme_tags(tag_text: str) -> list[Tag]:
     """Parse a tags section into `Tag` objects from space/comma-separated tokens."""
 
     tags: list[Tag] = []
@@ -60,6 +68,35 @@ def parse_tags(tag_text: str) -> list[Tag]:
             raise ValueError(f"Invalid tag {raw_tag!r}")
         tags.append(Tag(name=match.group(1), index=int(match.group(2)) if match.group(2) is not None else None))
     return tags
+
+
+def parse_tags(tag_path: str | Path) -> Tag:
+    """Parse a tag markdown file into a `Tag` object.
+
+    The tag name comes from the file stem, the title from the first level-1
+    markdown heading, and the description from the rest of the file.
+    """
+
+    path = Path(tag_path)
+    text = path.read_text(encoding="utf-8")
+    lines = text.splitlines()
+
+    title_index = next(
+        (index for index, line in enumerate(lines) if re.match(r"^#\s+.+\S\s*$", line)),
+        None,
+    )
+    if title_index is None:
+        raise ValueError(f"No title found in {path}")
+
+    title = re.sub(r"^#\s+", "", lines[title_index]).strip()
+    description = "\n".join(lines[title_index + 1:]).strip()
+    return Tag(name=path.stem, title=title, description=description)
+
+
+def read_tag_metadata(tag_path: Path) -> Tag:
+    """Read metadata for one standalone markdown tag file."""
+
+    return parse_tags(tag_path)
 
 
 def read_readme_metadata(readme_path: Path) -> Metadata:
@@ -94,7 +131,7 @@ def read_readme_metadata(readme_path: Path) -> Metadata:
 
     description = "\n".join(lines[title_index + 1: tags_index]).strip()
     tag_text = "\n".join(lines[tags_index + 1:]).strip()
-    tags = parse_tags(tag_text)
+    tags = _parse_readme_tags(tag_text)
     if not tags:
         raise ValueError(f"No tags found in {readme_path}")
 
@@ -134,6 +171,34 @@ def list_metadata(root_dir: str | Path = DEFAULT_QUEST_DIR) -> list[Metadata]:
         metadata_list.append(metadata)
 
     return metadata_list
+
+
+def list_tag_metadata(tag_dir: str | Path = DEFAULT_TAG_DIR) -> list[Tag]:
+    """Return metadata for every standalone tag markdown file in `tag_dir`."""
+
+    root = _resolve_root_dir(tag_dir)
+    tag_paths = sorted((child for child in root.iterdir() if child.is_file() and child.suffix == ".md"), key=lambda path: path.stem)
+    return [read_tag_metadata(tag_path) for tag_path in tag_paths]
+
+
+def list_tags(root_dir: str | Path = DEFAULT_QUEST_DIR, tag_dir: str | Path = DEFAULT_TAG_DIR) -> list[Tag]:
+    """Return unique tags sorted alphabetically, enriched with tag-file metadata."""
+
+    metadata_list = list_metadata(root_dir)
+    unique_tags: dict[tuple[str, int | None], Tag] = {}
+    for metadata in metadata_list:
+        for tag in metadata.tags:
+            unique_tags.setdefault((tag.name, tag.index), tag)
+
+    tag_metadata = {tag.name: tag for tag in list_tag_metadata(tag_dir)}
+    for tag in unique_tags.values():
+        metadata = tag_metadata.get(tag.name)
+        if metadata is None:
+            continue
+        tag.title = metadata.title
+        tag.description = metadata.description
+
+    return sorted(unique_tags.values(), key=lambda tag: (tag.name, -1 if tag.index is None else tag.index))
 
 
 def list_tag_names(root_dir: str | Path = DEFAULT_QUEST_DIR) -> list[str]:
