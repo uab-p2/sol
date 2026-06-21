@@ -65,4 +65,4 @@ Para la implementación:
 
 # Tags
 
-oop, encapsulation, diagram
+admision:2
