@@ -1,10 +1,4 @@
-<p align=center style="text-align: center">
-  <img src="doc/img/sol_logo.png" width="200" />
-</p>
-
-
-
-## Estructura
+# Proyecto SOL
 
 * [quest/](quest/): módulos con retos guiados e individuales
 * [src/](src/): base de código común para todos los quests
