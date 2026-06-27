@@ -8,10 +8,7 @@ import re
 import sys
 import os
 from pathlib import Path
-
-# Add the parent directory to the path so we can import tag
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from tag import Metadata, Tag, list_metadata, list_tag_names, list_tags
+from quest import Quest, Tag
 
 LABEL_SECTION_CATEGORIES = "Categorías"
 LABEL_SECTION_QUESTS = "Quests"
@@ -26,10 +23,70 @@ QUESTS_INTRO = """\
 Listado alfabético de quests.
 """
 
-from tag import PROJECT_ROOT, DEFAULT_QUEST_DIR, DEFAULT_TAG_DIR
+DEFAULT_IGNORED_TAGS = "plantilla,solucion"
 
-DEFAULT_QUEST_DIR = PROJECT_ROOT / "quest"
-DEFAULT_TAG_DIR = PROJECT_ROOT / "doc" / "tag"
+from quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, DEFAULT_TAG_DIR
+
+
+def md_list_quests(
+        base_dir: Path = DEFAULT_QUEST_DIR,
+        ignored_tags: set[str] | None = None,
+        tag_filter: set[str] | None = None,
+) -> str:
+    """Generate a Markdown-formatted list of quests, optionally filtered by tag.
+    :param ignored_tags: names of tags to exclude from the output.
+    :param tag_filter: return only quests that contain at least one tag with name equal to `tag_filter`.
+    """
+
+    if ignored_tags is None:
+        ignored_tags = set()
+
+    quests = Quest.list(base_dir)
+
+    if tag_filter:
+        available_tags = set(list_tag_names(base_dir))
+        missing = tag_filter - available_tags
+        if missing:
+            raise ValueError(f"Unknown tags: {', '.join(sorted(missing))}")
+
+    filtered_metadata = [quest for quest in quests
+                         if not any(tag.name in ignored_tags for tag in quest.tags)]
+
+    if tag_filter:
+        filtered_metadata = [
+            metadata
+            for metadata in filtered_metadata
+            if any(tag.name == tag_filter for tag in metadata.tags)
+        ]
+
+    if tag_filter:
+        tag_names = sorted(tag_filter)
+    else:
+        seen_names: set[str] = set()
+        tag_items: list[Tag] = []
+        for tag in Tag.list(base_dir):
+            if tag.name in ignored_tags or tag.name in seen_names:
+                continue
+            seen_names.add(tag.name)
+            tag_items.append(tag)
+
+    lines: list[str] = []
+
+    lines.extend([f"## {LABEL_SECTION_QUESTS}", "", QUESTS_INTRO.strip(), ""])
+
+    for metadata in sorted(filtered_metadata, key=lambda item: item.title.lower()):
+        module_name = os.path.basename(metadata.module_path.as_posix())
+        anchor = f"quest-{_slug(module_name)}"
+        categories = sorted({tag.name for tag in metadata.tags if tag.name not in ignored_tags})
+
+        first_paragraph = _first_paragraph(metadata.description)
+
+        lines.append(f"<a id=\"{anchor}\"></a>")
+        lines.append("")
+        lines.append(f"* **[{metadata.title}]({module_name})** ({', '.join(categories)})")
+        lines.append("")
+
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def _resolve_base_dir(base_dir: str | Path) -> Path:
@@ -80,102 +137,6 @@ def _first_paragraph(description: str) -> str:
     return ""
 
 
-def _members_for_tag(metadata_list: list[Metadata], tag_name: str) -> list[Metadata]:
-    """Return tag members ordered as regular tags or indexed series."""
-
-    series_matches: list[tuple[int, Metadata]] = []
-    regular_matches: list[Metadata] = []
-
-    for metadata in metadata_list:
-        matching_tags = [tag for tag in metadata.tags if tag.name == tag_name]
-        if not matching_tags:
-            continue
-
-        indexed = [tag.index for tag in matching_tags if tag.index is not None]
-        if indexed:
-            series_matches.append((min(indexed), metadata))
-        else:
-            regular_matches.append(metadata)
-
-    if series_matches:
-        return [
-            metadata
-            for _, metadata in sorted(
-                series_matches,
-                key=lambda item: (item[0], item[1].module_path.as_posix()),
-            )
-        ]
-
-    return sorted(regular_matches, key=lambda metadata: metadata.module_path.as_posix())
-
-
-def md_list_quests(
-        base_dir: Path = DEFAULT_QUEST_DIR,
-        ignored_tags: set[str] | None = None,
-        tag_filter: set[str] | None = None,
-) -> str:
-    """Build markdown content for the generated quest index README.
-
-    Args:
-        base_dir: Base quest directory.
-        ignored_tags: Set of tag names to exclude quests by (default: none).
-        tag_filter: Optional set of tag names to include; if None, all categories shown alphabetically.
-    """
-
-    if ignored_tags is None:
-        ignored_tags = set()
-
-    metadata_list = list_metadata(base_dir)
-
-    if tag_filter:
-        available_tags = set(list_tag_names(base_dir))
-        missing = tag_filter - available_tags
-        if missing:
-            raise ValueError(f"Unknown tags: {', '.join(sorted(missing))}")
-
-    filtered_metadata = [
-        metadata
-        for metadata in metadata_list
-        if not any(tag.name in ignored_tags for tag in metadata.tags)
-    ]
-
-    if tag_filter:
-        filtered_metadata = [
-            metadata
-            for metadata in filtered_metadata
-            if any(tag.name in tag_filter for tag in metadata.tags)
-        ]
-
-    if tag_filter:
-        tag_names = sorted(tag_filter)
-    else:
-        seen_names: set[str] = set()
-        tag_items: list[Tag] = []
-        for tag in list_tags(base_dir):
-            if tag.name in ignored_tags or tag.name in seen_names:
-                continue
-            seen_names.add(tag.name)
-            tag_items.append(tag)
-
-    lines: list[str] = []
-
-    lines.extend([f"## {LABEL_SECTION_QUESTS}", "", QUESTS_INTRO.strip(), ""])
-
-    for metadata in sorted(filtered_metadata, key=lambda item: item.title.lower()):
-        module_name = metadata.module_path.as_posix()
-        anchor = f"quest-{_slug(module_name)}"
-        categories = sorted({tag.name for tag in metadata.tags if tag.name not in ignored_tags})
-
-        first_paragraph = _first_paragraph(metadata.description)
-
-        lines.append(f"<a id=\"{anchor}\"></a>")
-        lines.append("")
-        lines.append(f"* **[{metadata.title}]({module_name})** ({', '.join(categories)})")
-        lines.append("")
-
-    return "\n".join(lines).rstrip() + "\n"
-
-
 def build_parser() -> argparse.ArgumentParser:
     """Build CLI arguments for auto-index generation."""
 
@@ -196,13 +157,13 @@ def build_parser() -> argparse.ArgumentParser:
         nargs="?",
         default=None,
         type=Path,
-        help="Output README path (default: <dir>/README.md)",
+        help="Output README path instead of <dir>/README.md",
     )
 
     parser.add_argument(
         "--ignore",
         type=str,
-        default="plantilla,solucion",
+        default=DEFAULT_IGNORED_TAGS,
         help="Comma-separated list of tag names to exclude quests",
     )
 
@@ -210,7 +171,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--tag",
         type=str,
         default="",
-        help="Comma-separated list of tag names to include (default: show all categories alphabetically)",
+        help="Comma-separated list of tag names to include, default is to accept all",
     )
 
     return parser
@@ -228,13 +189,12 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         content = md_list_quests(base_dir, ignored_tags, tag_filter)
+        readme_path.write_text(content, encoding="utf-8")
+        print(f"Autoindex {_display_path(readme_path)} created from {_display_path(base_dir)}")
+        return 0
     except ValueError as error:
         print(f"Error: {error}", file=sys.stderr)
         return 1
-
-    readme_path.write_text(content, encoding="utf-8")
-    print(f"Autoindex {_display_path(readme_path)} created from {_display_path(base_dir)}")
-    return 0
 
 
 if __name__ == "__main__":
