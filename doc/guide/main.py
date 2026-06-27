@@ -6,7 +6,10 @@ import sys
 from pathlib import Path
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, Quest, Tag
+
+# from tool.code import Snippet
 
 GITHUB_QUEST_URL = "https://github.com/uab-p2/sol/tree/main/quest"
 
@@ -44,3 +47,16 @@ def define_env(env):
             lines.append(quest.description.strip().split("\n\n")[0])
             lines.append("")
         return "\n".join(lines)
+
+    @env.macro
+    def snippet(name: str):
+        """:return: the rendered snippet for the element with the given name."""
+        from tool.code import Snippet
+        snippets = Snippet.list()
+        for snippet in snippets:
+            if snippet.name == name:
+                return str(snippet)
+
+        return (f"```cpp\n\n"
+                f"// Missing snippet for {name!r}\n"
+                f"```")
