@@ -5,7 +5,7 @@ para el proyecto SOL.
 
 ## Estructura
 
-- `tag/`: definición de títulos y descripciones de tags (categorías).
+- `tag/`: definición de títulos y descripciones de tags (categorías, campañas).
 - `img/`: recursos gráficos usados por documentación y README.
 - `guide/`: guía de estudio (compilada en html automáticamente).
 - `tool/`: scripts internos para facilitar la generación de documentación.
