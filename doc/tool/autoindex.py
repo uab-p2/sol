@@ -1,5 +1,5 @@
 #!/bin/env python3
-"""Generate a quest index README grouped by tags and quest modules."""
+"""Generate a quest index README based on the defined quest modules."""
 
 from __future__ import annotations
 

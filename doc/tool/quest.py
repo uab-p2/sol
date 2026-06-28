@@ -137,7 +137,3 @@ class Quest:
 
     def __repr__(self) -> str:
         return f"{self.title} ({' '.join(str(tag) for tag in sorted(self.tags))})"
-
-if __name__ == '__main__':
-    for q in Quest.list():
-        print(f"{q=}")
