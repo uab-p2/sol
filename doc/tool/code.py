@@ -15,6 +15,7 @@ from clang.cindex import Config
 from clang.cindex import Index, CursorKind, TranslationUnitLoadError
 from dataclasses import dataclass
 from enum import Enum, auto
+from functools import lru_cache
 from pathlib import Path
 from quest import PROJECT_ROOT
 import os
@@ -68,6 +69,7 @@ class Snippet:
             self.arg_types = [arg_type.replace(" *", "*") for arg_type in self.arg_types]
 
     @classmethod
+    @lru_cache
     def list(cls, path: str | Path | None = None) -> list[Snippet]:
         """List all snippets in a file, or in the whole project if no path is given."""
 
