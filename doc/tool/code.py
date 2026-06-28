@@ -70,13 +70,13 @@ class Snippet:
             )
 
             for d in tu.diagnostics:
-                print(f"{d=}")
+                print(f"Parsing warning: {d}")
 
             for node in tu.cursor.walk_preorder():
                 if node.kind == CursorKind.CLASS_DECL and node.is_definition():
-
                     try:
-                        node_relative_path = Path(os.path.abspath(node.location.file.name)).relative_to(PROJECT_ROOT)
+                        node_relative_path = Path(os.path.abspath(
+                            node.location.file.name)).relative_to(PROJECT_ROOT)
                         if node_relative_path != relative_path:
                             continue
                     except ValueError:
@@ -99,11 +99,10 @@ class Snippet:
         return snippets
 
     def __repr__(self) -> str:
-        return f"Snippet({self.type.value} {self.name}@{self.relative_file_path.as_posix()}:{self.line_start}-{self.line_end})"
+        return (f"Snippet({self.type.value} {self.name}"
+                f"@{self.relative_file_path.as_posix()}"
+                f":{self.line_start}-{self.line_end})")
 
     def __str__(self) -> str:
-        return textwrap.dedent(f"""\
-```cpp
-{self.code}
-```
-        """.rstrip())
+        """The snippet as a markdown code block."""
+        return textwrap.dedent(f"```cpp\n{self.code}\n```")
