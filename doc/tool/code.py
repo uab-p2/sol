@@ -163,7 +163,7 @@ class Snippet:
             return self.name
 
         ret_str = f"{self.return_type} " if self.return_type else ""
-        arg_str = "("+ ", ".join(self.arg_types) + ")" if self.arg_types is not None else ""
+        arg_str = "(" + ", ".join(self.arg_types) + ")" if self.arg_types is not None else ""
         return f"{ret_str}{self.name}{arg_str}"
 
     def __repr__(self) -> str:
