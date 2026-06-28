@@ -7,13 +7,11 @@ import os
 import sys
 from pathlib import Path
 from io import StringIO
+import textwrap
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, Quest, Tag
-
-
-GITHUB_QUEST_URL = "https://github.com/uab-p2/sol/tree/main/quest"
+from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, GITHUB_ROOT_URL, GITHUB_QUEST_URL, Quest, Tag
 
 
 def define_env(env):
@@ -81,3 +79,58 @@ def define_env(env):
                       f"```")
 
         return sio.getvalue()
+
+    @env.macro
+    def snippet_ref(name: str, arg_types: list[str] | None = None):
+        """Get the pretty-printed reference to a snippet,
+        including types if available."""
+        from tool.code import Snippet
+
+        snippets = Snippet.list()
+        for snippet in snippets:
+            if snippet.name == name:
+                if arg_types is not None and snippet.arg_types != arg_types:
+                    continue
+                return snippet.label
+
+        return f"`Warning: missing snippet for {name!r}`"
+
+    @env.macro
+    def snippet_src(name: str, arg_types: list[str] | None = None):
+        """Get the link to the source code of a snippet,
+        with its link to the code repository."""
+        from tool.code import Snippet
+
+        snippets = Snippet.list()
+        for snippet in snippets:
+            if snippet.name == name:
+                if arg_types is not None and snippet.arg_types != arg_types:
+                    continue
+                return (f"[{snippet.relative_file_path}"
+                        f":{snippet.line_start}-{snippet.line_end}]"
+                        f"({GITHUB_ROOT_URL}"
+                        f"/{snippet.relative_file_path.as_posix()}"
+                        f"#L{snippet.line_start}-L{snippet.line_end})")
+
+        return f"`Warning: missing snippet reference for {name!r}`"
+
+    @env.macro
+    def snippet_tag(name: str, arg_types: list[str] | None = None):
+        """Get the pretty-printed reference to a snippet, name @ source"""
+        return f"{snippet_ref(name, arg_types)} @ {snippet_src(name, arg_types)}"
+
+    @env.macro
+    def snippet_box(name: str, arg_types: list[str] | None = None, default_open: bool = False):
+        """Show a box with title equal to the return of snippet_tag,
+        with the snippet contents rendered inside."""
+        from tool.code import Snippet
+
+        snippets = Snippet.list()
+        for s in snippets:
+            if s.name == name:
+                if arg_types is not None and s.arg_types != arg_types:
+                    continue
+
+                return f"""\
+???{'+' if default_open else ''} example "{snippet_tag(name, arg_types)}"
+{textwrap.indent(snippet(name, arg_types), "    ")}\n"""

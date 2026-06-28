@@ -15,6 +15,8 @@ __all__ = ["Quest"]
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_QUEST_DIR = PROJECT_ROOT / "quest"
 DEFAULT_TAG_DIR = PROJECT_ROOT / "doc" / "tag"
+GITHUB_ROOT_URL = "https://github.com/uab-p2/sol/tree/main/"
+GITHUB_QUEST_URL = f"{GITHUB_ROOT_URL}/quest"
 
 
 @dataclass(slots=True)
