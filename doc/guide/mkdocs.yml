@@ -20,6 +20,7 @@ nav:
 
 theme:
   name: material
+  favicon: asset/white-balance-sunny.ico
 
   icon:
     logo: material/white-balance-sunny

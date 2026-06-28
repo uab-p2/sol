@@ -5,14 +5,16 @@
 class Cat {
 public:
     /// Create a hungry but awake cat
-    Cat(const std::string& name) : m_name(name), m_hungry(true), m_sleepy(false) {
+    Cat(const std::string& name)
+        : m_name(name), m_hungry(true), m_sleepy(false) {
     }
 
     /// Feed the cat, making it not hungry, but sleepy.
     void feed();
 
-    /// Pet the cat. If the cat is not hungry, it will play and become both hungry and sleepy.
-    /// If hungry, the cat will refuse to play and won't become sleepy.
+    /// Pet the cat. If the cat is not hungry, it will play and become both
+    /// hungry and sleepy. If hungry, the cat will refuse to play and won't
+    /// become sleepy.
     /// @return whether or not you managed to pet the cat.
     bool pet();
 
