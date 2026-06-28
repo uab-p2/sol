@@ -49,88 +49,106 @@ def define_env(env):
         return "\n".join(lines)
 
     @env.macro
-    def snippet(name: str, arg_types: list[str] | None = None):
-        """
+    def snippet(name: str,
+                arg_types: list[str] | None = None,
+                include_declarations: bool = True,
+                include_definitions: bool = True) -> str:
+        """Display a snippet of code in its ```cpp``` block.
         :return: the rendered snippet(s) for the element with the given name.
           If more than one snippet matches, all are rendered.
         :param name: the name of the snippet, e.g., "Cat", "Cat::meow", "free_func".
         :param arg_types: optional list of argument type names, e.g., ["int", "std::string"].
           If present, only those snippets matching the given argument types
           (and name) are rendered."""
-        # Lazy import because otherwise github pages cannot find clang
-        from tool.code import Snippet
-
         sio = StringIO()
-        found: bool = False
-
-        snippets = Snippet.list()
-        for snippet in snippets:
-            if snippet.name == name:
-                if arg_types is not None and snippet.arg_types != arg_types:
-                    continue
-                if found:
-                    sio.write("\n")
-                sio.write(str(snippet))
-                found = True
-
-        if not found:
+        snippets = find_snippets(name, arg_types, include_declarations, include_definitions)
+        sio.write("\n\n".join(str(s) for s in snippets))
+        if not snippets:
             sio.write(f"```cpp\n\n"
                       f"// Missing snippet for {name!r}\n"
                       f"```")
-
         return sio.getvalue()
 
     @env.macro
-    def snippet_ref(name: str, arg_types: list[str] | None = None):
+    def snippet_ref(name: str,
+                    arg_types: list[str] | None = None,
+                    include_declarations: bool = True,
+                    include_definitions: bool = True) -> str:
         """Get the pretty-printed reference to a snippet,
         including types if available."""
-        from tool.code import Snippet
-
-        snippets = Snippet.list()
-        for snippet in snippets:
-            if snippet.name == name:
-                if arg_types is not None and snippet.arg_types != arg_types:
-                    continue
-                return snippet.label
-
+        s = find_snippet(name, arg_types, include_declarations, include_definitions)
+        if s is not None:
+            return s.label
         return f"`Warning: missing snippet for {name!r}`"
 
     @env.macro
-    def snippet_src(name: str, arg_types: list[str] | None = None):
+    def snippet_src(name: str,
+                    arg_types: list[str] | None = None,
+                    include_declarations: bool = True,
+                    include_definitions: bool = True) -> str:
         """Get the link to the source code of a snippet,
         with its link to the code repository."""
-        from tool.code import Snippet
-
-        snippets = Snippet.list()
-        for snippet in snippets:
-            if snippet.name == name:
-                if arg_types is not None and snippet.arg_types != arg_types:
-                    continue
-                return (f"[{snippet.relative_file_path}"
-                        f":{snippet.line_start}-{snippet.line_end}]"
-                        f"({GITHUB_ROOT_URL}"
-                        f"/{snippet.relative_file_path.as_posix()}"
-                        f"#L{snippet.line_start}-L{snippet.line_end})")
-
-        return f"`Warning: missing snippet reference for {name!r}`"
+        s = find_snippet(name, arg_types, include_declarations, include_definitions)
+        if s is not None:
+            return (f"[{s.relative_file_path}"
+                    f":{s.line_start}-{s.line_end}]"
+                    f"({GITHUB_ROOT_URL}"
+                    f"/{s.relative_file_path.as_posix()}"
+                    f"#L{s.line_start}-L{s.line_end})")
+        return f"`Warning: missing snippet for {name!r}`"
 
     @env.macro
-    def snippet_tag(name: str, arg_types: list[str] | None = None):
+    def snippet_tag(name: str,
+                    arg_types: list[str] | None = None,
+                    include_declarations: bool = True,
+                    include_definitions: bool = True) -> str:
         """Get the pretty-printed reference to a snippet, name @ source"""
-        return f"{snippet_ref(name, arg_types)} @ {snippet_src(name, arg_types)}"
+        return (f"{snippet_ref(name, arg_types, include_declarations, include_definitions)} "
+                f"@ {snippet_src(name, arg_types, include_declarations, include_definitions)}")
 
     @env.macro
-    def snippet_box(name: str, arg_types: list[str] | None = None, default_open: bool = False):
+    def snippet_box(name: str,
+                    arg_types: list[str] | None = None,
+                    include_declarations: bool = True,
+                    include_definitions: bool = True,
+                    default_open: bool = False) -> str:
         """Show a box with title equal to the return of snippet_tag,
         with the snippet contents rendered inside."""
-        from tool.code import Snippet
+        s = find_snippet(name, arg_types, include_declarations, include_definitions)
+        if s is not None:
+            return (f"""\
+???{'+' if default_open else ''} example "{snippet_tag(name, arg_types, include_declarations, include_definitions)}"
+{textwrap.indent(snippet(name, arg_types, include_declarations, include_definitions), "    ")}\n""")
+        return f"`Warning: missing snippet for {name!r}`"
 
-        snippets = Snippet.list()
-        for s in snippets:
-            if s.name == name:
-                if arg_types is not None and s.arg_types != arg_types:
-                    continue
 
-                return f"""\
-???{'+' if default_open else ''} example "{snippet_tag(name, arg_types)}"
-{textwrap.indent(snippet(name, arg_types), "    ")}\n"""
+def find_snippets(name: str,
+                  arg_types: list[str] | None = None,
+                  include_declarations: bool = True,
+                  include_definitions: bool = True) -> list[Snippet]:
+    """Find all snippets, optionally:
+        - with the given name and argument types
+        - excluding callable declarations/definitions.
+    """
+    from tool.code import Snippet, SnippetType
+
+    snippets = [s for s in Snippet.list()
+                if s.name == name
+                and (arg_types is None or s.arg_types == arg_types)]
+
+    if not include_declarations:
+        snippets = [s for s in snippets if s.type != SnippetType.DECLARATION]
+    if not include_definitions:
+        snippets = [s for s in snippets if s.type != SnippetType.DEFINITION]
+
+    return snippets
+
+
+def find_snippet(name: str,
+                 arg_types: list[str] | None = None,
+                 include_declarations: bool = True,
+                 include_definitions: bool = True) -> Snippet | None:
+    """Find the first snippet matching the given name and argument types,
+    or None if no such snippet exists."""
+    snippets = find_snippets(name, arg_types, include_declarations, include_definitions)
+    return snippets[0] if snippets else None
