@@ -1,15 +1,17 @@
+from __future__ import annotations
+
 # macro commands invoked when building the guide
 import subprocess
 
 import os
 import sys
 from pathlib import Path
+from io import StringIO
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, Quest, Tag
 
-# from tool.code import Snippet
 
 GITHUB_QUEST_URL = "https://github.com/uab-p2/sol/tree/main/quest"
 
@@ -49,14 +51,33 @@ def define_env(env):
         return "\n".join(lines)
 
     @env.macro
-    def snippet(name: str):
-        """:return: the rendered snippet for the element with the given name."""
+    def snippet(name: str, arg_types: list[str] | None = None):
+        """
+        :return: the rendered snippet(s) for the element with the given name.
+          If more than one snippet matches, all are rendered.
+        :param name: the name of the snippet, e.g., "Cat", "Cat::meow", "free_func".
+        :param arg_types: optional list of argument type names, e.g., ["int", "std::string"].
+          If present, only those snippets matching the given argument types
+          (and name) are rendered."""
+        # Lazy import because otherwise github pages cannot find clang
         from tool.code import Snippet
+
+        sio = StringIO()
+        found: bool = False
+
         snippets = Snippet.list()
         for snippet in snippets:
             if snippet.name == name:
-                return str(snippet)
+                if arg_types is not None and snippet.arg_types != arg_types:
+                    continue
+                if found:
+                    sio.write("\n")
+                sio.write(str(snippet))
+                found = True
 
-        return (f"```cpp\n\n"
-                f"// Missing snippet for {name!r}\n"
-                f"```")
+        if not found:
+            sio.write(f"```cpp\n\n"
+                      f"// Missing snippet for {name!r}\n"
+                      f"```")
+
+        return sio.getvalue()

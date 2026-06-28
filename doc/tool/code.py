@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Parse C++ code to list defined classes and functions
 and allow easy snippet display.
@@ -22,9 +23,27 @@ import textwrap
 
 
 class SnippetType(Enum):
-    CLASS_DEFINITION = "class"
-    FUNCTION_OR_METHOD = "method"
-    WHOLE_FILE = "file"
+    CLASS = "class"
+    # These include constructors (I know, I know...)
+    DECLARATION = "meth-dcl"
+    DEFINITION = "meth-def"
+
+    @classmethod
+    def from_node(cls, node: CursorKind) -> SnippetType | None:
+        if node.kind == CursorKind.CLASS_DECL:
+            assert node.is_definition(), "Class declarations must be definitions"
+            return cls.CLASS
+        elif node.kind in (CursorKind.CXX_METHOD,
+                           CursorKind.CONSTRUCTOR,
+                           CursorKind.DESTRUCTOR,
+                           CursorKind.FUNCTION_DECL,
+                           CursorKind.CONVERSION_FUNCTION):
+            if node.is_definition():
+                return cls.DEFINITION
+            else:
+                return cls.DECLARATION
+        else:
+            abort("Unsupported node kind")
 
 
 @dataclass
@@ -36,6 +55,17 @@ class Snippet:
     line_start: int
     line_end: int
     type: SnippetType
+    # Only for method definitions.
+    return_type: str | None = None
+    arg_types: list[str] | None = None
+
+    def __post_init__(self):
+        if self.return_type is not None:
+            self.return_type = self.return_type.replace(" &", "&")
+            self.return_type = self.return_type.replace(" *", "*")
+        if self.arg_types is not None:
+            self.arg_types = [arg_type.replace(" &", "&") for arg_type in self.arg_types]
+            self.arg_types = [arg_type.replace(" *", "*") for arg_type in self.arg_types]
 
     @classmethod
     def list(cls, path: str | Path | None = None) -> list[Snippet]:
@@ -73,36 +103,83 @@ class Snippet:
                 print(f"Parsing warning: {d}")
 
             for node in tu.cursor.walk_preorder():
-                if node.kind == CursorKind.CLASS_DECL and node.is_definition():
-                    try:
-                        node_relative_path = Path(os.path.abspath(
-                            node.location.file.name)).relative_to(PROJECT_ROOT)
-                        if node_relative_path != relative_path:
-                            continue
-                    except ValueError:
+                if node.kind not in (
+                        CursorKind.CLASS_DECL,
+                        CursorKind.CXX_METHOD,
+                        CursorKind.CONSTRUCTOR,
+                        CursorKind.DESTRUCTOR,
+                        CursorKind.FUNCTION_DECL,
+                        CursorKind.CONVERSION_FUNCTION):
+                    continue
+                try:
+                    node_relative_path = Path(os.path.abspath(
+                        node.location.file.name)).relative_to(PROJECT_ROOT)
+                    if node_relative_path != relative_path:
                         continue
+                except ValueError:
+                    continue
+                if node.kind == CursorKind.CLASS_DECL and not node.is_definition():
+                    continue
 
-                    with open(PROJECT_ROOT / node_relative_path, "r") as f:
-                        lines = f.read().splitlines()
-                        comment_start = node.extent.start.line - 1
-                        while comment_start > 0 and lines[comment_start - 1].lstrip().startswith("//"):
-                            comment_start -= 1
-                        snippets.append(Snippet(
-                            name=node.spelling,
-                            code="\n".join(lines[comment_start:node.extent.end.line]),
-                            relative_file_path=node_relative_path,
-                            line_start=node.extent.start.line,
-                            line_end=node.extent.end.line,
-                            type=SnippetType.CLASS_DEFINITION,
-                        ))
+                arg_types = None
+                return_type = None
+                snippet_name = node.spelling
+                if node.kind in (
+                        CursorKind.CXX_METHOD,
+                        CursorKind.CONSTRUCTOR,
+                        CursorKind.DESTRUCTOR,
+                        CursorKind.FUNCTION_DECL,
+                        CursorKind.CONVERSION_FUNCTION):
+                    arg_types = [arg.type.spelling for arg in node.get_arguments()]
+                if node.kind in (
+                        CursorKind.CONSTRUCTOR,
+                        CursorKind.DESTRUCTOR,
+                        CursorKind.CXX_METHOD,
+                        CursorKind.CONVERSION_FUNCTION):
+                    return_type = node.result_type.spelling
+                    snippet_name = f"{node.semantic_parent.spelling}::{node.spelling}"
+
+                with open(PROJECT_ROOT / node_relative_path, "r") as f:
+                    lines = f.read().splitlines()
+                    comment_start = node.extent.start.line - 1
+                    while comment_start > 0 and lines[comment_start - 1].lstrip().startswith("//"):
+                        comment_start -= 1
+                    snippets.append(Snippet(
+                        name=snippet_name,
+                        code="\n".join(lines[comment_start:node.extent.end.line]),
+                        relative_file_path=node_relative_path,
+                        line_start=node.extent.start.line,
+                        line_end=node.extent.end.line,
+                        type=SnippetType.from_node(node),
+                        arg_types=arg_types,
+                        return_type=return_type,
+                    ))
 
         return snippets
 
+    @property
+    def label(self) -> str:
+        if self.type == SnippetType.CLASS:
+            return self.name
+
+        ret_str = f"{self.return_type} " if self.return_type else ""
+        arg_str = "("+ ", ".join(self.arg_types) + ")" if self.arg_types is not None else ""
+        return f"{ret_str}{self.name}{arg_str}"
+
     def __repr__(self) -> str:
-        return (f"Snippet({self.type.value} {self.name}"
-                f"@{self.relative_file_path.as_posix()}"
-                f":{self.line_start}-{self.line_end})")
+        return (f"Snippet({self.type.value} {self.label}"
+                f" @ {self.relative_file_path.as_posix()}"
+                f":{self.line_start}-{self.line_end})[{self.name}]")
 
     def __str__(self) -> str:
         """The snippet as a markdown code block."""
         return textwrap.dedent(f"```cpp\n{self.code}\n```")
+
+
+if __name__ == '__main__':
+    snippets = Snippet.list()
+    for snippet in snippets:
+        print(
+            f"{snippet!r}"
+            # f"\n{snippet!s}"
+        )
