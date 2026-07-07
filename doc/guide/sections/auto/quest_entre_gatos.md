@@ -59,6 +59,6 @@ Para la implementación:
 * Modifica `main.cpp` para que siga tu guión.
 * No modifiques ningún fichero de `../src` (en ningún quest).
 
-# Tags
-
-oop:1
+---
+- Campaña principal: [&leftarrow;Objetos celestes](/auto/campaign_oop)
+- [Código](https://github.com/uab-p2/sol/tree/main//quest/entre_gatos)

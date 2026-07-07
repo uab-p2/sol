@@ -4,10 +4,11 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import sys
-import os
 from pathlib import Path
+
 from quest import Quest, Tag
 
 LABEL_SECTION_CATEGORIES = "Categorías"
@@ -25,7 +26,7 @@ Listado alfabético de quests.
 
 DEFAULT_IGNORED_TAGS = "plantilla,solucion"
 
-from quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, DEFAULT_TAG_DIR
+from quest import PROJECT_ROOT, DEFAULT_QUEST_DIR
 
 
 def md_list_quests(

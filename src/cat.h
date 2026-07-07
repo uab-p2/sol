@@ -15,7 +15,7 @@ public:
     /// Pet the cat. If the cat is not hungry, it will play and become both
     /// hungry and sleepy. If hungry, the cat will refuse to play and won't
     /// become sleepy.
-    /// @return whether or not you managed to pet the cat.
+    /// @return whether you managed to pet the cat.
     bool pet();
 
     /// Let the cat sleep. It will no longer be sleepy, but will become hungry.

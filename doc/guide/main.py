@@ -1,17 +1,14 @@
 from __future__ import annotations
 
-# macro commands invoked when building the guide
-import subprocess
-
 import os
+import subprocess
 import sys
-from pathlib import Path
-from io import StringIO
 import textwrap
+from io import StringIO
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, GITHUB_ROOT_URL, GITHUB_QUEST_URL, Quest, Tag
+from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, GITHUB_ROOT_URL, GITHUB_QUEST_URL, GUIDE_SECTION_DIR, GUIDE_AUTO_SECTION_DIR, Quest, Tag
 
 
 def define_env(env):
@@ -38,7 +35,7 @@ def define_env(env):
 
     @env.macro
     def tag_quests(tag_name):
-        """List the quests of a given tag (campaign)."""
+        """List the quests of a given tag (campaign) with links to GITHUB."""
         quests = [quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)]
         lines = []
         for quest in quests:
@@ -47,6 +44,31 @@ def define_env(env):
             lines.append(quest.description.strip().split("\n\n")[0])
             lines.append("")
         return "\n".join(lines)
+
+    @env.macro
+    def tag_quest_sections(tag_name):
+        """List the quests of a given tag (campaign) with links to GITHUB."""
+        quests = [quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)]
+        lines = []
+        for quest in quests:
+            quest_section_url = ("/" + os.path.relpath(os.path.abspath(GUIDE_AUTO_SECTION_DIR), os.path.abspath(GUIDE_SECTION_DIR))
+                   + f"/quest_{os.path.basename(quest.module_path.resolve().as_posix())}")
+            lines.append(f"### [{quest.title}]({quest_section_url})")
+            lines.append(quest.description.strip().split("\n\n")[0])
+        return "\n".join(lines)
+
+    @env.macro
+    def tag_quest_links(tag_name):
+        """List the links to the quests of a given tag (campaign)."""
+        try:
+            quests = [quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)]
+            lines = []
+            for quest in quests:
+                lines.append("[" + quest.title + "](" + GITHUB_QUEST_URL + "/" + os.path.basename(
+                    quest.module_path.resolve().as_posix()) + ")")
+            return "\n".join(lines)
+        except ValueError:
+            return f"(no hay quests para `{tag_name}`)"
 
     @env.macro
     def snippet(name: str,

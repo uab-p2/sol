@@ -3,18 +3,18 @@ Process and display metainformation about quest modules.
 """
 from __future__ import annotations
 
+import glob
+import re
 from dataclasses import dataclass
 from pathlib import Path
-import argparse
-import glob
-import os
-import re
 
 __all__ = ["Quest"]
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_QUEST_DIR = PROJECT_ROOT / "quest"
 DEFAULT_TAG_DIR = PROJECT_ROOT / "doc" / "tag"
+GUIDE_SECTION_DIR = PROJECT_ROOT / "doc" / "guide" / "sections"
+GUIDE_AUTO_SECTION_DIR = GUIDE_SECTION_DIR / "auto"
 GITHUB_ROOT_URL = "https://github.com/uab-p2/sol/tree/main/"
 GITHUB_QUEST_URL = f"{GITHUB_ROOT_URL}/quest"
 
@@ -45,21 +45,24 @@ class Tag:
                 unique_tags.setdefault((tag.name, tag.index), tag)
 
         for tag in unique_tags.values():
-            try:
-                with open(tag_dir / f"{tag.name}.md", "r") as f:
-                    lines = f.read().strip().splitlines()
-                    header_line = lines[0]
-                    match = re.search(r"\s*#\s*([^\n]+)\s*$", header_line)
-                    if match:
-                        tag.title = match.group(1)
-
-                    description = "\n".join(lines[1:]).strip()
-                    tag.description = description or None
-            except FileNotFoundError:
-                pass
+            tag.populate(tag_dir=tag_dir)
 
         return sorted(unique_tags.values(),
                       key=lambda tag: (tag.name, -1 if tag.index is None else tag.index))
+
+    def populate(self, tag_dir):
+        """Populate the title and description from doc/tag"""
+        try:
+            with open(tag_dir / f"{self.name}.md", "r") as f:
+                lines = f.read().strip().splitlines()
+                header_line = lines[0]
+                match = re.search(r"\s*#\s*([^\n]+)\s*$", header_line)
+                if match:
+                    self.title = match.group(1)
+                description = "\n".join(lines[1:]).strip()
+                self.description = description or None
+        except FileNotFoundError:
+            pass
 
     def __lt__(self, other: Tag) -> bool:
         return self.name < other.name
@@ -112,8 +115,8 @@ class Quest:
         tag_text = "\n".join(lines[tags_index + 1:]).strip()
 
         tags = cls._parse_tags(tag_text)
-        if not tags:
-            raise ValueError(f"No tags found in {readme_path}")
+        tags = tags or None
+
 
         return cls(module_path=readme_path.parent, title=title, description=description, tags=tags)
 
@@ -135,6 +138,7 @@ class Quest:
             if not match:
                 raise ValueError(f"Invalid tag {raw_tag!r}")
             tags.append(Tag(name=match.group(1), index=int(match.group(2)) if match.group(2) is not None else None))
+            tags[-1].populate(tag_dir=DEFAULT_TAG_DIR)
         return tags
 
     def __repr__(self) -> str:

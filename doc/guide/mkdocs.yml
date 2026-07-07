@@ -9,10 +9,7 @@ nav:
   - main(): index.md
   - quest():
       - Intro : campaigns.md
-      - Admisión : campaign_admision.md
-      - Objetos celestes : campaign_oop.md
-      - Pasos acelerados : campaign_algorithms.md
-      - Recuerdos sintéticos : campaign_memory.md
+      - Despegue : auto/campaign_despegue.md
   - help():
       - Intro : codices.md
       - Sintaxis : codex_oop_syntax.md
