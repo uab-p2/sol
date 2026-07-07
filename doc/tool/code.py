@@ -14,12 +14,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from clang.cindex import Config
 from clang.cindex import Index, CursorKind, TranslationUnitLoadError
 from dataclasses import dataclass
-from enum import Enum, auto
+from enum import Enum
 from functools import lru_cache
 from pathlib import Path
 from quest import PROJECT_ROOT
 import os
-import sys
 import textwrap
 
 
