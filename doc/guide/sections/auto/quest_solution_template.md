@@ -31,5 +31,5 @@ Esta descripción puede usarse como ayuda para entender la solución mostrada.
   (el sistema pondera según los pesos de cada test en test.cpp).
 
 ---
-- Campaña principal: [&leftarrow;](/auto/campaign_solucion)
 - [Código](https://github.com/uab-p2/sol/tree/main//quest/solution_template)
+- [&leftarrow;&nbsp;](campaign_solucion.md)

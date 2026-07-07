@@ -1,7 +1,12 @@
-# Placeholder
+# Título del Quest
 
-Delete this when modules for all campaigns exist (this allows automatix index testing meanwhile)
+Descripción e instrucciones.
+
+```cpp
+// Snippet de ejemplo
+void f(int x) { x *= 2; }
+```
 
 ---
-- Campaña principal: [&leftarrow;Objetos celestes](/auto/campaign_oop)
 - [Código](https://github.com/uab-p2/sol/tree/main//quest/placeholder)
+- [&leftarrow;&nbsp;Recuerdos sintéticos](campaign_memory.md)

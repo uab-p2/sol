@@ -6,34 +6,25 @@ Te ofrecemos un puñado de preguntas guiadas, tras las cuales te proponemos un r
 
 ## Preguntas guiadas
 
-0. Descarga el proyecto SOL y abre `CMakeLists.txt` con tu IDE favorito.
-   Puedes descargarlo:
-    - Manualmente desde [github](https://github.com/uab-p2/sol/archive/refs/heads/main.zip).
-    - Mediante `git`, con `git clone https://github.com/uab-p2/sol`.
-    - Con la opción "Clone repository" en Visual Studio.
-
-   Si usas Visual Studio, activa la vista "cmake targets":
-   <p align=center style="text-align: center">
-      <img src="../../doc/img/screenshot_vs_config_view.png" />
-   </p>
+Descarga el proyecto SOL y abre el quest en la carpeta `quest/entre_gatos`.
 
 1. Ejecuta la demo proporcionada y estudia su salida.
     - ¿En qué estados puede estar un gato?
     - ¿Qué acciones afectan el estado de un gato?
     - Dibuja el diagrama de estados de un gato.
 
-2. Estudia el contenido de [main.cpp](main.cpp).
+2. Estudia el contenido de `main.cpp`.
     - ¿Qué elementos del código conocías ya?
     - ¿Qué partes no conoces todavía?
     - ¿Hay alguna parte repetitiva que puedas mejorar?
 
-3. Juega con [main.cpp](main.cpp).
+3. Juega con `main.cpp`.
     - Crea otro gato llamado "Gatélite".
     - ¿Se comporta Gatélite igual que Nyan?
     - Predice: ¿es posible tener un gato satisfecho (ni hambriendo ni somnoliento)?
     - Predice: ¿es posible crear un gato sin nombre?
 
-4. Estudia el contenido de [../../src/cat.h](../../src/cat.h) y [../../src/cat.cpp](../../src/cat.cpp).
+4. Estudia el contenido de `src/cat.h` y `src/cat.cpp`.
     - ¿Qué hay en el `.h` que no hay en el `.cpp`?
     - ¿Qué hay en el `.cpp` que no hay en el `.h`?
     - Corrobora o desmiente las dos predicciones del punto anterior.
@@ -60,5 +51,5 @@ Para la implementación:
 * No modifiques ningún fichero de `../src` (en ningún quest).
 
 ---
-- Campaña principal: [&leftarrow;Objetos celestes](/auto/campaign_oop)
 - [Código](https://github.com/uab-p2/sol/tree/main//quest/entre_gatos)
+- [&leftarrow;&nbsp;Objetos celestes](campaign_oop.md)
