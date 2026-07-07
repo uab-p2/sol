@@ -6,10 +6,10 @@ Listado alfabético de quests.
 
 * **[Entre gatos](entre_gatos)** (oop)
 
-<a id="quest-placeholder"></a>
-
-* **[Placeholder](placeholder)** (algorithms, memory, oop)
-
 <a id="quest-silicio-y-titanio"></a>
 
 * **[Silicio y titanio](silicio_y_titanio)** (despegue, semana)
+
+<a id="quest-placeholder"></a>
+
+* **[Título del Quest](placeholder)** (memory, stl)

@@ -1,7 +1,12 @@
-# Placeholder
+# Título del Quest
 
-Delete this when modules for all campaigns exist (this allows automatix index testing meanwhile)
+Descripción e instrucciones.
+
+```cpp
+// Snippet de ejemplo
+void f(int x) { x *= 2; }
+```
 
 # Tags
-
-oop algorithms memory
+memory
+stl
