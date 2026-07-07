@@ -8,8 +8,10 @@ site_dir: html
 nav:
   - main(): index.md
   - quest():
-      - Intro : campaigns.md
+      - Quests, campañas y calendario : campaigns.md
       - Despegue : auto/campaign_despegue.md
+      - Objetos celestes: auto/campaign_oop.md
+      - Recuerdos sintéticos: auto/campaign_memory.md
   - help():
       - Intro : codices.md
       - Sintaxis : codex_oop_syntax.md
@@ -18,6 +20,7 @@ nav:
 theme:
   name: material
   favicon: asset/white-balance-sunny.ico
+  language: es
 
   icon:
     logo: material/white-balance-sunny
@@ -47,6 +50,9 @@ theme:
         icon: material/tune
         name: Dark mode
 
+extra_css:
+  - css/extra.css
+
 markdown_extensions:
   - toc:
       permalink: true
@@ -60,7 +66,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
-
+  - pymdownx.tilde
 
 plugins:
   - search

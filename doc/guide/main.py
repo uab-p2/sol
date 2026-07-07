@@ -51,9 +51,7 @@ def define_env(env):
         quests = [quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)]
         lines = []
         for quest in quests:
-            quest_section_url = ("/" + os.path.relpath(os.path.abspath(GUIDE_AUTO_SECTION_DIR), os.path.abspath(GUIDE_SECTION_DIR))
-                   + f"/quest_{os.path.basename(quest.module_path.resolve().as_posix())}")
-            lines.append(f"### [{quest.title}]({quest_section_url})")
+            lines.append(f"### [{quest.title}](quest_{os.path.basename(quest.module_path.resolve().as_posix())}.md)")
             lines.append(quest.description.strip().split("\n\n")[0])
         return "\n".join(lines)
 
