@@ -1,0 +1,27 @@
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+    color: #ccc;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(255,255,255,.3);
+    padding-bottom: .3rem;
+}
+
+.md-typeset h2 {
+    margin-left: 1em;
+}
+.md-typeset h3 {
+    margin-left: 2em;
+}
+.md-typeset h4 {
+    margin-left: 3em;
+}
+.md-typeset h5 {
+    margin-left: 4em;
+}
+.md-typeset h6 {
+    margin-left: 5em;
+}
