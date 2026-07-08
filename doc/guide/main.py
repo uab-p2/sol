@@ -84,7 +84,7 @@ def define_env(env):
         snippets = find_snippets(name, arg_types, include_declarations, include_definitions)
         sio.write("\n\n".join(str(s) for s in snippets))
         if not snippets:
-            sio.write(f"```cpp\n\n"
+            sio.write(f"```cpp linenum\n\n"
                       f"// Missing snippet for {name!r}\n"
                       f"```")
         return sio.getvalue()

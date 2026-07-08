@@ -46,6 +46,8 @@ Comienza descargando el proyecto SOL y abriendo el quest en la carpeta `quest/en
 
 Casi todos los gatos prefieren tener una persona ~~esclava~~ cuidadora.
 ¿Puedes crear una clase `Caregiver` que interactúe con la clase `Cat`?
+Demuéstralo creando una demo en `main.cpp` que ilustre el comportamiento 
+de la nueva clase.
 
 Antes de programar nada:
 
