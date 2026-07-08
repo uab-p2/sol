@@ -1,7 +1,7 @@
 /// Your tests here
 #include <iostream>
 
-int main(int argc, char* argv[]) {
+int main(void) {
     std::cout << "No tests implemented yet." << std::endl;
     return 0;
 }
