@@ -185,7 +185,7 @@ class Snippet:
 
     def __str__(self) -> str:
         """The snippet as a markdown code block."""
-        return textwrap.dedent(f"```cpp\n{self.code}\n```")
+        return f"```cpp linenums=\"{self.line_start}\"\n{self.code}\n```"
 
 
 if __name__ == '__main__':
