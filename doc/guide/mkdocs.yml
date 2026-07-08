@@ -8,10 +8,16 @@ site_dir: html
 nav:
   - main(): index.md
   - quest():
-      - Quests, campañas y calendario : campaigns.md
-      - Despegue : auto/campaign_despegue.md
-      - Objetos celestes: auto/campaign_oop.md
-      - Recuerdos sintéticos: auto/campaign_memory.md
+      - Quests, campañas y calendario: campaigns.md
+      - Despegue:
+        - Intro: auto/campaign_despegue.md
+        - Silicio y titanio(): auto/quest_silicio_y_titanio.md
+      - Objetos celestes:
+        - Intro: auto/campaign_oop.md
+        - Entre gatos(): auto/quest_entre_gatos.md
+      - Recuerdos sintéticos:
+        - Intro: auto/campaign_memory.md
+        - Título del Quest(): auto/quest_placeholder.md
   - help():
       - Intro : codices.md
       - Sintaxis : codex_oop_syntax.md
