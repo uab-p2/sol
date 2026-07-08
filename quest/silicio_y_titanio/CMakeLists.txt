@@ -48,17 +48,69 @@ add_executable(${TEST_TARGET}
         ${SHARED_CPP}
 )
 
-# Debug-friendly flags in a portable way (MSVC, GCC, Clang).
-foreach (target ${MAIN_TARGET} ${TEST_TARGET})
-    target_compile_options(${target} PRIVATE
-            $<$<AND:$<CONFIG:Debug>,$<CXX_COMPILER_ID:MSVC>>:/Od /Zi>
-            $<$<AND:$<CONFIG:Debug>,$<NOT:$<CXX_COMPILER_ID:MSVC>>>:-O0 -g>
-    )
 
-    # Emit linker debug information for MSVC in Debug builds.
-    target_link_options(${target} PRIVATE
-            $<$<AND:$<CONFIG:Debug>,$<CXX_COMPILER_ID:MSVC>>:/DEBUG>
-    )
+function(enable_warnings_and_debug target_name)
+    if (MSVC)
+        target_compile_options(${target_name} PRIVATE
+                /W4                             # high warning verbosity
+                /permissive-                    # stricter standard conformance
+                $<$<CONFIG:Debug>:/Zi>          # full debug info
+                $<$<CONFIG:Debug>:/Od>          # disable optimizations
+                $<$<CONFIG:Debug>:/RTC1>        # runtime checks (debug)
+                $<$<CONFIG:Debug>:/sdl>         # extra runtime/security checks
+        )
+        target_link_options(${target_name} PRIVATE
+                $<$<CONFIG:Debug>:/DEBUG>       # emit PDB debug symbols
+        )
+
+    elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        target_compile_options(${target_name} PRIVATE
+                -Wall
+                -Wextra
+                -Wpedantic
+                -Wconversion
+                -Wsign-conversion
+                -Wshadow
+                -Wnon-virtual-dtor
+                -Wold-style-cast
+                -Woverloaded-virtual
+                -Wnull-dereference
+                -Wdouble-promotion
+                -Wformat=2
+                $<$<CONFIG:Debug>:-g3>          # max practical debug info
+                $<$<CONFIG:Debug>:-O0>          # disable optimizations
+                $<$<CONFIG:Debug>:-fno-omit-frame-pointer>
+        )
+
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        target_compile_options(${target_name} PRIVATE
+                -Wall
+                -Wextra
+                -Wpedantic
+                -Wconversion
+                -Wsign-conversion
+                -Wshadow
+                -Wnon-virtual-dtor
+                -Wold-style-cast
+                -Woverloaded-virtual
+                -Wnull-dereference
+                -Wdouble-promotion
+                -Wformat=2
+                -Wmisleading-indentation
+                -Wduplicated-cond
+                -Wduplicated-branches
+                -Wlogical-op
+                -Wuseless-cast
+                $<$<CONFIG:Debug>:-g3>          # richer debug symbols
+                $<$<CONFIG:Debug>:-O0>          # disable optimizations
+                $<$<CONFIG:Debug>:-fno-omit-frame-pointer>
+                $<$<CONFIG:Debug>:-fno-inline>  # easier stepping in debugger
+        )
+    endif ()
+endfunction()
+foreach (target ${MAIN_TARGET} ${TEST_TARGET})
+    # Warning verbose and Debug-friendly flags (MSVC, GCC, Clang).
+    enable_warnings_and_debug(${target})
 
     # Include src headers so #include "stuff.h" works
     target_include_directories(${target}
