@@ -2,7 +2,7 @@
 
 Tu primera misión es configurar un buen entorno de desarrollo
 que te sirva para todo el proyecto. Primero te ayudamos a instalar
-todo lo necesario. Después, te proponemos una prueba de humo.
+todo lo necesario. Después, te proponemos una *prueba de humo*.
 
 ## Sistema operativo
 
@@ -14,8 +14,10 @@ Las principales opciones compatibles con el proyecto SOL son:
 - Windows
 - MacOS
 
-Te animamos a explorar un sistema dual boot Linux + Windows/MacOS
-para que puedas comparar las diferencias.
+Recuerda que puedes tener más de un sistema operativo 
+instalado a la vez. Te animamos a explorar una configuración
+dual boot Linux + Windows/MacOS para que puedas familiarizarte
+con ambos sistemas.
 
 ## Entorno de desarrollo y compiladores
 
