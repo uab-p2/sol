@@ -8,6 +8,9 @@ Te ofrecemos un puñado de preguntas guiadas, tras las cuales te proponemos un r
 
 Descarga el proyecto SOL y abre el quest en la carpeta `quest/entre_gatos`.
 
+Revisa el quest [Silicio y titanio](quest_silicio_y_titanio.md) si necesitas ayuda para
+obtener el código o configurar tu entorno de desarrollo.
+
 1. Ejecuta la demo proporcionada y estudia su salida.
     - ¿En qué estados puede estar un gato?
     - ¿Qué acciones afectan el estado de un gato?
@@ -33,6 +36,8 @@ Descarga el proyecto SOL y abre el quest en la carpeta `quest/entre_gatos`.
 5. Reflexiona sobre lo que has observado:
     - Haz una tabla resumen con (a) la nueva sintaxis aprendida, y (b) para qué sirve.
     - ¿Hay algún aspecto todavía misterioso?
+
+{{ snippet_box("Cat", default_open=False) }}
 
 ## Reto final
 
