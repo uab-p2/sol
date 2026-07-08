@@ -1,3 +1,4 @@
+/* More clear title contrast (all) */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
@@ -9,6 +10,7 @@
     border-bottom: 2px solid rgba(0, 0, 0, .6);
 }
 
+/* More clear title contrast (dark) */
 [data-md-color-scheme="slate"] .md-typeset h1,
 [data-md-color-scheme="slate"] .md-typeset h2,
 [data-md-color-scheme="slate"] .md-typeset h3,
@@ -40,6 +42,7 @@
     margin-left: 5em;
 }
 
+/* Logo images (200x200) */
 .logo {
     text-align: center;
 }
@@ -49,4 +52,10 @@
     width: 100%;
     height: auto;
     display: inline-block;
+}
+
+/* Justify regular page text */
+.md-typeset p,
+.md-typeset li {
+    text-align: justify;
 }
