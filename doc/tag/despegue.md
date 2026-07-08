@@ -1,12 +1,8 @@
 # Despegue
 
-<p style="text-align: center;">
-  <img
-    src="/asset/img/logo_despegue.png"
-    alt="SOL"
-    style="max-width: 200px; width: 100%; height: auto;"
-  />
-</p>
+<div class="logo">
+  <img src="../../asset/img/import/logo_despegue.png" alt="SOL">
+</div>
 
 Enhorabuena! Acabas de recibir la aceptación para el Proyecto SOL.
 Pon a punto tu máquina y prepárate para el despegue.

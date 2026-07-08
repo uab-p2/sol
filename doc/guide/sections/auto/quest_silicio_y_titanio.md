@@ -102,7 +102,7 @@ Dependiendo de tu IDE:
 
   ![VS open quest](../asset/img/import/screenshot_vs_open_quest.png)
 
-  A continuación, ctiva la vista "cmake targets":
+  A continuación, activa la vista "cmake targets":
 
   ![VS open quest](../asset/img/import/screenshot_vs_config_view.png)
 
