@@ -137,7 +137,7 @@ def define_env(env):
         s = find_snippet(name, arg_types, include_declarations, include_definitions)
         if s is not None:
             return (f"""\
-???{'+' if default_open else ''} example "{snippet_tag(name, arg_types, include_declarations, include_definitions)}"
+???{'+' if default_open else ''} tip "{snippet_tag(name, arg_types, include_declarations, include_definitions)}"
 {textwrap.indent(snippet(name, arg_types, include_declarations, include_definitions), "    ")}\n""")
         return f"`Warning: missing snippet for {name!r}`"
 

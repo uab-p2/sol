@@ -6,10 +6,11 @@ Te ofrecemos un puñado de preguntas guiadas, tras las cuales te proponemos un r
 
 ## Preguntas guiadas
 
-Descarga el proyecto SOL y abre el quest en la carpeta `quest/entre_gatos`.
+Comienza descargando el proyecto SOL y abriendo el quest en la carpeta `quest/entre_gatos`.
 
-Revisa el quest [Silicio y titanio](quest_silicio_y_titanio.md) si necesitas ayuda para
-obtener el código o configurar tu entorno de desarrollo.
+!!! info
+      Revisa el quest [Silicio y titanio](quest_silicio_y_titanio.md) si necesitas ayuda para
+      obtener el código o configurar tu entorno de desarrollo.
 
 1. Ejecuta la demo proporcionada y estudia su salida.
     - ¿En qué estados puede estar un gato?
@@ -37,7 +38,9 @@ obtener el código o configurar tu entorno de desarrollo.
     - Haz una tabla resumen con (a) la nueva sintaxis aprendida, y (b) para qué sirve.
     - ¿Hay algún aspecto todavía misterioso?
 
-{{ snippet_box("Cat", default_open=False) }}
+{{ snippet_box("cat.h", default_open=False) }}
+
+{{ snippet_box("cat.cpp", default_open=False) }}
 
 ## Reto final
 
@@ -51,10 +54,13 @@ Antes de programar nada:
 
 Para la implementación:
 
-* Crea al menos `caregiver.h`, `caregiver.cpp` y define una nueva clase `Caregiver`.
-* Modifica `main.cpp` para que siga tu guión.
-* No modifiques ningún fichero de `../src` (en ningún quest).
+* Crea al menos `caregiver.h`, `caregiver.cpp` en la carpeta del quest,
+  y define una nueva clase `Caregiver`.
+* Modifica el `main.cpp` de tu quest para que siga tu guión.
 
----
-- [Código](https://github.com/uab-p2/sol/tree/main//quest/entre_gatos)
-- [&leftarrow;&nbsp;Objetos celestes](campaign_oop.md)
+!!! info
+      Podrás utilizar, pero no modificar, el código en la carpeta `src/`
+      para solucionar tus quests.
+
+<br/><br/>
+[&rightarrow; Repositorio](https://github.com/uab-p2/sol/tree/main//quest/entre_gatos)

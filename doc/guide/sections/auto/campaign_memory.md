@@ -4,7 +4,7 @@
 
 ## Quests
 
-A continuación tienes los quests de la campaña `{{ tag_title("memory") }}`:
+A continuación tienes un resumen de los quests de la campaña `{{ tag_title("memory") }}`:
 
 {{ tag_quest_sections("memory") }}
 

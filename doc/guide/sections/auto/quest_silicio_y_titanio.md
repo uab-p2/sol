@@ -134,6 +134,5 @@ Dependiendo de tu IDE:
 Si todo ha ido bien, deberías ver un mensaje indicando cómo se compara
 la velocidad de tu máquina con la de la mía. ¿Cuál de las dos nos lleva más rápido?
 
----
-- [Código](https://github.com/uab-p2/sol/tree/main//quest/silicio_y_titanio)
-- [&leftarrow;&nbsp;Despegue](campaign_despegue.md)
+<br/><br/>
+[&rightarrow; Repositorio](https://github.com/uab-p2/sol/tree/main//quest/silicio_y_titanio)
