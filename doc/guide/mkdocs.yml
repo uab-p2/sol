@@ -8,7 +8,7 @@ site_dir: html
 nav:
   - main(): index.md
   - quest():
-      - Quests, campañas y calendario: campaigns.md
+      - Intro: campaigns.md
       - Despegue:
         - Intro: auto/campaign_despegue.md
         - Silicio y titanio(): auto/quest_silicio_y_titanio.md

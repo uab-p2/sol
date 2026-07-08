@@ -158,6 +158,28 @@ def _extract_campaign_tag(path: str) -> str | None:
     return base[len("campaign_") : -len(".md")]
 
 
+def _campaign_nav_path(value: object) -> str | None:
+    """Return the campaign markdown path from a nav node value, if present."""
+
+    if isinstance(value, str) and value.startswith(CAMPAIGN_PREFIX):
+        return value
+
+    if not isinstance(value, list) or not value:
+        return None
+
+    first = value[0]
+    if isinstance(first, str) and first.startswith(CAMPAIGN_PREFIX):
+        return first
+
+    if isinstance(first, dict) and len(first) == 1:
+        intro_key, intro_value = next(iter(first.items()))
+        if isinstance(intro_key, str) and intro_key.strip().lower() == "intro" and isinstance(intro_value, str):
+            if intro_value.startswith(CAMPAIGN_PREFIX):
+                return intro_value
+
+    return None
+
+
 def _iter_quest_campaign_nodes(nav: object):
     """Yield campaign nav nodes under top-level `quest():` entries."""
 
@@ -173,16 +195,7 @@ def _iter_quest_campaign_nodes(nav: object):
                 continue
 
             label, value = next(iter(item.items()))
-            if isinstance(value, str) and value.startswith(CAMPAIGN_PREFIX):
-                yield item, label, value
-                continue
-
-            if (
-                isinstance(value, list)
-                and len(value) >= 1
-                and isinstance(value[0], str)
-                and value[0].startswith(CAMPAIGN_PREFIX)
-            ):
+            if _campaign_nav_path(value) is not None:
                 yield item, label, value
 
 
@@ -429,7 +442,9 @@ def update_mkdocs_index(argv: list[str] | None = None) -> int:
         return 1
 
     for item, label, value in _iter_quest_campaign_nodes(nav):
-        campaign_path = value if isinstance(value, str) else value[0]
+        campaign_path = _campaign_nav_path(value)
+        if campaign_path is None:
+            continue
 
         tag_name = _extract_campaign_tag(campaign_path)
         if tag_name is None:
