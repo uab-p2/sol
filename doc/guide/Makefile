@@ -15,7 +15,8 @@ serve: sections assets
 	$(MKDOCS) serve
 
 sections:
-	$(shell python3 ../tool/campaign.py)
+	python3 ../tool/campaign.py
+	python3 ../tool/autoindex.py
 
 assets:
 	rm -rf $(SECTION_DIR)/asset/img/import && mkdir -p $(SECTION_DIR)/asset/img/import && cp -r ../img/*png $(SECTION_DIR)/asset/img/import
