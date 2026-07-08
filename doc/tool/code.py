@@ -23,13 +23,14 @@ import textwrap
 
 
 class SnippetType(Enum):
+    WHOLE_FILE = "file"
     CLASS = "class"
     # These include constructors (I know, I know...)
     DECLARATION = "meth-dcl"
     DEFINITION = "meth-def"
 
     @classmethod
-    def from_node(cls, node: CursorKind) -> SnippetType | None:
+    def from_node(cls, node: CursorKind) -> SnippetType:
         if node.kind == CursorKind.CLASS_DECL:
             assert node.is_definition(), "Class declarations must be definitions"
             return cls.CLASS
@@ -43,7 +44,7 @@ class SnippetType(Enum):
             else:
                 return cls.DECLARATION
         else:
-            abort("Unsupported node kind")
+            raise ValueError(f"Unsupported node kind: {node.kind}")
 
 
 @dataclass
@@ -88,6 +89,18 @@ class Snippet:
             except ValueError as ex:
                 print(f"Path must be under project root {PROJECT_ROOT}, but got {path}")
                 raise ex
+
+            with open(path, "r") as f:
+                lines = f.read().splitlines()
+
+            snippets.append(Snippet(
+                name=path.name,
+                code="\n".join(lines),
+                relative_file_path=relative_path,
+                line_start=1,
+                line_end=len(lines),
+                type=SnippetType.WHOLE_FILE,
+            ))
 
             tu = Index.create().parse(
                 path,
@@ -140,27 +153,25 @@ class Snippet:
                     return_type = node.result_type.spelling
                     snippet_name = f"{node.semantic_parent.spelling}::{node.spelling}"
 
-                with open(PROJECT_ROOT / node_relative_path, "r") as f:
-                    lines = f.read().splitlines()
-                    comment_start = node.extent.start.line - 1
-                    while comment_start > 0 and lines[comment_start - 1].lstrip().startswith("//"):
-                        comment_start -= 1
-                    snippets.append(Snippet(
-                        name=snippet_name,
-                        code="\n".join(lines[comment_start:node.extent.end.line]),
-                        relative_file_path=node_relative_path,
-                        line_start=node.extent.start.line,
-                        line_end=node.extent.end.line,
-                        type=SnippetType.from_node(node),
-                        arg_types=arg_types,
-                        return_type=return_type,
-                    ))
+                comment_start = node.extent.start.line - 1
+                while comment_start > 0 and lines[comment_start - 1].lstrip().startswith("//"):
+                    comment_start -= 1
+                snippets.append(Snippet(
+                    name=snippet_name,
+                    code="\n".join(lines[comment_start:node.extent.end.line]),
+                    relative_file_path=node_relative_path,
+                    line_start=node.extent.start.line,
+                    line_end=node.extent.end.line,
+                    type=SnippetType.from_node(node),
+                    arg_types=arg_types,
+                    return_type=return_type,
+                ))
 
         return snippets
 
     @property
     def label(self) -> str:
-        if self.type == SnippetType.CLASS:
+        if self.type in (SnippetType.WHOLE_FILE, SnippetType.CLASS):
             return self.name
 
         ret_str = f"{self.return_type} " if self.return_type else ""

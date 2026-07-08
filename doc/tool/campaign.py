@@ -23,7 +23,7 @@ def generate_campaign_sections():
             
             ## Quests
             
-            A continuación tienes los quests de la campaña `{{{{ tag_title("{tag.name}") }}}}`:
+            A continuación tienes un resumen de los quests de la campaña `{{{{ tag_title("{tag.name}") }}}}`:
             
             {{{{ tag_quest_sections("{tag.name}") }}}}
             
@@ -44,9 +44,8 @@ def generate_quest_sections():
 
 {description_fixed_links}
 
----
-- [Código]({GITHUB_QUEST_URL}/{os.path.basename(quest.module_path)})
-- [&leftarrow;&nbsp;{quest.tags[0].title}](campaign_{quest.tags[0].name}.md)
+<br/><br/>
+[&rightarrow; Repositorio]({GITHUB_QUEST_URL}/{os.path.basename(quest.module_path)})
             """))
 
 

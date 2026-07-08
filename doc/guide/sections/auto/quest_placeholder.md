@@ -7,6 +7,5 @@ Descripción e instrucciones.
 void f(int x) { x *= 2; }
 ```
 
----
-- [Código](https://github.com/uab-p2/sol/tree/main//quest/placeholder)
-- [&leftarrow;&nbsp;Recuerdos sintéticos](campaign_memory.md)
+<br/><br/>
+[&rightarrow; Repositorio](https://github.com/uab-p2/sol/tree/main//quest/placeholder)

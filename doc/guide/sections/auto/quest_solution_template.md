@@ -30,6 +30,5 @@ Esta descripción puede usarse como ayuda para entender la solución mostrada.
   **Importante**: siempre configurar el assignment the gradescope con un máximo de 10 puntos
   (el sistema pondera según los pesos de cada test en test.cpp).
 
----
-- [Código](https://github.com/uab-p2/sol/tree/main//quest/solution_template)
-- [&leftarrow;&nbsp;](campaign_solucion.md)
+<br/><br/>
+[&rightarrow; Repositorio](https://github.com/uab-p2/sol/tree/main//quest/solution_template)
