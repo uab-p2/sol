@@ -8,7 +8,8 @@ from io import StringIO
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, GITHUB_ROOT_URL, GITHUB_QUEST_URL, GUIDE_SECTION_DIR, GUIDE_AUTO_SECTION_DIR, Quest, Tag
+from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, GITHUB_ROOT_URL, GITHUB_QUEST_URL, GUIDE_SECTION_DIR, \
+    GUIDE_AUTO_SECTION_DIR, Quest, Tag
 
 
 def define_env(env):
@@ -62,11 +63,19 @@ def define_env(env):
             quests = [quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)]
             lines = []
             for quest in quests:
-                lines.append("[" + quest.title + "](" + GITHUB_QUEST_URL + "/" + os.path.basename(
-                    quest.module_path.resolve().as_posix()) + ")")
+                lines.append(quest_link(quest))
             return "\n".join(lines)
         except ValueError:
             return f"(no hay quests para `{tag_name}`)"
+
+    @env.macro
+    def quest_link(quest_name):
+        """Get the link to the quest with the given name."""
+        try:
+            quest = [quest for quest in Quest.list() if quest.name.lower() == quest_name.lower()][0]
+            return f"[{quest.title}](quest_{quest.name}.md)"
+        except IndexError:
+            return f"(missing quest `{quest_name}`)\n\n{s}"
 
     @env.macro
     def snippet(name: str,

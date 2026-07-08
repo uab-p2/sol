@@ -4,6 +4,7 @@ Process and display metainformation about quest modules.
 from __future__ import annotations
 
 import glob
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -79,6 +80,10 @@ class Quest:
     title: str
     description: str
     tags: list[Tag]
+
+    @property
+    def name(self) -> str:
+        return os.path.basename(self.module_path.resolve().as_posix())
 
     @classmethod
     def from_readme(cls, readme_path: Path) -> Quest:

@@ -1,11 +1,11 @@
 # Despegue
 
+Enhorabuena! Acabas de recibir la aceptación para el Proyecto SOL.
+Pon a punto tu máquina y prepárate para el despegue.
+
 <div class="logo">
   <img src="../../asset/img/import/logo_despegue.png" alt="SOL">
 </div>
-
-Enhorabuena! Acabas de recibir la aceptación para el Proyecto SOL.
-Pon a punto tu máquina y prepárate para el despegue.
 
 Los quests de esta campaña te ayudarán a configurar y probar tu plataforma 
 de desarrollo y optimizarla para la asignatura `Programación 2`.
