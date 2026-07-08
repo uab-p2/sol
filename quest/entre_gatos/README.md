@@ -9,7 +9,7 @@ Te ofrecemos un puñado de preguntas guiadas, tras las cuales te proponemos un r
 Comienza descargando el proyecto SOL y abriendo el quest en la carpeta `quest/entre_gatos`.
 
 !!! info
-      Revisa el quest [Silicio y titanio](quest_silicio_y_titanio.md) si necesitas ayuda para
+      Revisa el quest {{ quest_link("silicio_y_titanio") }} si necesitas ayuda para
       obtener el código o configurar tu entorno de desarrollo.
 
 1. Ejecuta la demo proporcionada y estudia su salida.
