@@ -37,7 +37,9 @@ def define_env(env):
     @env.macro
     def tag_quests(tag_name):
         """List the quests of a given tag (campaign) with links to GITHUB."""
-        quests = [quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)]
+        quests = sorted([quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)],
+                        key=lambda q: next(t for t in q.tags if t.name == tag_name).index)
+
         lines = []
         for quest in quests:
             lines.append("### [" + quest.title + "](" + GITHUB_QUEST_URL + "/" + os.path.basename(
@@ -48,8 +50,9 @@ def define_env(env):
 
     @env.macro
     def tag_quest_sections(tag_name):
-        """List the quests of a given tag (campaign) with links to GITHUB."""
-        quests = [quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)]
+        """List the quests of a given tag (campaign) with links to the quest sections."""
+        quests = sorted([quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)],
+                        key=lambda q: next(t for t in q.tags if t.name == tag_name).index or 0)
         lines = []
         for quest in quests:
             lines.append(f"### [{quest.title}](quest_{os.path.basename(quest.module_path.resolve().as_posix())}.md)")
