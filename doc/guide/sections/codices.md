@@ -7,4 +7,6 @@ confeccionados a medida de la asignatura y del proyecto SOL.
 <img src="../asset/img/tome.png">
 </div>
 
+## Índice alfabético
+
 {{ codex_list() }}
