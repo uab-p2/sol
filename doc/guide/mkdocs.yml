@@ -1,12 +1,13 @@
-site_name: P2 - Guía de estudio
-site_description: P2 - Guía de estudio
-site_author: Programación 2 - UAB
+site_name: Proyecto SOL
+site_description: Proyecto SOL
+site_author: UAB::Programación_2
 
 docs_dir: sections
 site_dir: html
 
 nav:
-  - main(): index.md
+  - main():
+      - Intro: index.md
   - quest():
       - Intro: campaigns.md
       - Despegue:
@@ -21,7 +22,12 @@ nav:
           - Título del Quest(): auto/quest_placeholder.md
   - help():
       - Intro : codices.md
-      - codex/plataforma.md
+
+      - Primeros pasos:
+        - codex/plataforma.md
+        - codex/clone_project.md
+        - codex/open_quest.md
+        - codex/run_quest.md
 
 
 theme:

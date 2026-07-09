@@ -1,6 +1,6 @@
 # Plataforma de desarrollo
 
-Instalación y configuración de la plataforma de desarrollo:
+Instala y configura tu plataforma de desarrollo:
 sistema operativo, entorno de desarrollo y otras herramientas.
 
 ## Sistema operativo

@@ -3,8 +3,8 @@
 Enhorabuena! Acabas de recibir la aceptación para el Proyecto SOL.
 Pon a punto tu máquina y prepárate para el despegue.
 
-<div class="logo">
-  <img src="../../asset/img/import/logo_despegue.png" alt="SOL">
+<div class="logo frame">
+  <img src="../../asset/img/import/takeoff.png" alt="SOL">
 </div>
 
 Los quests de esta campaña te ayudarán a configurar y probar tu plataforma 

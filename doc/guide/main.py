@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import posixpath
 import subprocess
 import sys
 import textwrap
@@ -18,8 +19,17 @@ def define_env(env):
         """Get the link to the codex entry with the given name."""
         from tool.codex import Codex
         codex: Codex = next(c for c in Codex.list() if c.name == name)
-        site_url = (env.conf.get("site_url") or "").rstrip("/")
-        return f"[{codex.title}]({site_url}/codex/{codex.name})"
+
+        # Resolve against current page depth to avoid root-prefix issues on GitHub Pages.
+        page_url = (getattr(getattr(env, "page", None), "url", "") or "").lstrip("/")
+        if page_url.endswith("/"):
+            current_dir = page_url.rstrip("/") or "."
+        else:
+            current_dir = posixpath.dirname(page_url) or "."
+
+        target = f"codex/{codex.name}"
+        href = posixpath.relpath(target, start=current_dir) if current_dir != "." else target
+        return f"[{codex.title}]({href}/)"
 
     @env.macro
     def codex_list() -> str:
@@ -87,6 +97,15 @@ def define_env(env):
         try:
             quest = [quest for quest in Quest.list() if quest.name.lower() == quest_name.lower()][0]
             return f"[{quest.title}](quest_{quest.name}.md)"
+        except IndexError:
+            return f"(missing quest `{quest_name}`)\n\n{s}"
+
+    @env.macro
+    def quest_title(quest_name):
+        """Get the title of the quest with the given name."""
+        try:
+            quest = [quest for quest in Quest.list() if quest.name.lower() == quest_name.lower()][0]
+            return quest.title
         except IndexError:
             return f"(missing quest `{quest_name}`)\n\n{s}"
 
