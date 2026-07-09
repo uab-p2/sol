@@ -1,0 +1,80 @@
+// Free UAB font alternative
+@font-face {
+  font-family: "Mona Sans";
+  src: url("../assets/fonts/MonaSans-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 200 2000;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* More clear title contrast (all) */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+    font-weight: 700;
+    padding-bottom: .1rem;
+    border-bottom: 2px solid rgba(0, 0, 0, .6);
+}
+
+/* More clear title contrast (dark) */
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2,
+[data-md-color-scheme="slate"] .md-typeset h3,
+[data-md-color-scheme="slate"] .md-typeset h4,
+[data-md-color-scheme="slate"] .md-typeset h5,
+[data-md-color-scheme="slate"] .md-typeset h6 {
+    color: #ccc;
+    padding-bottom: .1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, .3);
+}
+
+[data-md-color-scheme="slate"] .md-typeset h2 {
+    margin-left: 1em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h3 {
+    margin-left: 2em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h4 {
+    margin-left: 3em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h5 {
+    margin-left: 4em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h6 {
+    margin-left: 5em;
+}
+
+/* Logo images and text */
+.logo {
+    text-align: center;
+}
+.logo img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+p.logo {
+    font-family: "Mona Sans", sans-serif;
+    font-variant: small-caps;
+    font-size: 3em;
+    font-weight: 2000;
+    color: #ff6e42;
+    padding: 0;
+    margin: 0;
+}
+
+/* Justify regular page text */
+.md-typeset p,
+.md-typeset li {
+    text-align: justify;
+}

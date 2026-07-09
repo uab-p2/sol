@@ -1,6 +1,6 @@
-site_name: Guía de estudio P2
-site_description: Guía de estudio P2
-site_author: Profesorado Programación 2, UAB
+site_name: P2 - Guía de estudio
+site_description: P2 - Guía de estudio
+site_author: Programación 2 - UAB
 
 docs_dir: sections
 site_dir: html
@@ -10,14 +10,15 @@ nav:
   - quest():
       - Intro: campaigns.md
       - Despegue:
-        - Intro: auto/campaign_despegue.md
-        - Silicio y titanio(): auto/quest_silicio_y_titanio.md
+          - Intro: auto/campaign_despegue.md
+          - Silicio y titanio(): auto/quest_silicio_y_titanio.md
+          - Cámara de desinfección(): auto/quest_camara_de_desinfeccion.md
       - Objetos celestes:
-        - Intro: auto/campaign_oop.md
-        - Entre gatos(): auto/quest_entre_gatos.md
+          - Intro: auto/campaign_oop.md
+          - Entre gatos(): auto/quest_entre_gatos.md
       - Recuerdos sintéticos:
-        - Intro: auto/campaign_memory.md
-        - Título del Quest(): auto/quest_placeholder.md
+          - Intro: auto/campaign_memory.md
+          - Título del Quest(): auto/quest_placeholder.md
   - help():
       - Intro : codices.md
       - Sintaxis : codex_oop_syntax.md
@@ -25,7 +26,7 @@ nav:
 
 theme:
   name: material
-  favicon: asset/white-balance-sunny.ico
+  favicon: asset/img/white-balance-sunny.ico
   language: es
 
   icon:
@@ -57,7 +58,7 @@ theme:
         name: Dark mode
 
 extra_css:
-  - css/extra.css
+  - asset/css/extra.css
 
 markdown_extensions:
   - toc:
