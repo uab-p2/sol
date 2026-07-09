@@ -1,8 +1,10 @@
-# Codex de conocimiento
+# Códice
 
-Sumérgete en los detalles:
+El códice contiene una colección destilada de materiales de referencia
+confeccionados a medida de la asignatura y del proyecto SOL.
 
-* Chuletas de sintaxis
-* Explicaciones compactas, autocontenidas 
+<div class="logo frame">
+<img src="../asset/img/tome.png">
+</div>
 
-Usa el menú lateral para navegar.
+{{ codex_list() }}

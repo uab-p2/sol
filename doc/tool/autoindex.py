@@ -18,6 +18,13 @@ import yaml
 from quest import PROJECT_ROOT, DEFAULT_QUEST_DIR
 from quest import Quest, Tag
 
+try:
+    from markdown import first_paragraph as _shared_first_paragraph
+    from markdown import sanitize_markdown_description as _shared_sanitize_description
+except ImportError:  # pragma: no cover - import path when used as package `tool.autoindex`
+    from tool.markdown import first_paragraph as _shared_first_paragraph
+    from tool.markdown import sanitize_markdown_description as _shared_sanitize_description
+
 LABEL_SECTION_CATEGORIES = "Categorías"
 LABEL_SECTION_QUESTS = "Quests"
 LABEL_QUEST_INDEX = "Índice de quests"
@@ -129,20 +136,13 @@ def _slug(value: str) -> str:
 def _sanitize_description(description: str) -> str:
     """Remove noisy HTML tags from README descriptions."""
 
-    text = re.sub(r"<img[^>]*>", "", description, flags=re.IGNORECASE)
-    text = re.sub(r"</?p[^>]*>", "", text, flags=re.IGNORECASE)
-    return text.strip()
+    return _shared_sanitize_description(description)
 
 
 def _first_paragraph(description: str) -> str:
     """Return the first non-empty paragraph from a description."""
 
-    cleaned = _sanitize_description(description)
-    for paragraph in re.split(r"\n\s*\n", cleaned):
-        normalized = " ".join(paragraph.split())
-        if normalized:
-            return normalized
-    return ""
+    return _shared_first_paragraph(description)
 
 
 def _extract_campaign_tag(path: str) -> str | None:

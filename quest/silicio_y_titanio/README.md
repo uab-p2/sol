@@ -4,42 +4,11 @@ Tu primera misión es configurar un buen entorno de desarrollo
 que te sirva para todo el proyecto. Primero te ayudamos a instalar
 todo lo necesario. Después, te proponemos una *prueba de humo*.
 
-<div class="logo">
+<div class="logo frame">
 <img src="../../doc/img/silicon.png">
 </div>
 
-## Sistema operativo
-
-Tu primera decisión debe ser qué sistema operativo utilizar.
-Las principales opciones compatibles con el proyecto SOL son:
-
-- Linux (p.ej., [Kubuntu](https://kubuntu.org/)
-  o [linuxmint](https://www.linuxmint.com/))
-- Windows
-- MacOS
-
-Recuerda que puedes tener más de un sistema operativo 
-instalado a la vez. Te animamos a explorar una configuración
-dual boot Linux + Windows/MacOS para que puedas familiarizarte
-con ambos sistemas.
-
-## Entorno de desarrollo y compiladores
-
-Los principales entornos de desarrollo integrado (IDEs)
-disponibles en la mayoría de plataformas son:
-
-- [Jetbrains CLion](https://www.jetbrains.com/clion/):
-  gratis para usos no comerciales. Recomendado instalar
-  a trevés del Toolbox de Jetbrains.
-- [Visual Studio 2026](https://visualstudio.microsoft.com/downloads/):
-  version Community gratuita.
-
-Si utilizas Linux en la línea de comandos (CLI), tan sólo necesitarás
-instalar los paquetes básicos de compilación, como por ejemplo (debian/ubuntu):
-
-```bash
-apt install build-essential gdb valrgind cmake git
-```
+{{ codex_link("plataforma") }}
 
 ## Prueba de humo
 
