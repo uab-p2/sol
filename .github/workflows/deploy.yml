@@ -23,13 +23,83 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt update -y
+          sudo apt install -y clang-18 libclang-18-dev llvm-18
           python -m pip install --upgrade pip
+          # Pin the `clang` python bindings to the same major.minor version as the
+          # system libclang-18 package. Mismatched versions cause ctypes/ABI
+          # errors like "undefined symbol: clang_getOffsetOfBase" at runtime.
+          #
+          # IMPORTANT: never install the `libclang` PyPI package alongside `clang`.
+          # Both packages install files into the SAME `clang/` import namespace
+          # (clang/__init__.py, clang/cindex.py, ...), so installing both causes
+          # one to silently overwrite the other's cindex.py with no warning,
+          # potentially reintroducing this exact ABI mismatch bug.
+          CLANG_APT_VERSION=$(dpkg-query -W -f='${Version}' libclang-18-dev)
+          echo "libclang-18-dev apt version: $CLANG_APT_VERSION"
+          if python -m pip show libclang >/dev/null 2>&1; then
+            echo "::error::pip package 'libclang' is installed and collides with 'clang' (both provide clang/cindex.py). Uninstall it."
+            exit 1
+          fi
           python -m pip install \
+            "clang==18.1.8" \
             mkdocs \
             mkdocs-material \
             pymdown-extensions \
             mkdocs-minify-plugin \
             mkdocs-macros-plugin
+
+      - name: Locate libclang and export env
+        run: |
+          LIBCLANG_FILE=$(find /usr/lib/llvm-18 -name 'libclang.so*' | sort | head -n1)
+          if [ -z "$LIBCLANG_FILE" ]; then
+            echo "::error::libclang.so not found under /usr/lib/llvm-18"
+            exit 1
+          fi
+          echo "Found libclang at $LIBCLANG_FILE"
+          echo "LIBCLANG_FILE=$LIBCLANG_FILE" >> "$GITHUB_ENV"
+
+      - name: Debug environment (only runs if a previous step failed)
+        if: failure()
+        run: |
+          echo "::group::clang/llvm apt packages"
+          dpkg -l | grep -Ei 'clang|llvm' || echo "no clang/llvm packages found"
+          echo "::endgroup::"
+
+          echo "::group::LIBCLANG_FILE details"
+          echo "LIBCLANG_FILE=${LIBCLANG_FILE:-<unset>}"
+          if [ -n "$LIBCLANG_FILE" ]; then
+            ls -la "$LIBCLANG_FILE"
+            readlink -f "$LIBCLANG_FILE"
+            echo "-- exported symbol check (clang_getOffsetOfBase) --"
+            nm -D --defined-only "$(readlink -f "$LIBCLANG_FILE")" 2>/dev/null | grep clang_getOffsetOfBase \
+              || echo "symbol clang_getOffsetOfBase NOT FOUND in $LIBCLANG_FILE"
+          fi
+          echo "::endgroup::"
+
+          echo "::group::Python clang bindings info"
+          python3 -m pip show clang || true
+          echo "::endgroup::"
+
+      - name: Verify libclang is loadable
+        run: |
+          python3 - <<'PY'
+          import os
+          from clang.cindex import Config, Index
+
+          libclang_file = os.environ["LIBCLANG_FILE"]
+          print(f"Using LIBCLANG_FILE={libclang_file}")
+          Config.set_library_file(libclang_file)
+          try:
+              Index.create()
+          except Exception:
+              print("!!! Failed to load/initialize libclang. See 'Debug environment' "
+                    "step above for library/symbol details, and check that the "
+                    "pinned pip 'clang' package version matches the apt "
+                    "'libclang-18-dev' version.")
+              raise
+          print("OK: clang.cindex can load libclang")
+          PY
 
       - name: Build site (via Makefile)
         working-directory: doc/guide

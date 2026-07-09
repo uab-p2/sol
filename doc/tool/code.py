@@ -7,12 +7,14 @@ and allow easy snippet display.
 from __future__ import annotations
 
 import sys
+import subprocess
+import ctypes.util
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from clang.cindex import Config
-from clang.cindex import Index, CursorKind, TranslationUnitLoadError
+from clang.cindex import Index, CursorKind, TranslationUnitLoadError, LibclangError
 from dataclasses import dataclass
 from enum import Enum
 from functools import lru_cache
@@ -20,6 +22,32 @@ from pathlib import Path
 from quest import PROJECT_ROOT
 import os
 import textwrap
+
+
+def _configure_libclang() -> None:
+    """Configure libclang location for python clang bindings."""
+    if os.getenv("LIBCLANG_FILE"):
+        Config.set_library_file(os.environ["LIBCLANG_FILE"])
+        return
+    if os.getenv("LIBCLANG_PATH"):
+        Config.set_library_path(os.environ["LIBCLANG_PATH"])
+        return
+
+    # Best effort fallback for CI runners that have llvm-config available.
+    try:
+        libdir = subprocess.check_output(["llvm-config", "--libdir"], text=True).strip()
+        if libdir:
+            Config.set_library_path(libdir)
+            return
+    except (subprocess.SubprocessError, FileNotFoundError):
+        pass
+
+    library_name = ctypes.util.find_library("clang")
+    if library_name:
+        Config.set_library_file(library_name)
+
+
+_configure_libclang()
 
 
 class SnippetType(Enum):
@@ -102,22 +130,37 @@ class Snippet:
                 type=SnippetType.WHOLE_FILE,
             ))
 
-            tu = Index.create().parse(
-                path,
-                args=[
-                    "-x", "c++",
-                    "-std=c++23",
-                    "-I/usr/include",
-                    "-I/usr/include/x86_64-linux-gnu",
-                    f"-I{os.path.abspath(PROJECT_ROOT)}/src",
-                ],
-            )
+            try:
+                tu = Index.create().parse(
+                    path,
+                    args=[
+                        "-x", "c++",
+                        "-std=c++23",
+                        "-I/usr/include",
+                        "-I/usr/include/x86_64-linux-gnu",
+                        f"-I{os.path.abspath(PROJECT_ROOT)}/src",
+                    ],
+                )
+            except LibclangError as ex:
+                raise RuntimeError(
+                    "Unable to load libclang. Set LIBCLANG_FILE to the full libclang.so path "
+                    "or LIBCLANG_PATH to the directory containing libclang.so."
+                ) from ex
 
             for d in tu.diagnostics:
                 print(f"Parsing warning: {d}")
 
             for node in tu.cursor.walk_preorder():
-                if node.kind not in (
+                try:
+                    node_kind = node.kind
+                except ValueError:
+                    # Some cursor kinds emitted by libclang (e.g. for newer
+                    # C++ constructs like concepts/deduction guides) aren't
+                    # registered in the `clang` python bindings' CursorKind
+                    # table, and accessing `.kind` raises ValueError instead
+                    # of returning an unrecognized value. Just skip them.
+                    continue
+                if node_kind not in (
                         CursorKind.CLASS_DECL,
                         CursorKind.CXX_METHOD,
                         CursorKind.CONSTRUCTOR,
@@ -132,7 +175,7 @@ class Snippet:
                         continue
                 except ValueError:
                     continue
-                if node.kind == CursorKind.CLASS_DECL and not node.is_definition():
+                if node_kind == CursorKind.CLASS_DECL and not node.is_definition():
                     continue
 
                 arg_types = None

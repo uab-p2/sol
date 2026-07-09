@@ -6,7 +6,7 @@
 
 <p style="text-align: center;">
   <img
-    src="doc/img/logo_despegue.png"
+    src="doc/img/logo_sol.png"
     alt="SOL"
     style="max-width: 200px; width: 100%; height: auto;"
   />

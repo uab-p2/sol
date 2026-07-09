@@ -1,10 +1,10 @@
 # Lógica lunática
-    
+
 A veces nuestro código parece desafiar la lógica: la ejecución del programa
 no parece consistente con el código que hemos escrito.
 Primero te armamos con técnicas de desparasitación (debugging) activas y pasivas para
 destruir monstruos lógicos.
-A continuación, te retamos a ponerlas en práctica en la cámara de desinfección.  
+A continuación, te retamos a ponerlas en práctica contra un adversario lunar.
 
 
 <div class="logo frame">
@@ -13,8 +13,8 @@ A continuación, te retamos a ponerlas en práctica en la cámara de desinfecci�
 
 ## Técnicas de debugging
 
-Recuerda y complementa tus habilidades de debugging: {{ codex_link("debugging") }}.
-
+Refresca y aumenta tus habilidades de debugging en el códice:
+{{ codex_link("debugging") }}.
 
 # Tags
 
