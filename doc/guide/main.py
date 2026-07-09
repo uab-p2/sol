@@ -20,16 +20,17 @@ def define_env(env):
         from tool.codex import Codex
         codex: Codex = next(c for c in Codex.list() if c.name == name)
 
-        # Resolve against current page depth to avoid root-prefix issues on GitHub Pages.
+        # Resolve against the *source* directory of the current page (i.e., the
+        # directory containing its .md file), not its rendered pretty-URL
+        # directory, so the link works at any nesting depth inside `sections/`.
+        # page.url is e.g. "codex/open_quest/" (pretty URL for codex/open_quest.md);
+        # stripping the trailing "/" and its last segment yields the source dir "codex".
         page_url = (getattr(getattr(env, "page", None), "url", "") or "").lstrip("/")
-        if page_url.endswith("/"):
-            current_dir = page_url.rstrip("/") or "."
-        else:
-            current_dir = posixpath.dirname(page_url) or "."
+        current_dir = posixpath.dirname(page_url.rstrip("/")) or "."
 
-        target = f"codex/{codex.name}"
+        target = f"codex/{codex.name}.md"
         href = posixpath.relpath(target, start=current_dir) if current_dir != "." else target
-        return f"[{codex.title}]({href}/)"
+        return f"[{codex.title}]({href})"
 
     @env.macro
     def codex_list() -> str:
