@@ -14,9 +14,19 @@ from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, GITHUB_ROOT_URL, GITHUB_
 
 def define_env(env):
     @env.macro
-    def cmd(command):
-        """Show the output of any shell command"""
-        return subprocess.check_output(command, shell=True, text=True).strip()
+    def codex_link(name: str) -> str:
+        """Get the link to the codex entry with the given name."""
+        from tool.codex import Codex
+        codex: Codex = next(c for c in Codex.list() if c.name == name)
+        site_url = (env.conf.get("site_url") or "").rstrip("/")
+        return f"[{codex.title}]({site_url}/codex/{codex.name})"
+
+    @env.macro
+    def codex_list() -> str:
+        """Get an index of codices sorted by title."""
+        from tool.codex import Codex
+        codices = sorted(Codex.list(), key=lambda c: c.title.lower())
+        return "\n".join(f"- {codex_link(codex.name)}" for codex in codices)
 
     @env.macro
     def tag_title(tag_name):

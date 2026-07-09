@@ -12,7 +12,7 @@ nav:
       - Despegue:
           - Intro: auto/campaign_despegue.md
           - Silicio y titanio(): auto/quest_silicio_y_titanio.md
-          - Cámara de desinfección(): auto/quest_camara_de_desinfeccion.md
+          - Lógica lunática(): auto/quest_logica_lunatica.md
       - Objetos celestes:
           - Intro: auto/campaign_oop.md
           - Entre gatos(): auto/quest_entre_gatos.md
@@ -21,8 +21,8 @@ nav:
           - Título del Quest(): auto/quest_placeholder.md
   - help():
       - Intro : codices.md
-      - Sintaxis : codex_oop_syntax.md
-      - Contenedores STL : codex_stl_usage.md
+      - codex/plataforma.md
+
 
 theme:
   name: material

@@ -9,6 +9,11 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+try:
+    from markdown import find_last_h1_named, join_section, read_markdown_lines, require_first_h1
+except ImportError:  # pragma: no cover - import path when used as package `tool.quest`
+    from tool.markdown import find_last_h1_named, join_section, read_markdown_lines, require_first_h1
+
 __all__ = ["Quest"]
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -54,14 +59,13 @@ class Tag:
     def populate(self, tag_dir):
         """Populate the title and description from doc/tag"""
         try:
-            with open(tag_dir / f"{self.name}.md", "r") as f:
-                lines = f.read().strip().splitlines()
-                header_line = lines[0]
-                match = re.search(r"\s*#\s*([^\n]+)\s*$", header_line)
-                if match:
-                    self.title = match.group(1)
-                description = "\n".join(lines[1:]).strip()
-                self.description = description or None
+            lines = read_markdown_lines(Path(tag_dir) / f"{self.name}.md")
+            if not lines:
+                return
+            title_heading = require_first_h1(lines, Path(tag_dir) / f"{self.name}.md")
+            self.title = title_heading[1]
+            description = join_section(lines, title_heading[0] + 1)
+            self.description = description or ""
         except FileNotFoundError:
             pass
 
@@ -96,28 +100,16 @@ class Quest:
         `:<number>` to encode an index.
         """
         readme_path = Path(readme_path)
-        text = readme_path.read_text(encoding="utf-8")
-        lines = text.splitlines()
+        lines = read_markdown_lines(readme_path)
 
-        title_index = next(
-            (index for index, line in enumerate(lines) if re.match(r"^#\s+.+\S\s*$", line)),
-            None,
-        )
-        if title_index is None:
-            raise ValueError(f"No title found in {readme_path}")
-        title = re.sub(r"^#\s+", "", lines[title_index]).strip()
+        title_index, title = require_first_h1(lines, readme_path)
 
-        tag_heading_indexes = [
-            index
-            for index, line in enumerate(lines)
-            if re.match(r"^#\s+tags\s*$", line, flags=re.IGNORECASE)
-        ]
-        if not tag_heading_indexes:
+        tags_index = find_last_h1_named(lines, "tags")
+        if tags_index is None:
             raise ValueError(f"No tags section found in {readme_path}")
-        tags_index = tag_heading_indexes[-1]
 
-        description = "\n".join(lines[title_index + 1: tags_index]).strip()
-        tag_text = "\n".join(lines[tags_index + 1:]).strip()
+        description = join_section(lines, title_index + 1, tags_index)
+        tag_text = join_section(lines, tags_index + 1)
 
         tags = cls._parse_tags(tag_text)
         tags = tags or None
