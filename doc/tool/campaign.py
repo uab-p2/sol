@@ -32,10 +32,16 @@ def generate_campaign_sections():
 
 def generate_quest_sections():
     for quest in Quest.list():
+        # Fix media links
         description_fixed_links = re.sub(
             r"\]\(\.\./\.\./doc/img/?",
             "](../asset/img/import/",
             quest.description,
+        )
+        description_fixed_links = re.sub(
+            r'<img\s+src\s*=\s*"\.\./\.\./doc/img/?',
+            r'<img src="../../asset/img/import/',
+            description_fixed_links,
         )
 
         with open(GUIDE_AUTO_SECTION_DIR / f"quest_{os.path.basename(quest.module_path)}.md", "w") as f:

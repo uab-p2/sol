@@ -4,6 +4,10 @@ Tu primera misión es configurar un buen entorno de desarrollo
 que te sirva para todo el proyecto. Primero te ayudamos a instalar
 todo lo necesario. Después, te proponemos una *prueba de humo*.
 
+<div class="logo">
+<img src="../../doc/img/silicon.png">
+</div>
+
 ## Sistema operativo
 
 Tu primera decisión debe ser qué sistema operativo utilizar.

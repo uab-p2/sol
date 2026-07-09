@@ -61,6 +61,7 @@
     width: 100%;
     height: auto;
     display: inline-block;
+    border-radius: 2em;
 }
 
 p.logo {
