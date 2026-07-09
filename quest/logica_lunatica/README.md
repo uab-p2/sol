@@ -1,5 +1,5 @@
 # Lógica lunática
-
+    
 A veces nuestro código parece desafiar la lógica: la ejecución del programa
 no parece consistente con el código que hemos escrito.
 Primero te armamos con técnicas de desparasitación (debugging) activas y pasivas para
@@ -8,12 +8,15 @@ A continuación, te retamos a ponerlas en práctica en la cámara de desinfecci�
 
 
 <div class="logo frame">
-<img src="../../asset/img/import/astronaut_ant.png">
+<img src="../../doc/img/astronaut_ant.png">
 </div>
 
 ## Técnicas de debugging
 
 Recuerda y complementa tus habilidades de debugging: {{ codex_link("debugging") }}.
 
-<br/><br/>
-[&rightarrow; Repositorio](https://github.com/uab-p2/sol/tree/main//quest/logica_lunatica)
+
+# Tags
+
+despegue:2
+semana:0

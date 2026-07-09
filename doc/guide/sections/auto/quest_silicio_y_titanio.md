@@ -8,7 +8,10 @@ todo lo necesario. Después, te proponemos una *prueba de humo*.
 <img src="../../asset/img/import/silicon.png">
 </div>
 
-{{ codex_link("plataforma") }}
+## Instalación de la plataforma
+
+Tienes todas las instrucciones para la instalación y configuración
+de tu plataforma de desarollo en el Códice: {{ codex_link("plataforma") }}.
 
 ## Prueba de humo
 
