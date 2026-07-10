@@ -63,7 +63,16 @@ También se puede compilar y acceder localmente con `make serve`.
 Requisitos para la compilación:
 
 ```bash
-sudo apt install python3 python3-pip make
+sudo apt install python3 python3-pip make clang-18 libclang-18-dev llvm-18
 
-pip install mkdocs mkdocs-material pymdown-extensions mkdocs-minify-plugin mkdocs-macros-plugin clang libclang
+# The pip `clang` bindings version must match the apt libclang-18 major
+# version, or you'll get "undefined symbol" ctypes errors at runtime.
+#
+# Do NOT also `pip install libclang`: both `clang` and `libclang` PyPI
+# packages install into the same `clang/` import namespace and will
+# silently overwrite each other's cindex.py.
+pip install mkdocs mkdocs-material pymdown-extensions mkdocs-minify-plugin mkdocs-macros-plugin "clang==18.1.8"
+
+# If libclang isn't found automatically, point to it explicitly:
+export LIBCLANG_FILE=$(find /usr/lib/llvm-18 -name 'libclang.so*' | sort | head -n1)
 ```

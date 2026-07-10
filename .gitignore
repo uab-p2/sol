@@ -78,3 +78,6 @@ Thumbs.db*
 quest/solution_*
 quest/quest_template
 gradescope
+.idea
+__pycache__
+cmake-build-debug

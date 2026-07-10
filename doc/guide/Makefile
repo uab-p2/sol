@@ -2,24 +2,21 @@ SITE_DIR = site
 SECTION_DIR = sections
 MKDOCS = mkdocs
 
-.PHONY: all build serve clean rebuild doctor help campaign_pages sections assets
+.PHONY: all build serve clean rebuild doctor help campaign_pages sections
 
 all: build
 
 build: campaign_pages
 
-campaign_pages: sections assets
+campaign_pages: sections
 	$(MKDOCS) build
 
-serve: sections assets
+serve: sections
 	$(MKDOCS) serve
 
 sections:
 	python3 ../tool/campaign.py
 	python3 ../tool/autoindex.py
-
-assets:
-	rm -rf $(SECTION_DIR)/asset/img/import && mkdir -p $(SECTION_DIR)/asset/img/import && cp -r ../img/*png $(SECTION_DIR)/asset/img/import
 
 clean:
 	rm -rf $(SITE_DIR)

@@ -5,9 +5,7 @@ que te sirva para todo el proyecto. Te proponemos una
 *prueba de humo* para tu nuevo sistema:
 compilar el código tu primer quest del proyecto SOL.
 
-<div class="logo frame">
-<img src="../../doc/img/silicon.png">
-</div>
+{{ img_badge("silicon.png") }}
 
 ## Paso 1/4: Instala tu plataforma de desarrollo
 
