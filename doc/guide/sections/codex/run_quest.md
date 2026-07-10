@@ -14,7 +14,7 @@ En primer lugar, elige `main` (para el código en `main.cpp`)
 o `test` (para el código en `test.cpp`).
 A continuación, pulsa el botón play en la barra de herramientas.
 
-![CLion run](../asset/img/screenshot_clion_run.png)
+{{ img("screenshot_clion_run.png") }}
 
 Puedes usar el símbolo de la herramienta para configurar 
 los argumentos por línea de comandos que se reciben en
@@ -26,7 +26,7 @@ En primer lugar, elige `main.exe` (para el código en `main.cpp`)
 o `test.exe` (para el código en `test.cpp`).
 A continuación, pulsa el botón play en la barra de herramientas.
 
-![VS run](../asset/img/screenshot_vs_run.png)
+{{ img("screenshot_vs_run.png") }}
 
 Puedes usar la caja contigua para
 los argumentos por línea de comandos que se reciben en

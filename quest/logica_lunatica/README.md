@@ -6,10 +6,7 @@ Primero te armamos con técnicas de desparasitación (debugging) activas y pasiv
 destruir monstruos lógicos.
 A continuación, te retamos a ponerlas en práctica contra un adversario lunar.
 
-
-<div class="logo frame">
-<img src="../../doc/img/astronaut_ant.png">
-</div>
+{{ img_badge("astronaut_ant.png") }}
 
 ## Técnicas de debugging
 

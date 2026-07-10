@@ -1,8 +1,6 @@
 # Proyecto SOL
 
-<div class="logo">
-  <img src="asset/img/import/logo_sol.png" alt="SOL">
-</div>
+{{ img_badge("logo_sol.png", framed=False) }}
 
 ```verbatim 
 Iniciando................. OK

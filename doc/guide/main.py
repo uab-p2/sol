@@ -18,19 +18,13 @@ def define_env(env):
     def codex_link(name: str) -> str:
         """Get the link to the codex entry with the given name."""
         from tool.codex import Codex
-        codex: Codex = next(c for c in Codex.list() if c.name == name)
-
-        # Resolve against the *source* directory of the current page (i.e., the
-        # directory containing its .md file), not its rendered pretty-URL
-        # directory, so the link works at any nesting depth inside `sections/`.
-        # page.url is e.g. "codex/open_quest/" (pretty URL for codex/open_quest.md);
-        # stripping the trailing "/" and its last segment yields the source dir "codex".
-        page_url = (getattr(getattr(env, "page", None), "url", "") or "").lstrip("/")
-        current_dir = posixpath.dirname(page_url.rstrip("/")) or "."
-
-        target = f"codex/{codex.name}.md"
-        href = posixpath.relpath(target, start=current_dir) if current_dir != "." else target
-        return f"[{codex.title}]({href})"
+        try:
+            codex: Codex = next(c for c in Codex.list() if c.name == name)
+            return (
+                f"[{codex.title}]("
+                f"{env.conf.site_url}codex/{codex.name})")
+        except StopIteration:
+            return ""
 
     @env.macro
     def codex_list() -> str:
@@ -40,19 +34,32 @@ def define_env(env):
         return "\n".join(f"- {codex_link(codex.name)}" for codex in codices)
 
     @env.macro
+    def img(img_name: str):
+        return f"""<img src="{env.conf['site_url']}asset/img/{img_name}">"""
+
+    @env.macro
+    def img_badge(img_name: str, framed: bool = True, div_class="badge") -> str:
+        """Display a centered badge image within the given div class"""
+        return textwrap.dedent(f"""\
+                <div class="{div_class}{' frame' if framed else ''}">
+                <img src="{env.conf['site_url']}asset/img/{img_name}">
+                </div>
+                """)
+
+    @env.macro
     def tag_title(tag_name):
         try:
-            tag = [t for t in Tag.list() if t.name == tag_name][0]
+            tag: Tag = next(t for t in Tag.list() if t.name == tag_name)
             return tag.title
-        except IndexError:
+        except StopIteration:
             return ""
 
     @env.macro
     def tag_description(tag_name):
         try:
-            tag = [t for t in Tag.list() if t.name == tag_name][0]
-            return tag.description
-        except IndexError:
+            tag: Tag = next(t for t in Tag.list() if t.name == tag_name)
+            return env.render(tag.description)
+        except StopIteration:
             return ""
 
     @env.macro
@@ -60,14 +67,13 @@ def define_env(env):
         """List the quests of a given tag (campaign) with links to GITHUB."""
         quests = sorted([quest for quest in Quest.list() if any(tag.name == tag_name for tag in quest.tags)],
                         key=lambda q: next(t for t in q.tags if t.name == tag_name).index)
-
         lines = []
         for quest in quests:
             lines.append("### [" + quest.title + "](" + GITHUB_QUEST_URL + "/" + os.path.basename(
                 quest.module_path.resolve().as_posix()) + ")")
             lines.append(quest.description.strip().split("\n\n")[0])
             lines.append("")
-        return "\n".join(lines)
+        return env.render("\n".join(lines))
 
     @env.macro
     def tag_quest_sections(tag_name):
@@ -78,7 +84,7 @@ def define_env(env):
         for quest in quests:
             lines.append(f"### [{quest.title}](quest_{os.path.basename(quest.module_path.resolve().as_posix())}.md)")
             lines.append(quest.description.strip().split("\n\n")[0])
-        return "\n".join(lines)
+        return env.render("\n".join(lines))
 
     @env.macro
     def tag_quest_links(tag_name):
@@ -88,7 +94,7 @@ def define_env(env):
             lines = []
             for quest in quests:
                 lines.append(quest_link(quest))
-            return "\n".join(lines)
+            return env.render("\n".join(lines))
         except ValueError:
             return f"(no hay quests para `{tag_name}`)"
 
@@ -96,18 +102,18 @@ def define_env(env):
     def quest_link(quest_name):
         """Get the link to the quest with the given name."""
         try:
-            quest = [quest for quest in Quest.list() if quest.name.lower() == quest_name.lower()][0]
-            return f"[{quest.title}](quest_{quest.name}.md)"
-        except IndexError:
+            quest: Quest = next(quest for quest in Quest.list() if quest.name.lower() == quest_name.lower())
+            return f"[{quest.title}]({env.conf['site_url']}auto/quest_{quest.name}.md)"
+        except StopIteration:
             return f"(missing quest `{quest_name}`)\n\n{s}"
 
     @env.macro
     def quest_title(quest_name):
         """Get the title of the quest with the given name."""
         try:
-            quest = [quest for quest in Quest.list() if quest.name.lower() == quest_name.lower()][0]
+            quest: Quest = next(quest for quest in Quest.list() if quest.name.lower() == quest_name.lower())
             return quest.title
-        except IndexError:
+        except StopIteration:
             return f"(missing quest `{quest_name}`)\n\n{s}"
 
     @env.macro
@@ -126,10 +132,10 @@ def define_env(env):
         snippets = find_snippets(name, arg_types, include_declarations, include_definitions)
         sio.write("\n\n".join(str(s) for s in snippets))
         if not snippets:
-            sio.write(f"```cpp linenum\n\n"
+            sio.write(f"```cpp\n"
                       f"// Missing snippet for {name!r}\n"
                       f"```")
-        return sio.getvalue()
+        return env.render(sio.getvalue())
 
     @env.macro
     def snippet_ref(name: str,
@@ -178,7 +184,7 @@ def define_env(env):
         with the snippet contents rendered inside."""
         s = find_snippet(name, arg_types, include_declarations, include_definitions)
         if s is not None:
-            return (f"""\
+            return env.render(f"""\
 ???{'+' if default_open else ''} tip "{snippet_tag(name, arg_types, include_declarations, include_definitions)}"
 {textwrap.indent(snippet(name, arg_types, include_declarations, include_definitions), "    ")}\n""")
         return f"`Warning: missing snippet for {name!r}`"

@@ -1,9 +1,9 @@
 site_name: Proyecto SOL
 site_description: Proyecto SOL
 site_author: UAB::Programación_2
-
-docs_dir: sections
+site_url: https://uab-p2.github.io/sol/
 site_dir: html
+docs_dir: sections
 
 nav:
   - main():
@@ -21,13 +21,13 @@ nav:
           - Intro: auto/campaign_memory.md
           - Título del Quest(): auto/quest_placeholder.md
   - help():
-      - Intro : codices.md
+      - Intro: codices.md
 
       - Primeros pasos:
-        - codex/plataforma.md
-        - codex/clone_project.md
-        - codex/open_quest.md
-        - codex/run_quest.md
+          - codex/plataforma.md
+          - codex/clone_project.md
+          - codex/open_quest.md
+          - codex/run_quest.md
 
 
 theme:
