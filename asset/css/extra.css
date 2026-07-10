@@ -1,11 +1,20 @@
-// Free UAB font alternative
+/* Free UAB font alternative */
 @font-face {
-  font-family: "Mona Sans";
-  src: url("../assets/fonts/MonaSans-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 200 2000;
-  font-stretch: 75% 125%;
-  font-style: normal;
-  font-display: swap;
+    font-family: "Mona Sans";
+    src: url("../assets/fonts/MonaSans-VariableFont_wdth,wght.ttf") format("truetype");
+    font-weight: 200 2000;
+    font-stretch: 75% 125%;
+    font-style: normal;
+    font-display: swap;
+}
+p.logo {
+    font-family: "Mona Sans", sans-serif;
+    font-variant: small-caps;
+    font-size: 3em;
+    font-weight: 2000;
+    color: #ff6e42;
+    padding: 0;
+    margin: 0;
 }
 
 /* More clear title contrast (all) */
@@ -53,10 +62,10 @@
 }
 
 /* Logo images and text */
-.logo {
+.badge {
     text-align: center;
 }
-.logo img {
+.badge img {
     max-width: 200px;
     width: 100%;
     height: auto;
@@ -65,27 +74,15 @@
     transition: all 0.25s ease;
 }
 
-.logo.frame img {
-    border: 3px solid #ff6e42;
+.badge.frame img {
+    border: 3px solid #ff8d69;
     background: #1b0f0a;
-    border-color: #ff8d69;
     box-shadow:
-        0 0 0 2px #8b3b22,
-        0 0 16px rgba(255,110,66,.8),
-        0 0 36px rgba(255,110,66,.55),
-        0 0 60px rgba(255,140,80,.25),
-        inset 0 0 18px rgba(255,200,140,.2);
-}
-
-
-p.logo {
-    font-family: "Mona Sans", sans-serif;
-    font-variant: small-caps;
-    font-size: 3em;
-    font-weight: 2000;
-    color: #ff6e42;
-    padding: 0;
-    margin: 0;
+            0 0 0 2px #8b3b22,
+            0 0 16px rgba(255,110,66,.8),
+            0 0 36px rgba(255,110,66,.55),
+            0 0 60px rgba(255,140,80,.25),
+            inset 0 0 18px rgba(255,200,140,.2);
 }
 
 /* Justify regular page text */
