@@ -106,14 +106,12 @@ class Quest:
 
         tags_index = find_last_h1_named(lines, "tags")
         if tags_index is None:
-            raise ValueError(f"No tags section found in {readme_path}")
-
-        description = join_section(lines, title_index + 1, tags_index)
-        tag_text = join_section(lines, tags_index + 1)
-
-        tags = cls._parse_tags(tag_text)
-        tags = tags or None
-
+            description = join_section(lines, title_index + 1)
+            tags: list[Tag] = []
+        else:
+            description = join_section(lines, title_index + 1, tags_index)
+            tag_text = join_section(lines, tags_index + 1)
+            tags = cls._parse_tags(tag_text)
 
         return cls(module_path=readme_path.parent, title=title, description=description, tags=tags)
 

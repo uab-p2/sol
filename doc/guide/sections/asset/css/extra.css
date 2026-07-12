@@ -90,3 +90,26 @@ p.logo {
 .md-typeset li {
     text-align: justify;
 }
+
+/* Links */
+/* Codex links */
+a.codex {
+    text-decoration: none;
+}
+a.codex::before {
+    content: "📜";
+}
+a.codex::after {
+    content: "";
+}
+
+/* Quest links */
+a.quest {
+    text-decoration: none;
+}
+a.quest::before {
+    content: "❂";
+}
+a.quest::after {
+    content: "";
+}

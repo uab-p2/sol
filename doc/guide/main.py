@@ -11,6 +11,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, GITHUB_ROOT_URL, GITHUB_QUEST_URL, GUIDE_SECTION_DIR, \
     GUIDE_AUTO_SECTION_DIR, Quest, Tag
+from tool.code import Snippet, SnippetType
 
 
 def define_env(env):
@@ -20,9 +21,7 @@ def define_env(env):
         from tool.codex import Codex
         try:
             codex: Codex = next(c for c in Codex.list() if c.name == name)
-            return (
-                f"[{codex.title}]("
-                f"{env.conf.site_url}codex/{codex.name})")
+            return f"<a class='codex' href='{env.conf.site_url}codex/{codex.name}'>{codex.title}</a>"
         except StopIteration:
             return ""
 
@@ -69,8 +68,7 @@ def define_env(env):
                         key=lambda q: next(t for t in q.tags if t.name == tag_name).index)
         lines = []
         for quest in quests:
-            lines.append("### [" + quest.title + "](" + GITHUB_QUEST_URL + "/" + os.path.basename(
-                quest.module_path.resolve().as_posix()) + ")")
+            lines.append(f"### {quest_link(quest.name)}")
             lines.append(quest.description.strip().split("\n\n")[0])
             lines.append("")
         return env.render("\n".join(lines))
@@ -82,7 +80,8 @@ def define_env(env):
                         key=lambda q: next(t for t in q.tags if t.name == tag_name).index or 0)
         lines = []
         for quest in quests:
-            lines.append(f"### [{quest.title}](quest_{os.path.basename(quest.module_path.resolve().as_posix())}.md)")
+            lines.append(
+                f"### {quest_link(quest.name)}")  # [{quest.title}](quest_{os.path.basename(quest.module_path.resolve().as_posix())}.md)")
             lines.append(quest.description.strip().split("\n\n")[0])
         return env.render("\n".join(lines))
 
@@ -103,7 +102,7 @@ def define_env(env):
         """Get the link to the quest with the given name."""
         try:
             quest: Quest = next(quest for quest in Quest.list() if quest.name.lower() == quest_name.lower())
-            return f"[{quest.title}]({env.conf['site_url']}auto/quest_{quest.name}.md)"
+            return f"<a class='quest' href='{env.conf.site_url}auto/quest_{quest.name}'>{quest.title}</a>"
         except StopIteration:
             return f"(missing quest `{quest_name}`)\n\n{s}"
 
@@ -119,7 +118,7 @@ def define_env(env):
     @env.macro
     def snippet(name: str,
                 arg_types: list[str] | None = None,
-                include_declarations: bool = True,
+                include_declarations: bool = False,
                 include_definitions: bool = True) -> str:
         """Display a snippet of code in its ```cpp``` block.
         :return: the rendered snippet(s) for the element with the given name.
@@ -140,7 +139,7 @@ def define_env(env):
     @env.macro
     def snippet_ref(name: str,
                     arg_types: list[str] | None = None,
-                    include_declarations: bool = True,
+                    include_declarations: bool = False,
                     include_definitions: bool = True) -> str:
         """Get the pretty-printed reference to a snippet,
         including types if available."""
@@ -152,7 +151,7 @@ def define_env(env):
     @env.macro
     def snippet_src(name: str,
                     arg_types: list[str] | None = None,
-                    include_declarations: bool = True,
+                    include_declarations: bool = False,
                     include_definitions: bool = True) -> str:
         """Get the link to the source code of a snippet,
         with its link to the code repository."""
@@ -168,7 +167,7 @@ def define_env(env):
     @env.macro
     def snippet_tag(name: str,
                     arg_types: list[str] | None = None,
-                    include_declarations: bool = True,
+                    include_declarations: bool = False,
                     include_definitions: bool = True) -> str:
         """Get the pretty-printed reference to a snippet, name @ source"""
         return (f"{snippet_ref(name, arg_types, include_declarations, include_definitions)} "
@@ -177,7 +176,7 @@ def define_env(env):
     @env.macro
     def snippet_box(name: str,
                     arg_types: list[str] | None = None,
-                    include_declarations: bool = True,
+                    include_declarations: bool = False,
                     include_definitions: bool = True,
                     default_open: bool = False) -> str:
         """Show a box with title equal to the return of snippet_tag,
@@ -192,7 +191,7 @@ def define_env(env):
 
 def find_snippets(name: str,
                   arg_types: list[str] | None = None,
-                  include_declarations: bool = True,
+                  include_declarations: bool = False,
                   include_definitions: bool = True) -> list[Snippet]:
     """Find all snippets, optionally:
         - with the given name and argument types
@@ -203,7 +202,6 @@ def find_snippets(name: str,
     snippets = [s for s in Snippet.list()
                 if s.name == name
                 and (arg_types is None or s.arg_types == arg_types)]
-
     if not include_declarations:
         snippets = [s for s in snippets if s.type != SnippetType.DECLARATION]
     if not include_definitions:
@@ -214,9 +212,9 @@ def find_snippets(name: str,
 
 def find_snippet(name: str,
                  arg_types: list[str] | None = None,
-                 include_declarations: bool = True,
+                 include_declarations: bool = False,
                  include_definitions: bool = True) -> Snippet | None:
     """Find the first snippet matching the given name and argument types,
     or None if no such snippet exists."""
-    snippets = find_snippets(name, arg_types, include_declarations, include_definitions)
+    snippets = find_snippets(name, arg_types, include_declarations, include_definitions) or []
     return snippets[0] if snippets else None
