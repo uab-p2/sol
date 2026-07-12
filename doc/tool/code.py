@@ -105,8 +105,9 @@ class Snippet:
 
         paths = []
         if path is None:
-            paths = ([p for p in Path(PROJECT_ROOT / "src").rglob("*.cpp")]
-                     + [p for p in Path(PROJECT_ROOT).rglob("*.h")])
+            for dir in ("src", "quest"):
+                paths.extend(Path(PROJECT_ROOT / dir).rglob("*.cpp"))
+                paths.extend(Path(PROJECT_ROOT / dir).rglob("*.h"))
         else:
             paths = [path]
 
@@ -136,8 +137,10 @@ class Snippet:
                     args=[
                         "-x", "c++",
                         "-std=c++23",
-                        "-I/usr/include",
-                        "-I/usr/include/x86_64-linux-gnu",
+                        # "-I/usr/include",
+                        # "-I/usr/include/x86_64-linux-gnu",
+                        "-nostdinc",
+                        "-nostdinc++",
                         f"-I{os.path.abspath(PROJECT_ROOT)}/src",
                     ],
                 )
@@ -146,9 +149,6 @@ class Snippet:
                     "Unable to load libclang. Set LIBCLANG_FILE to the full libclang.so path "
                     "or LIBCLANG_PATH to the directory containing libclang.so."
                 ) from ex
-
-            for d in tu.diagnostics:
-                print(f"Parsing warning: {d}")
 
             for node in tu.cursor.walk_preorder():
                 try:
