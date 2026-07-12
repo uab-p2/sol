@@ -28,6 +28,7 @@ nav:
           - codex/clone_project.md
           - codex/open_quest.md
           - codex/run_quest.md
+          - codex/debugging.md
 
 
 theme:
