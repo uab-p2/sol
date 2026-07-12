@@ -1,8 +1,10 @@
 # Plantilla de solución de quest
 
-Esta plantilla permite generar soluciones a un quest del proyecto SOL.
+Cada quest del proyecto SOL tiene una solución basada en esta plantilla.
+Estas soluciones incluyen una propuesta metodológica sobre cómo trabajar
+el quest y la propia solución en clase. 
 
-Esta descripción puede usarse como ayuda para entender la solución mostrada.
+Además de este README.md en formato markdown:
 
 * `main.cpp` puede usarse para mostrar un ejemplo de solución.
 
@@ -25,10 +27,10 @@ Esta descripción puede usarse como ayuda para entender la solución mostrada.
   }
   ```
 
-* La herramienta `gradescope/pack_coderunner.py` permite (re)generar el
-  coderunner para corrección automática con gradescope.
-  **Importante**: siempre configurar el assignment the gradescope con un máximo de 10 puntos
-  (el sistema pondera según los pesos de cada test en test.cpp).
+La herramienta `gradescope/pack_coderunner.py` (o `make coderunner`)
+permite (re)generar el coderunner para corrección automática con gradescope.
+**Importante**: siempre configurar el assignment de gradescope con un máximo de 10 puntos
+(el sistema pondera según los pesos de cada test en test.cpp).
 
 <br/><br/>
 [&rightarrow; Repositorio](https://github.com/uab-p2/sol/tree/main//quest/solution_template)

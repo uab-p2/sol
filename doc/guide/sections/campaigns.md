@@ -15,7 +15,7 @@ cada unidad temática.
 
 * S0: Repaso de herramientas de desarrollo.
 
-### Campañas
+**Campañas**:
 
 - [Despegue](auto/campaign_despegue.md).
 
@@ -30,7 +30,7 @@ cada unidad temática.
 * S4: Persistencia y serialización de objetos. Archivos.
 * S5: Complejidad computacional
 
-### Campañas
+**Campañas**:
 
 - [{{ tag_title("oop") }}](auto/campaign_oop.md)
 
@@ -41,7 +41,7 @@ cada unidad temática.
 * S7: Representación e implementación de estructuras de datos dinámicas:
   listas, pilas y colas.
 
-### Campañas 
+**Campañas**: 
 
 - [{{ tag_title("memory") }}](auto/campaign_memory.md)
 
@@ -50,7 +50,7 @@ cada unidad temática.
 * S8: Introducción al concepto de Template.
 * S9: Estructuras de datos dinámicas con STL: `vector`, `list`, `queue`, `stack`.
 
-### Campañas
+**Campañas**:
 TBD
 
 ## Tema 4: Introducción a Python (S10-S11)
@@ -60,5 +60,5 @@ TBD
 * S11: Serialización de objetos. Archivos.
 * S11: Estructuras de datos (`dict`, `set`, `list`)
 
-### Campañas
+**Campañas**:
 TBD

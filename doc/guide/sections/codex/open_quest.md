@@ -9,7 +9,7 @@ A continuación, necesitas saber cuál de los quests quieres abrir. Cada uno
 es un projecto de código independiente.
 
 !!!info
-Todos los quests se abren de la misma manera.
+    Todos los quests se abren de la misma manera.
 
 Si queremos abrir el quest 'Silicio y titanio', por ejemplo, y tenemos el código en la carpeta `sol/`,
 entonces necesitamos entrar en la carpeta `sol/quest/silicio_y_titanio`.

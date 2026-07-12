@@ -45,7 +45,7 @@ Clona el repositorio con `git clone https://github.com/uab-p2/sol.git`.
 ## Opción 4: Descarga manual del zip
 
 !!! warning
-Esta opción es menos recomendable que las otras alternativas.
+        Esta opción es menos recomendable que las otras alternativas.
 
 Descarga y descomprime el [`.zip` del proyecto sol.](https://github.com/uab-p2/sol/archive/refs/heads/main.zip)
 
