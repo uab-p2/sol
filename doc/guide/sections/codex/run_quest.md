@@ -1,4 +1,4 @@
-# Compilación y ejecución un quest
+# Compilación y ejecución de un quest
 
 Aprende a compilar y ejecutar el código de un quest
 abierto en tu IDE favorito. 
