@@ -10,8 +10,9 @@ from difflib import unified_diff
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tool.quest import PROJECT_ROOT, DEFAULT_QUEST_DIR, GITHUB_ROOT_URL, GITHUB_QUEST_URL, GUIDE_SECTION_DIR, \
-    GUIDE_AUTO_SECTION_DIR, Quest, Tag
+from tool.quest import (
+    PROJECT_ROOT, DEFAULT_QUEST_DIR, GITHUB_ROOT_URL, GITHUB_SOLUTION_URL,
+    GITHUB_QUEST_URL, GUIDE_SECTION_DIR, GUIDE_AUTO_SECTION_DIR, Quest, Tag)
 from tool.code import Snippet, SnippetType
 
 
@@ -255,20 +256,27 @@ def find_snippets(name: str,
     snippets = [s for s in Snippet.list()
                 if s.name == name
                 and (arg_types is None or s.arg_types == arg_types)]
+
     if not include_declarations:
         snippets = [s for s in snippets if s.type != SnippetType.DECLARATION]
     if not include_definitions and len(snippets):
         snippets = [s for s in snippets if s.type != SnippetType.DEFINITION]
-
+    
     if priority_dir and len(snippets) > 1:
         filtered_snippets = []
         for s in snippets:
             if priority_dir.startswith("quest_"):
                 priority_dir = priority_dir[len("quest_"):]
-            snippet_dir = os.path.basename(os.path.dirname(s.relative_file_path))
-            if snippet_dir == priority_dir:
+            snippet_dir_name = os.path.basename(os.path.dirname(s.relative_file_path))
+            snippet_parent_dir = os.path.basename(os.path.dirname(os.path.dirname(s.relative_file_path)))
+            if snippet_dir_name == priority_dir:                
                 filtered_snippets.append(s)
+            elif (snippet_parent_dir == "solution"
+                  and priority_dir == f"solution_{snippet_dir_name}"):
+                filtered_snippets.append(s)
+
         snippets = filtered_snippets
+    
 
     return snippets
 
