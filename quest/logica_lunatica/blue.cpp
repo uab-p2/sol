@@ -1,9 +1,6 @@
 #include "blue.h"
 #include <iostream>
 
-bool g(int);
-
-
 void talk_to_blue() {
     std::cout << "Hi, I'm Blue! I like Earth's function g." << std::endl;
     std::cout << "If you ask me about g(10), the answer is "
