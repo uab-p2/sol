@@ -1,8 +1,6 @@
 #include "red.h"
 #include <iostream>
 
-/// Ask red if he knows a bird with a given name
-void is_a_bird(const std::string& name);
 
 void talk_to_red() {
     std::cout << "Hi, I'm Red! I like Earth's nature." << std::endl;
@@ -10,7 +8,7 @@ void talk_to_red() {
     is_a_bird("kangaroo");
 }
 
-void is_a_bird(const std::string& name) {
+bool is_a_bird(const std::string& name) {
     bool not_a_bird;
     if (name == "eagle" || name == "dove" || name == "parrot"
         || name == "penguin" || name == "pigeon" || name == "swan") {
@@ -22,5 +20,5 @@ void is_a_bird(const std::string& name) {
     else {
         std::cout << "I do not think '" << name << "' is a bird." << std::endl;
     }
+    return !not_a_bird;
 }
-

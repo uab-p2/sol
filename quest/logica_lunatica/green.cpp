@@ -1,24 +1,17 @@
 #include "green.h"
 #include <iostream>
 
-/// Ask green about passing grades
-void check_passing_grade(int minimum, float grade);
-
-/// Tell Green you could pay him `payment` euros
-/// every day for `days` days.
-void propose_bribe(int payment, int days);
-
 void talk_to_green() {
     std::cout << "Hi, I'm Green! I like Earth's money." << std::endl;
-    check_passing_grade(5, 6.5);
-    check_passing_grade(5, 3.5);
+    is_passing_grade(5, 6.5);
+    is_passing_grade(5, 3.5);
     propose_bribe(10, 10);
     propose_bribe(10, 30);
     std::cout << "Maybe you can bribe me with 10 euros for 60 days instead?" << std::endl;
     // propose_bribe(10,60);
 }
 
-void check_passing_grade(int minimum, float grade) {
+bool is_passing_grade(int minimum, float grade) {
     bool passing_grade = grade >= minimum;
     if (passing_grade = true) {
         std::cout << "If the minimum grade is " << minimum
@@ -28,9 +21,10 @@ void check_passing_grade(int minimum, float grade) {
         std::cout << "You fail the course with a "
             << grade << " if the minimum is " << minimum << std::endl;
     }
+    return passing_grade;
 }
 
-void propose_bribe(int payment, int days) {
+int propose_bribe(int payment, int days) {
     // 30 days in a month
     const int days_in_month = 30;
     int payments[days_in_month];
@@ -45,4 +39,6 @@ void propose_bribe(int payment, int days) {
         total_payment += payments[i];
     }
     std::cout << total_payment << " euros in total." << std::endl;
+
+    return total_payment;
 }

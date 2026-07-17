@@ -24,30 +24,37 @@ Tienes ante ti tres oponentes en traje espacial idéntico salvo por el casco.
         If you paid me 10 euros every day for 10 days, I would get 1827553899 euros in total.
         Maybe you can bribe me with 10 euros for 60 days instead?
 
-
 ???quote "El del casco azul te dice:"
         Hi, I'm Blue! I like Earth's function g.
         If you ask me about g(10), the answer is yes
         If you ask me about g(11), the answer is yes
         Do you agree?
 
-Notas algo raro en lo que dicen? No pierdas la cordura y trata de restaurar 
+¿Notas algo raro en lo que dicen? No pierdas la cordura y trata de restaurar 
 la lógica de sus afirmaciones.
 
-Si no lo has hecho ya, abre el quest `logica_lunatica` en tu IDE
-siguiendo {{ quest_link("silicio_y_titanio") }}.
+??? objetivo
+    Si no lo has hecho ya, abre el quest `logica_lunatica` en tu IDE
+    siguiendo las instrucciones en {{ quest_link("silicio_y_titanio") }}.    
 
-Si te atascas o quieres ampliar tus habilidades de desinfección, 
-tienes {{ codex_link("debugging") }}.
+    Entonces, para cada oponente:
+
+    - Prepara respuestas para las preguntas guiadas.
+    - Arregla el código para que funcione correctamente.
+
+
+
+Si en cualquier momento te atascas o quieres ampliar tus habilidades 
+de desinfección, puedes visitar {{ codex_link("debugging") }}.
 
 ## Mr. Red
 
 * ¿Qué tiene de raro lo que dice Mr. Red?
 * ¿Qué funciones están involucradas en este caso?
 * ¿Hay algún problema en `is_a_bird`?
-* ¿Serviría con cambiar `!not_a_bird` por `not_a_bird` en el segundo if?
+* ¿Serviría con cambiar `!not_a_bird` por `not_a_bird` en el segundo `if`?
 * ¿Qué herramientas tienes para encontrar y solucionar este error?
-* ¿Qué hábitos le hubieran permitido detectar y solucionar este error a Mr. Red?
+
 
 {{ snippet_box("is_a_bird") }}
 
@@ -69,9 +76,8 @@ con 10 euros durante 60 meses.
 
 * ¿Se deja sobornar?
 * ¿Sabrías explicar qué está pasando?
-* ¿Hay algún hábito que le hubiera podido ahorrar el error a Mr. Green?
 
-{{ snippet_box("check_passing_grade") }}
+{{ snippet_box("is_passing_grade") }}
 
 {{ snippet_box("propose_bribe") }}
 
@@ -82,10 +88,25 @@ No sé si me fio de la lógica de Mr. Blue.
 * ¿Qué intenta hacer su misteriosa función `g`?
 * ¿Lo hace correctamente?
 * ¿Qué herramientas te pueden ayudar con este caso?
-* ¿Qué habitos le hubieran ahorrado este error a Mr. Blue?
-* ¿Cuál de todos los errores te ha llevado más tiempo solucionar?
 
 {{ snippet_box("g") }}
+
+## Repelente
+
+Encontrarás muchos bichos (bugs) como estos durante y después del proyecto SOL.
+Pensemos en qué repele y qué favorece su aparición.
+
+* Ninguno de los tres oponentes parecía saber que su lógica era incorrecta.
+  ¿Qué hubieran podido hacer para detectar este problema a tiempo?
+  Propón una solución completa, con ejemplos de código si resulta relevante.
+
+* ¿Alguno de los tres bichos te ha parecido más difícil de cazar?
+  ¿Qué aspectos del código te han facilitado/dificultado la tarea de desinfección?
+
+* Existen herramientas de *análisis estático* de codigo que pueden ayudar a 
+  detectar errores lógicos antes de ejecutar el programa. 
+  Una de ellas son los *compiladores*. ¿Te había avisado tu compilador
+  de alguno de los bugs de estos oponentes?
 
 # Tags
 
