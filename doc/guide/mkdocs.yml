@@ -81,6 +81,8 @@ markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.tilde
+  - pymdownx.tabbed:
+      alternate_style: true
 
 plugins:
   - search

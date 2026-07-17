@@ -218,8 +218,9 @@ def define_env(env):
 
     @env.macro
     def snippet_diff_box(name: str, default_open: bool = True):
-        """Within a quest solution, show the code differences between the
-        original and solution for a given snippet."""
+        """From a solution, find for the original and solution snippets with a given
+        name. Several diff boxes can be used one after the other to automatically
+        produce a tabbed box with one tab per snippet name."""
         url = env.page.url
         if url[-1] == "/":
             url = url[:-1]
@@ -235,11 +236,18 @@ def define_env(env):
         diff = "\n".join(unified_diff(original_snippet.code.splitlines(keepends=True),
                                       solution_snippet.code.splitlines(keepends=True)))
 
-        return textwrap.dedent(f"""
-??? diff "Cambios en {snippet_tag(name=name, snippet=solution_snippet)}"
-    ```diff
-    {textwrap.indent(diff, "    ")}
-    ```""")
+        return textwrap.dedent(f"""\
+=== "{name}"
+ 
+{textwrap.indent(snippet_box(name=name, snippet=original_snippet, admonition="bug"), '    ')}
+    
+{textwrap.indent(snippet_box(name=name, snippet=solution_snippet, admonition="success"), '    ')}
+
+    ??? abstract "Cambios en {snippet_tag(name=name, snippet=solution_snippet)}"
+        ```diff
+{textwrap.indent(diff, "        ")}
+        ```
+""")
 
 
 def find_snippets(name: str,
