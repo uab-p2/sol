@@ -9,6 +9,15 @@ para el proyecto SOL.
 - `img/`: recursos gráficos usados por documentación y README.
 - `guide/`: guía de estudio (compilada en html automáticamente).
 - `tool/`: scripts internos para facilitar la generación de documentación.
+  - `link_luna.py`: enlaza las carpetas `gradescope`, `solution` y `template` del proyecto LUNA en la raíz de este proyecto.
+
+## Configuración inicial: enlazar el proyecto LUNA
+
+Antes de compilar la documentación, es necesario enlazar el proyecto LUNA ejecutando:
+
+```bash
+python3 doc/tool/link_luna.py /ruta/al/proyecto/luna
+```
 
 ## Compilación
 
