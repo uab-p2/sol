@@ -81,3 +81,8 @@ gradescope
 .idea
 __pycache__
 cmake-build-debug
+
+# Prevent involuntary leaks
+solution
+gradescope
+template

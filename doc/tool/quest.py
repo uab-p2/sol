@@ -18,11 +18,13 @@ __all__ = ["Quest"]
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_QUEST_DIR = PROJECT_ROOT / "quest"
+DEFAULT_SOLUTION_DIR = PROJECT_ROOT / "solution"
 DEFAULT_TAG_DIR = PROJECT_ROOT / "doc" / "tag"
 GUIDE_SECTION_DIR = PROJECT_ROOT / "doc" / "guide" / "sections"
 GUIDE_AUTO_SECTION_DIR = GUIDE_SECTION_DIR / "auto"
 GITHUB_ROOT_URL = "https://github.com/uab-p2/sol/tree/main/"
 GITHUB_QUEST_URL = f"{GITHUB_ROOT_URL}/quest"
+GITHUB_SOLUTION_URL = f"{GITHUB_ROOT_URL}/solution"
 
 
 @dataclass(slots=True)
@@ -121,7 +123,11 @@ class Quest:
         return [Quest.from_readme(p)
                 for p in glob.glob((base_dir / "*" / "README.md").resolve().as_posix(), recursive=False)]
 
-        return metadata_list
+    @classmethod
+    def solutions(cls, base_dir: Path = DEFAULT_SOLUTION_DIR) -> list[Quest]:
+        """Return a list of all quests with solutions under the given directory,
+        the solution directory by default."""
+        return cls.list(base_dir=base_dir)
 
     @classmethod
     def _parse_tags(cls, tag_text: str) -> list[Tag]:

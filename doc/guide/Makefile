@@ -15,10 +15,14 @@ serve: sections
 	$(MKDOCS) serve
 
 sections:
+	rm -rf $(SECTION_DIR)/auto/*
+	mkdir -p $(SECTION_DIR)/auto
 	python3 ../tool/campaign.py
 	python3 ../tool/autoindex.py
 
 clean:
+	rm -rf $(SECTION_DIR)/auto/*
+	mkdir -p $(SECTION_DIR)/auto
 	rm -rf $(SITE_DIR)
 
 rebuild: clean build
