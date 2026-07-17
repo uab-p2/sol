@@ -198,7 +198,8 @@ def define_env(env):
                     include_declarations: bool = False,
                     include_definitions: bool = True,
                     default_open: bool = False,
-                    snippet: Snippet | None = None) -> str:
+                    snippet: Snippet | None = None,
+                    admonition: str | None = "tip") -> str:
         """Show a box with title equal to the return of snippet_tag,
         with the snippet contents rendered inside.
         If `search_quest_only` is True, only snippets in the quests are considered.
@@ -211,7 +212,7 @@ def define_env(env):
             snippet = find_snippet(name, arg_types, include_declarations, include_definitions, priority_dir)
         if snippet is not None:
             return env.render(f"""\
-???{'+' if default_open else ''} tip "{snippet_tag(name, arg_types, include_declarations, include_definitions, snippet)}"
+???{'+' if default_open else ''} {admonition} "{snippet_tag(name, arg_types, include_declarations, include_definitions, snippet)}"
 {textwrap.indent(str(snippet), "    ")}\n""")
         return f"`Warning: missing snippet for {name!r}`"
 
