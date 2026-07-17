@@ -6,6 +6,7 @@ import subprocess
 import sys
 import textwrap
 from io import StringIO
+from difflib import unified_diff
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -119,7 +120,8 @@ def define_env(env):
     def snippet(name: str,
                 arg_types: list[str] | None = None,
                 include_declarations: bool = False,
-                include_definitions: bool = True) -> str:
+                include_definitions: bool = True,
+                snippet: Snippet | None = None) -> str:
         """Display a snippet of code in its ```cpp``` block.
         :return: the rendered snippet(s) for the element with the given name.
           If more than one snippet matches, all are rendered.
@@ -128,7 +130,10 @@ def define_env(env):
           If present, only those snippets matching the given argument types
           (and name) are rendered."""
         sio = StringIO()
-        snippets = find_snippets(name, arg_types, include_declarations, include_definitions)
+        if snippet is None:
+            snippets = find_snippets(name, arg_types, include_declarations, include_definitions)
+        else:
+            snippets = [snippet]
         sio.write("\n\n".join(str(s) for s in snippets))
         if not snippets:
             sio.write(f"```cpp\n"
@@ -140,62 +145,110 @@ def define_env(env):
     def snippet_ref(name: str,
                     arg_types: list[str] | None = None,
                     include_declarations: bool = False,
-                    include_definitions: bool = True) -> str:
+                    include_definitions: bool = True,
+                    snippet: Snippet | None = None) -> str:
         """Get the pretty-printed reference to a snippet,
         including types if available."""
-        s = find_snippet(name, arg_types, include_declarations, include_definitions)
-        if s is not None:
-            return s.label
+        if snippet is None:
+            url = env.page.url
+            if url[-1] == "/":
+                url = url[:-1]
+            priority_dir = os.path.basename(url)
+            snippet = find_snippet(name, arg_types, include_declarations, include_definitions, priority_dir)
+        if snippet is not None:
+            return snippet.label
         return f"`Warning: missing snippet for {name!r}`"
 
     @env.macro
     def snippet_src(name: str,
                     arg_types: list[str] | None = None,
                     include_declarations: bool = False,
-                    include_definitions: bool = True) -> str:
+                    include_definitions: bool = True,
+                    snippet: Snippet | None = None) -> str:
         """Get the link to the source code of a snippet,
         with its link to the code repository."""
-        s = find_snippet(name, arg_types, include_declarations, include_definitions)
-        if s is not None:
-            return (f"[{s.relative_file_path}"
-                    f":{s.line_start}-{s.line_end}]"
+        if snippet is None:
+            url = env.page.url
+            if url[-1] == "/":
+                url = url[:-1]
+            priority_dir = os.path.basename(url)
+            snippet = find_snippet(name, arg_types, include_declarations, include_definitions, priority_dir)
+        if snippet is not None:
+            return (f"[{snippet.relative_file_path}"
+                    f":{snippet.line_start}-{snippet.line_end}]"
                     f"({GITHUB_ROOT_URL}"
-                    f"/{s.relative_file_path.as_posix()}"
-                    f"#L{s.line_start}-L{s.line_end})")
+                    f"/{snippet.relative_file_path.as_posix()}"
+                    f"#L{snippet.line_start}-L{snippet.line_end})")
         return f"`Warning: missing snippet for {name!r}`"
 
     @env.macro
     def snippet_tag(name: str,
                     arg_types: list[str] | None = None,
                     include_declarations: bool = False,
-                    include_definitions: bool = True) -> str:
+                    include_definitions: bool = True,
+                    snippet: Snippet | None = None) -> str:
         """Get the pretty-printed reference to a snippet, name @ source"""
-        return (f"{snippet_ref(name, arg_types, include_declarations, include_definitions)} "
-                f"@ {snippet_src(name, arg_types, include_declarations, include_definitions)}")
+        return (f"{snippet_ref(name, arg_types, include_declarations, include_definitions, snippet)} "
+                f"@ {snippet_src(name, arg_types, include_declarations, include_definitions, snippet)}")
 
     @env.macro
     def snippet_box(name: str,
                     arg_types: list[str] | None = None,
                     include_declarations: bool = False,
                     include_definitions: bool = True,
-                    default_open: bool = False) -> str:
+                    default_open: bool = False,
+                    snippet: Snippet | None = None) -> str:
         """Show a box with title equal to the return of snippet_tag,
-        with the snippet contents rendered inside."""
-        s = find_snippet(name, arg_types, include_declarations, include_definitions)
-        if s is not None:
+        with the snippet contents rendered inside.
+        If `search_quest_only` is True, only snippets in the quests are considered.
+        """
+        if snippet is None:
+            url = env.page.url
+            if url[-1] == "/":
+                url = url[:-1]
+            priority_dir = os.path.basename(url)
+            snippet = find_snippet(name, arg_types, include_declarations, include_definitions, priority_dir)
+        if snippet is not None:
             return env.render(f"""\
-???{'+' if default_open else ''} tip "{snippet_tag(name, arg_types, include_declarations, include_definitions)}"
-{textwrap.indent(snippet(name, arg_types, include_declarations, include_definitions), "    ")}\n""")
+???{'+' if default_open else ''} tip "{snippet_tag(name, arg_types, include_declarations, include_definitions, snippet)}"
+{textwrap.indent(str(snippet), "    ")}\n""")
         return f"`Warning: missing snippet for {name!r}`"
+
+    @env.macro
+    def snippet_diff_box(name: str, default_open: bool = True):
+        """Within a quest solution, show the code differences between the
+        original and solution for a given snippet."""
+        url = env.page.url
+        if url[-1] == "/":
+            url = url[:-1]
+        solution_dir = os.path.basename(url)
+        if not "solution_" in solution_dir:
+            return ("Cannot show diff box for `{name}`. Ensure `solution_` "
+                    "is in the current directory name.")
+        original_dir = solution_dir.replace("solution_", "")
+
+        original_snippet = find_snippet(name, priority_dir=original_dir)
+        solution_snippet = find_snippet(name, priority_dir=solution_dir)
+
+        diff = "\n".join(unified_diff(original_snippet.code.splitlines(keepends=True),
+                                      solution_snippet.code.splitlines(keepends=True)))
+
+        return textwrap.dedent(f"""
+??? diff "Cambios en {snippet_tag(name=name, snippet=solution_snippet)}"
+    ```diff
+    {textwrap.indent(diff, "    ")}
+    ```""")
 
 
 def find_snippets(name: str,
                   arg_types: list[str] | None = None,
                   include_declarations: bool = False,
-                  include_definitions: bool = True) -> list[Snippet]:
+                  include_definitions: bool = True,
+                  priority_dir: string | None = None) -> list[Snippet]:
     """Find all snippets, optionally:
-        - with the given name and argument types
+        - with the given name and argument types.
         - excluding callable declarations/definitions.
+        - if more than one snippet matches, only those within the given `priority_dir`.
     """
     from tool.code import Snippet, SnippetType
 
@@ -204,8 +257,18 @@ def find_snippets(name: str,
                 and (arg_types is None or s.arg_types == arg_types)]
     if not include_declarations:
         snippets = [s for s in snippets if s.type != SnippetType.DECLARATION]
-    if not include_definitions:
+    if not include_definitions and len(snippets):
         snippets = [s for s in snippets if s.type != SnippetType.DEFINITION]
+
+    if priority_dir and len(snippets) > 1:
+        filtered_snippets = []
+        for s in snippets:
+            if priority_dir.startswith("quest_"):
+                priority_dir = priority_dir[len("quest_"):]
+            snippet_dir = os.path.basename(os.path.dirname(s.relative_file_path))
+            if snippet_dir == priority_dir:
+                filtered_snippets.append(s)
+        snippets = filtered_snippets
 
     return snippets
 
@@ -213,8 +276,11 @@ def find_snippets(name: str,
 def find_snippet(name: str,
                  arg_types: list[str] | None = None,
                  include_declarations: bool = False,
-                 include_definitions: bool = True) -> Snippet | None:
+                 include_definitions: bool = True,
+                 priority_dir: string | None = None) -> Snippet | None:
     """Find the first snippet matching the given name and argument types,
-    or None if no such snippet exists."""
-    snippets = find_snippets(name, arg_types, include_declarations, include_definitions) or []
+    or None if no such snippet exists.
+    If multiple snippets match, the one within `priority_dir` is returned."""
+    snippets = find_snippets(
+        name, arg_types, include_declarations, include_definitions, priority_dir) or []
     return snippets[0] if snippets else None

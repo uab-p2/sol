@@ -106,8 +106,8 @@ class Snippet:
         paths = []
         if path is None:
             for dir in ("src", "quest"):
-                paths.extend(Path(PROJECT_ROOT / dir).rglob("*.cpp"))
-                paths.extend(Path(PROJECT_ROOT / dir).rglob("*.h"))
+                paths.extend(Path(PROJECT_ROOT / dir).rglob("*.cpp", recurse_symlinks=True))
+                paths.extend(Path(PROJECT_ROOT / dir).rglob("*.h", recurse_symlinks=True))
         else:
             paths = [path]
 
