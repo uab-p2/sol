@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Tools to encrypt generated solution section HTML."""
 
+import argparse
 import base64
 import os
 
@@ -17,6 +18,9 @@ _encryption_template = """
 <div class="md-content" data-md-component="content">
 
     <article class="md-content__inner md-typeset">
+        <div class="badge frame"> <img src="https://uab-p2.github.io/sol/asset/img/lock.png"> </div>
+        <br/>
+    
         <div class="pinpad-container" style="max-width: 300px; margin: 0 auto; padding: 20px; border: 2px solid #333; border-radius: 4px;">
             <label style="display: block; margin-bottom: 15px; font-weight: bold;">{title}</label>
             
@@ -114,11 +118,21 @@ function updateDisplay() {
 }
 
 function handleHexKeyPress(key) {
-    passwordValue += key;
+    passwordValue += key.toUpperCase();
     updateDisplay();
     
     const status = document.getElementById("decrypt-status");
     status.hidden = true;
+}
+
+function handleHexTextInput(text) {
+    const hexChars = Array.from(text).filter(char => /[0-9a-f]/i.test(char));
+
+    if (hexChars.length === 0) {
+        return;
+    }
+
+    hexChars.forEach(handleHexKeyPress);
 }
 
 function handleBackspace() {
@@ -152,6 +166,67 @@ async function handleDecrypt() {
     }
 }
 
+function handleDocumentKeydown(event) {
+    const target = event.target;
+    const isEditableTarget = target instanceof HTMLElement && (
+        target.isContentEditable ||
+        ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)
+    );
+
+    if (isEditableTarget) {
+        return;
+    }
+
+    if (event.ctrlKey || event.metaKey) {
+        if (event.key.toLowerCase() === "v") {
+            return;
+        }
+        return;
+    }
+
+    if (/^[0-9a-f]$/i.test(event.key)) {
+        event.preventDefault();
+        event.stopPropagation();
+        handleHexKeyPress(event.key);
+        return;
+    }
+
+    if (event.key === "Backspace") {
+        event.preventDefault();
+        event.stopPropagation();
+        handleBackspace();
+        return;
+    }
+
+    if (event.key === "Enter") {
+        event.preventDefault();
+        event.stopPropagation();
+        handleDecrypt();
+    }
+}
+
+function handleDocumentPaste(event) {
+    const target = event.target;
+    const isEditableTarget = target instanceof HTMLElement && (
+        target.isContentEditable ||
+        ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)
+    );
+
+    if (isEditableTarget) {
+        return;
+    }
+
+    const pastedText = event.clipboardData?.getData("text") ?? "";
+
+    if (!/[0-9a-f]/i.test(pastedText)) {
+        return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    handleHexTextInput(pastedText);
+}
+
 // Attach handlers
 document.querySelectorAll(".hex-btn").forEach(btn => {
     btn.addEventListener("click", () => handleHexKeyPress(btn.dataset.key));
@@ -159,6 +234,8 @@ document.querySelectorAll(".hex-btn").forEach(btn => {
 
 document.getElementById("backspace-btn").addEventListener("click", handleBackspace);
 document.getElementById("decrypt-button").addEventListener("click", handleDecrypt);
+window.addEventListener("keydown", handleDocumentKeydown, true);
+window.addEventListener("paste", handleDocumentPaste, true);
 </script>
 
 </main>
@@ -169,7 +246,7 @@ def encrypt_solution(solution: Quest) -> str:
     """Encrypt the solution index.html file with the given password."""
     # Normalize password
     password = solution.secret.lower().strip()
-    assert all("a" <= c <= "h" or "0" <= c <= "9" for c in password), (
+    assert all("a" <= c <= "f" or "0" <= c <= "9" for c in password), (
         "Secrets should contain only lowercase letters, numbers, and the characters a-h "
     )
 
@@ -230,13 +307,24 @@ def encrypt_contents(contents, password):
     blob = salt + iv + ciphertext
     return base64.b64encode(blob).decode("ascii")
 
+
 def encrypt_solutions():
     """Encrypt all solution index.html files in the docs/solutions directory."""
-    solutions : list[Quest] = Quest.solutions()
+    solutions: list[Quest] = Quest.solutions()
     for solution in solutions:
         print(f"Encrypting {solution}...")
         encrypt_solution(solution=solution)
 
+def show_secrets():
+    solutions: list[Quest] = Quest.solutions()
+    for solution in solutions:
+        print(f"Secret for '{solution!r}': {solution.secret}")
 
 if __name__ == '__main__':
-    encrypt_solutions()
+    parser = argparse.ArgumentParser(description="Encrypt solution index.html files.")
+    parser.add_argument("--secrets", action="store_true", help="If enabled, the secrets for all solutions are shown")
+    options = parser.parse_args()
+    if options.secrets:
+        show_secrets()
+    else:
+        encrypt_solutions()
