@@ -42,6 +42,8 @@ jobs:
             exit 1
           fi
           python -m pip install \
+            beautifulsoup4 \
+            cryptography \
             "clang==18.1.8" \
             mkdocs \
             mkdocs-material \
