@@ -10,6 +10,8 @@ build: campaign_pages
 
 campaign_pages: sections
 	$(MKDOCS) build
+	python3 ../tool/crypt.py
+	rm -rf $(SECTION_DIR)/auto
 
 serve: sections
 	$(MKDOCS) serve

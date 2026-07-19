@@ -4,6 +4,7 @@ Process and display metainformation about quest modules.
 from __future__ import annotations
 
 import glob
+import hashlib
 import os
 import re
 from dataclasses import dataclass
@@ -90,6 +91,15 @@ class Quest:
     @property
     def name(self) -> str:
         return os.path.basename(self.module_path.resolve().as_posix())
+
+    @property
+    def secret(self) -> str:
+        """Return the secret for this quest, if any, or an empty string."""
+        secret_path = PROJECT_ROOT / self.module_path / "README.md"
+        hasher = hashlib.sha256()
+        with open(secret_path, "rb") as f:
+            hasher.update(f.read())
+        return hasher.hexdigest()[:6]
 
     @classmethod
     def from_readme(cls, readme_path: Path) -> Quest:
