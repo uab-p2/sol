@@ -16,6 +16,19 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Checkout private repository
+        uses: actions/checkout@v4
+        with:
+          repository: uab-p2/luna
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: luna
+
+      - name: Copy solution directory
+        run: |
+          rm -rf solution
+          cp -r luna/solution ./solution
+
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
