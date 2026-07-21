@@ -14,10 +14,65 @@ function initPinpad() {
     if (!container) return;
     if (container.dataset.pinpadInit) return;
     container.dataset.pinpadInit = "1";
+    const templateEl = document.getElementById("template");
+    const templateBlob = templateEl ? templateEl.textContent.trim() : "";
+    const sessionKey = `pinpad:${location.pathname}:${templateBlob.length}:${templateBlob.slice(0, 48)}`;
     const input      = document.getElementById("led-display");
     const backBtn    = document.getElementById("backspace-btn");
     const decryptBtn = document.getElementById("decrypt-button");
     const status     = document.getElementById("decrypt-status");
+
+    function jumpToHashIfPresent() {
+        if (!location.hash) return;
+        const id = decodeURIComponent(location.hash.slice(1));
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView();
+    }
+
+    function wireSamePageHashLinks(root) {
+        const anchors = root.querySelectorAll("a[href]");
+        anchors.forEach((anchor) => {
+            anchor.addEventListener("click", (event) => {
+                const href = anchor.getAttribute("href");
+                if (!href) return;
+                const url = new URL(href, location.href);
+                if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+                event.preventDefault();
+                history.replaceState(null, "", url.hash);
+                jumpToHashIfPresent();
+            });
+        });
+    }
+
+    function restoreDecryptedContent() {
+        try {
+            const cachedHtml = sessionStorage.getItem(sessionKey);
+            if (!cachedHtml) return false;
+            const parsed = new DOMParser().parseFromString(cachedHtml, "text/html");
+            const replacement = parsed.body.firstElementChild;
+            if (!replacement) {
+                sessionStorage.removeItem(sessionKey);
+                return false;
+            }
+            container.replaceWith(replacement);
+            wireSamePageHashLinks(replacement);
+            jumpToHashIfPresent();
+            return true;
+        } catch (err) {
+            console.warn("Unable to restore decrypted content:", err);
+            return false;
+        }
+    }
+
+    function cacheDecryptedContent(replacement) {
+        try {
+            sessionStorage.setItem(sessionKey, replacement.outerHTML);
+        } catch (err) {
+            console.warn("Unable to cache decrypted content:", err);
+        }
+    }
+
+    if (restoreDecryptedContent()) return;
     if (!input || !decryptBtn) return;
 
     function clearStatus() {
@@ -33,7 +88,7 @@ function initPinpad() {
     }
     // ── crypto ───────────────────────────────────────────────────────────────
     async function decrypt(password) {
-        const b64 = document.getElementById("template").textContent.trim();
+        const b64 = templateBlob;
         const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
         const salt       = bytes.slice(0, 16);
         const iv         = bytes.slice(16, 28);
@@ -64,6 +119,9 @@ function initPinpad() {
             const replacement = parsed.body.firstElementChild;
             if (!replacement) throw new Error("Decrypted content is empty");
             document.getElementById("encrypted-content").replaceWith(replacement);
+            wireSamePageHashLinks(replacement);
+            cacheDecryptedContent(replacement);
+            jumpToHashIfPresent();
         } catch (err) {
             showStatus("Error!");
             console.error("Decryption failed:", err);
