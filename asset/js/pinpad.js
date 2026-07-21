@@ -21,6 +21,17 @@ function initPinpad() {
     const decryptBtn = document.getElementById("decrypt-button");
     const status     = document.getElementById("decrypt-status");
 
+    function normalizePath(pathname) {
+        const normalized = pathname.replace(/\/+$/, "");
+        return normalized || "/";
+    }
+
+    function isSamePageHashUrl(url) {
+        return url.origin === location.origin
+            && normalizePath(url.pathname) === normalizePath(location.pathname)
+            && !!url.hash;
+    }
+
     function jumpToHashIfPresent() {
         if (!location.hash) return;
         const id = decodeURIComponent(location.hash.slice(1));
@@ -28,20 +39,33 @@ function initPinpad() {
         if (target) target.scrollIntoView();
     }
 
-    function wireSamePageHashLinks(root) {
-        const anchors = root.querySelectorAll("a[href]");
-        anchors.forEach((anchor) => {
-            anchor.addEventListener("click", (event) => {
-                const href = anchor.getAttribute("href");
-                if (!href) return;
-                const url = new URL(href, location.href);
-                if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
-                event.preventDefault();
-                history.replaceState(null, "", url.hash);
-                jumpToHashIfPresent();
-            });
-        });
+    function installSamePageHashInterceptor() {
+        if (window.__pinpadHashInterceptorInstalled) return;
+        window.__pinpadHashInterceptorInstalled = true;
+
+        document.addEventListener("click", (event) => {
+            const anchor = event.target.closest("a[href]");
+            if (!anchor) return;
+            if (!document.querySelector("[data-pinpad-decrypted='1']")) return;
+
+            const href = anchor.getAttribute("href");
+            if (!href) return;
+
+            let url;
+            try {
+                url = new URL(href, location.href);
+            } catch {
+                return;
+            }
+
+            if (!isSamePageHashUrl(url)) return;
+            event.preventDefault();
+            history.replaceState(null, "", url.hash);
+            jumpToHashIfPresent();
+        }, true);
     }
+
+    installSamePageHashInterceptor();
 
     if (!input || !decryptBtn) return;
 
@@ -88,8 +112,8 @@ function initPinpad() {
             const parsed = new DOMParser().parseFromString(decryptedHtml, "text/html");
             const replacement = parsed.body.firstElementChild;
             if (!replacement) throw new Error("Decrypted content is empty");
+            replacement.setAttribute("data-pinpad-decrypted", "1");
             document.getElementById("encrypted-content").replaceWith(replacement);
-            wireSamePageHashLinks(replacement);
             jumpToHashIfPresent();
         } catch (err) {
             showStatus("Error!");
