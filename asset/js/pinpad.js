@@ -12,14 +12,11 @@
 function initPinpad() {
     const container = document.getElementById("encrypted-content");
     if (!container) return;
-    if (container.dataset.pinpadInit) return;
-    container.dataset.pinpadInit = "1";
-    const templateEl = document.getElementById("template");
-    const templateBlob = templateEl ? templateEl.textContent.trim() : "";
-    const input      = document.getElementById("led-display");
-    const backBtn    = document.getElementById("backspace-btn");
-    const decryptBtn = document.getElementById("decrypt-button");
-    const status     = document.getElementById("decrypt-status");
+    if (container.dataset.pinpadInit === "1") return;
+    const input      = container.querySelector("#led-display");
+    const backBtn    = container.querySelector("#backspace-btn");
+    const decryptBtn = container.querySelector("#decrypt-button");
+    const status     = container.querySelector("#decrypt-status");
 
     function normalizePath(pathname) {
         const normalized = pathname.replace(/\/+$/, "");
@@ -69,6 +66,25 @@ function initPinpad() {
 
     if (!input || !decryptBtn) return;
 
+    function getTemplateBlob() {
+        const templateEl = container.querySelector("#template");
+        return templateEl ? templateEl.textContent.trim() : "";
+    }
+
+    const templateBlob = getTemplateBlob();
+    if (!templateBlob) {
+        if (!container.dataset.pinpadRetryScheduled) {
+            container.dataset.pinpadRetryScheduled = "1";
+            setTimeout(() => {
+                container.dataset.pinpadRetryScheduled = "";
+                initPinpad();
+            }, 80);
+        }
+        return;
+    }
+
+    container.dataset.pinpadInit = "1";
+
     function clearStatus() {
         if (!status) return;
         status.textContent = "";
@@ -82,7 +98,8 @@ function initPinpad() {
     }
     // ── crypto ───────────────────────────────────────────────────────────────
     async function decrypt(password) {
-        const b64 = templateBlob;
+        const b64 = getTemplateBlob();
+        if (!b64) throw new Error("Encrypted payload is missing");
         const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
         const salt       = bytes.slice(0, 16);
         const iv         = bytes.slice(16, 28);
