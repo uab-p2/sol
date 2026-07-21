@@ -75,6 +75,11 @@ function initPinpad() {
     if (!templateBlob) {
         if (!container.dataset.pinpadRetryScheduled) {
             container.dataset.pinpadRetryScheduled = "1";
+            if (status) {
+                status.hidden = false;
+                status.textContent = "Debug: encrypted payload not ready yet, retrying...";
+            }
+            console.warn("Pinpad init: encrypted payload missing, retrying shortly.");
             setTimeout(() => {
                 container.dataset.pinpadRetryScheduled = "";
                 initPinpad();
