@@ -68,21 +68,9 @@ Testing/
 .cache/
 .vs
 
-# Project SOL custom
-main
-test
-*_main
-*_test
-!test/
-Thumbs.db*
-quest/solution_*
-quest/quest_template
-gradescope
 .idea
 __pycache__
 cmake-build-debug
-
-# Prevent involuntary leaks
-solution
-gradescope
-template
+quest/**/main
+quest/**/test
+.venv

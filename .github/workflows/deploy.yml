@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,22 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Checkout private repository
-        uses: actions/checkout@v4
-        with:
-          repository: uab-p2/luna
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: luna
-
-      - name: Copy solution directory
-        run: |
-          rm -rf solution
-          cp -r luna/solution ./solution
-
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -58,6 +43,7 @@ jobs:
             beautifulsoup4 \
             cryptography \
             "clang==18.1.8" \
+            libclang \
             mkdocs \
             mkdocs-material \
             pymdown-extensions \
@@ -97,6 +83,7 @@ jobs:
           echo "::endgroup::"
 
       - name: Verify libclang is loadable
+        if: failure()
         run: |
           python3 - <<'PY'
           import os
@@ -116,12 +103,30 @@ jobs:
           print("OK: clang.cindex can load libclang")
           PY
 
+
+      - name: Checkout SOL project
+        uses: actions/checkout@v4
+        with:
+          repository: uab-p2/sol
+          path: sol
+
+      - name: Checkout LUNA project
+        uses: actions/checkout@v4
+        with:
+          repository: uab-p2/luna
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: luna
+
+      - name: Link SOL and LUNA projects
+        run: |
+          python luna/doc/tool/link.py sol
+
       - name: Build site (via Makefile)
-        working-directory: doc/guide
+        working-directory: luna/doc/guide
         run: make build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: doc/guide/html
+          publish_dir: luna/doc/guide/html

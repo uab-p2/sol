@@ -1,5 +1,9 @@
 # Proyecto SOL
 
-* [quest/](quest/): módulos con retos guiados e individuales
-* [src/](src/): base de código común para todos los quests
-* [doc/](doc/): fuentes de la [Guía de estudio](https://uab-p2.github.io/sol)
+Repositorio de código del [Proyecto SOL](https://uab-p2.github.io/sol).
+
+## Estructura
+
+* [`src/`](src/): base de código común para todos los quests.
+* [`quest/`](quest/): módulos con retos guiados e individuales.
+* [`solution/`](solution/): soluciones y metodología para los quests.
