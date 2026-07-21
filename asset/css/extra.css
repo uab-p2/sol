@@ -191,10 +191,6 @@ div.decrypt-box p {
     overflow-wrap: break-word;
 }
 
-#led-display::before {
-    content: "❂ ";
-}
-
 /* Pinpad Grid */
 .pinpad-grid {
     display: grid;
@@ -263,12 +259,12 @@ div.decrypt-box p {
 
 /* Decrypt Button - Highlight */
 #decrypt-button {
-    background: linear-gradient(180deg, #556b5f 0%, #445550 100%);
-    color: #90ee90;
+    background: linear-gradient(180deg, #ff6e4244 0%, ##ff6e4288 100%);
+    color: #ff6e42;
 }
 
 #decrypt-button:hover {
-    background: linear-gradient(180deg, #657a6e 0%, #556b5f 100%);
+    background: linear-gradient(180deg, #ff6e4299 0%, ##ff6e42aa 100%);
 }
 
 /* Status Message */
