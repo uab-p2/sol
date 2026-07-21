@@ -88,6 +88,32 @@ function initPinpad() {
         return;
     }
 
+    const passwordCacheKey = `pinpad-password:${normalizePath(location.pathname)}:${templateBlob.length}:${templateBlob.slice(0, 48)}`;
+
+    function getCachedPassword() {
+        try {
+            return sessionStorage.getItem(passwordCacheKey) || "";
+        } catch {
+            return "";
+        }
+    }
+
+    function setCachedPassword(password) {
+        try {
+            sessionStorage.setItem(passwordCacheKey, password);
+        } catch {
+            // Ignore storage failures (private mode / quota / policies)
+        }
+    }
+
+    function clearCachedPassword() {
+        try {
+            sessionStorage.removeItem(passwordCacheKey);
+        } catch {
+            // Ignore storage failures (private mode / quota / policies)
+        }
+    }
+
     container.dataset.pinpadInit = "1";
 
     function clearStatus() {
@@ -125,23 +151,31 @@ function initPinpad() {
         return new TextDecoder().decode(plaintext);
     }
     // ── accept handler ───────────────────────────────────────────────────────
-    async function handleAccept() {
-        const password = input.value.toLowerCase().replace(/\s/g, "");
+    async function handleAccept(passwordOverride = null, options = {}) {
+        const password = (passwordOverride === null ? input.value : passwordOverride)
+            .toLowerCase()
+            .replace(/\s/g, "");
         if (!password) return;
-        showStatus("Decrypting...");
+        if (!options.silent) showStatus("Decrypting...");
         try {
             const decryptedHtml = await decrypt(password);
             const parsed = new DOMParser().parseFromString(decryptedHtml, "text/html");
             const replacement = parsed.body.firstElementChild;
             if (!replacement) throw new Error("Decrypted content is empty");
+            setCachedPassword(password);
             replacement.setAttribute("data-pinpad-decrypted", "1");
             document.getElementById("encrypted-content").replaceWith(replacement);
             jumpToHashIfPresent();
         } catch (err) {
-            showStatus("Error!");
+            clearCachedPassword();
+            if (!options.silent) {
+                showStatus("Error!");
+            }
             console.error("Decryption failed:", err);
-            input.value = "";
-            input.focus();
+            if (!options.silent) {
+                input.value = "";
+                input.focus();
+            }
         }
     }
     // ── wire up ──────────────────────────────────────────────────────────────
@@ -164,6 +198,12 @@ function initPinpad() {
             handleAccept();
         }
     });
+    const cachedPassword = getCachedPassword();
+    if (cachedPassword) {
+        handleAccept(cachedPassword, { silent: true });
+        return;
+    }
+
     clearStatus();
     input.focus();
 }
