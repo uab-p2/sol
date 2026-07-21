@@ -16,7 +16,6 @@ function initPinpad() {
     container.dataset.pinpadInit = "1";
     const templateEl = document.getElementById("template");
     const templateBlob = templateEl ? templateEl.textContent.trim() : "";
-    const sessionKey = `pinpad:${location.pathname}:${templateBlob.length}:${templateBlob.slice(0, 48)}`;
     const input      = document.getElementById("led-display");
     const backBtn    = document.getElementById("backspace-btn");
     const decryptBtn = document.getElementById("decrypt-button");
@@ -44,35 +43,6 @@ function initPinpad() {
         });
     }
 
-    function restoreDecryptedContent() {
-        try {
-            const cachedHtml = sessionStorage.getItem(sessionKey);
-            if (!cachedHtml) return false;
-            const parsed = new DOMParser().parseFromString(cachedHtml, "text/html");
-            const replacement = parsed.body.firstElementChild;
-            if (!replacement) {
-                sessionStorage.removeItem(sessionKey);
-                return false;
-            }
-            container.replaceWith(replacement);
-            wireSamePageHashLinks(replacement);
-            jumpToHashIfPresent();
-            return true;
-        } catch (err) {
-            console.warn("Unable to restore decrypted content:", err);
-            return false;
-        }
-    }
-
-    function cacheDecryptedContent(replacement) {
-        try {
-            sessionStorage.setItem(sessionKey, replacement.outerHTML);
-        } catch (err) {
-            console.warn("Unable to cache decrypted content:", err);
-        }
-    }
-
-    if (restoreDecryptedContent()) return;
     if (!input || !decryptBtn) return;
 
     function clearStatus() {
@@ -120,7 +90,6 @@ function initPinpad() {
             if (!replacement) throw new Error("Decrypted content is empty");
             document.getElementById("encrypted-content").replaceWith(replacement);
             wireSamePageHashLinks(replacement);
-            cacheDecryptedContent(replacement);
             jumpToHashIfPresent();
         } catch (err) {
             showStatus("Error!");
