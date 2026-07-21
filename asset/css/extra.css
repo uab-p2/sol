@@ -185,8 +185,8 @@ div.decrypt-box p {
     border-radius: 4px;
     min-height: 30px;
     word-break: break-all;
-    color: #00ff00;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    color: #ff6e42;
+    text-shadow: 0 0 5px #ff6e4288;
     letter-spacing: 2px;
     overflow-wrap: break-word;
 }
