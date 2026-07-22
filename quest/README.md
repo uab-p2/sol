@@ -6,6 +6,10 @@ Listado alfabético de quests, con sus campañas y categorías.
 
 * **[Entre gatos](entre_gatos)** (oop)
 
+<a id="quest-juego-peligroso"></a>
+
+* **[Juego peligroso](juego_peligroso)** (despegue)
+
 <a id="quest-logica-lunatica"></a>
 
 * **[Lógica lunática](logica_lunatica)** (despegue)
