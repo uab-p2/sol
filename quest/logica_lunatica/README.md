@@ -110,5 +110,5 @@ Pensemos en qué repele y qué favorece su aparición.
 
 # Tags
 
-despegue:2
+despegue:1
 semana:0
