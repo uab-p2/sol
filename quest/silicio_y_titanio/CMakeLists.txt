@@ -24,16 +24,26 @@ file(GLOB SHARED_CPP CONFIGURE_DEPENDS
         "${SRC_DIR}/*.cpp"
 )
 
+file(GLOB SHARED_HEADERS CONFIGURE_DEPENDS
+        "${SRC_DIR}/*.h"
+)
+
 # Build `main` from local quest/*.cpp except test.cpp + shared src/*.cpp
 file(GLOB QUEST_MAIN_CPP CONFIGURE_DEPENDS
         "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
 )
+file (GLOB QUEST_HEADERS CONFIGURE_DEPENDS
+        "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+)
+
 list(REMOVE_ITEM QUEST_MAIN_CPP
         "${CMAKE_CURRENT_SOURCE_DIR}/test.cpp"
 )
 add_executable(${MAIN_TARGET}
         ${QUEST_MAIN_CPP}
+        ${QUEST_HEADERS}
         ${SHARED_CPP}
+        ${SHARED_HEADERS}
 )
 
 # Build `test` from local quest/*.cpp except main.cpp + shared src/*.cpp
@@ -45,7 +55,9 @@ list(REMOVE_ITEM QUEST_TEST_CPP
 )
 add_executable(${TEST_TARGET}
         ${QUEST_TEST_CPP}
+        ${QUEST_HEADERS}
         ${SHARED_CPP}
+        ${SHARED_HEADERS}
 )
 
 
