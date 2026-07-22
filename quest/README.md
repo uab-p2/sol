@@ -1,6 +1,6 @@
 ## Quests
 
-Listado alfabético de quests.
+Listado alfabético de quests, con sus campañas y categorías.
 
 <a id="quest-entre-gatos"></a>
 
@@ -8,11 +8,11 @@ Listado alfabético de quests.
 
 <a id="quest-logica-lunatica"></a>
 
-* **[Lógica lunática](logica_lunatica)** (despegue, semana)
+* **[Lógica lunática](logica_lunatica)** (despegue)
 
 <a id="quest-silicio-y-titanio"></a>
 
-* **[Silicio y titanio](silicio_y_titanio)** (despegue, semana)
+* **[Silicio y titanio](silicio_y_titanio)** (despegue)
 
 <a id="quest-placeholder"></a>
 

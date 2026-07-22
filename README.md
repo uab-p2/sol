@@ -6,4 +6,4 @@ Repositorio de código del [Proyecto SOL](https://uab-p2.github.io/sol).
 
 * [`src/`](src/): base de código común para todos los quests.
 * [`quest/`](quest/): módulos con retos guiados e individuales.
-* [`solution/`](solution/): soluciones y metodología para los quests.
+* [`solution/`](solution/): soluciones publicadas.
