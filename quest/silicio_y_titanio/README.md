@@ -40,5 +40,5 @@ la velocidad de tu máquina con la de la mía.
 
 # Tags
 
-despegue:1
+despegue:0
 semana:0
