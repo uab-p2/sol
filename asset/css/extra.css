@@ -280,3 +280,14 @@ div.decrypt-box p {
     display: none;
 }
 
+/* Quest duration */
+div.duration::before {
+    font-size: 120%;
+    font-weight: bold;
+    content: "⏱ ";
+}
+
+div.duration {
+    margin-left: auto;
+    width: fit-content;
+}
