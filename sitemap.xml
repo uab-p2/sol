@@ -2,90 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://uab-p2.github.io/sol/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/campaigns/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/codices/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/campaign_despegue/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/campaign_memory/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/campaign_oop/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/campaign_semana/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/campaign_stl/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/quest_entre_gatos/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/quest_entretenimiento_peligroso/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/quest_logica_lunatica/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/quest_placeholder/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/quest_silicio_y_titanio/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
-         <loc>https://uab-p2.github.io/sol/auto/solution_entretenimiento_peligroso/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <loc>https://uab-p2.github.io/sol/auto/solution_juego_peligroso/</loc>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/solution_logica_lunatica/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/auto/solution_silicio_y_titanio/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/codex/add_file_quest/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
+    </url>
+    <url>
+         <loc>https://uab-p2.github.io/sol/codex/cin_cout/</loc>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/codex/clone_project/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/codex/debugging/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
+    </url>
+    <url>
+         <loc>https://uab-p2.github.io/sol/codex/diagrams/</loc>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/codex/open_quest/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/codex/plataforma/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
     <url>
          <loc>https://uab-p2.github.io/sol/codex/run_quest/</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-07-24</lastmod>
     </url>
 </urlset>
