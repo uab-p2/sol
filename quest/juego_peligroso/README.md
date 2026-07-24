@@ -12,7 +12,8 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
 ## Dibujo
 
 Antes de programar necesitamos saber qué queremos programar. En primer lugar,
-imagina el juego que quieres crear.
+imagina el juego que quieres crear. Decide cuántos jugadores participarán,
+de dónde saldrán las palabras secretas, que se mostrará por pantalla, etc.
 
 Coge un papel. Ahora, coge un boli (o un lápiz). ¿Podrías explicar tu versión
 del juego usando únicamente diagramas? Intenta dejar claro: 
@@ -35,6 +36,11 @@ con las palabras idóneas para:
 * *Acciones* (verbos)
 * *Entidades* (sustantivos)
 * *Datos* (sustantivos)
+
+!!! info
+    El standard en el sector es utilizar inglés para todo el código y documentación. 
+    Te recomendamos utilizarlo en tus implementaciones del proyecto SOL,
+    pero puedes usar castellano o catalán si prefieres.
 
 ## Mecanografía
 
@@ -72,3 +78,4 @@ Quizá te pueda ayudar:
 
 despegue:2
 semana:0
+time:90
