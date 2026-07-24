@@ -42,3 +42,4 @@ la velocidad de tu máquina con la de la mía.
 
 despegue:0
 semana:0
+time:30

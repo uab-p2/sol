@@ -112,3 +112,4 @@ Pensemos en qué repele y qué favorece su aparición.
 
 despegue:1
 semana:0
+time:60
