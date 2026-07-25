@@ -8,7 +8,8 @@ compilar el código tu primer quest del proyecto SOL.
 {{ img_badge("silicon.png") }}
 
 ??? objetivo
-    Configura tu entorno de desarrollo y compila el código del quest `silicio_y_titanio`.
+    Configura tu entorno de desarrollo y compila el código del quest `silicio_y_titanio`
+    mediante los siguientes pasos.
 
 ## Paso 1/4: Instala tu plataforma de desarrollo
 

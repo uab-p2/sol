@@ -7,6 +7,13 @@ está el desinfectante.
 
 {{ img_badge("astronaut_ant.png") }}
 
+??? objetivo
+    - Abre el quest `logica_lunatica` en tu IDE siguiendo las instrucciones en
+      {{ quest_link("silicio_y_titanio") }}. 
+    - Prepara respuestas para las preguntas guiadas.
+    - Arregla el código para que funcione correctamente.
+    - Discute cambios y hábitos de programación.
+
 ## Bichos de colores
 
 Tienes ante ti tres oponentes en traje espacial idéntico salvo por el casco.
@@ -32,17 +39,6 @@ Tienes ante ti tres oponentes en traje espacial idéntico salvo por el casco.
 
 ¿Notas algo raro en lo que dicen? No pierdas la cordura y trata de restaurar 
 la lógica de sus afirmaciones.
-
-??? objetivo
-    Si no lo has hecho ya, abre el quest `logica_lunatica` en tu IDE
-    siguiendo las instrucciones en {{ quest_link("silicio_y_titanio") }}.    
-
-    Entonces, para cada oponente:
-
-    - Prepara respuestas para las preguntas guiadas.
-    - Arregla el código para que funcione correctamente.
-
-
 
 Si en cualquier momento te atascas o quieres ampliar tus habilidades 
 de desinfección, puedes visitar {{ codex_link("debugging") }}.
