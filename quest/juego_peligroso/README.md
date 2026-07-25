@@ -3,11 +3,14 @@
 El camino será largo. ¿Por qué no fabricarte algo de entretenimiento?
 Te guiamos para montar un juego peligroso: el del ahorcado.
 
+{{ img_badge("hangman.png") }}
+
 ??? objetivo
 
     - Diseña y dibuja las entidades, datos e interacciones que describen el juego.
     - Nombra las acciones que tienen lugar en cada interacción.
     - Implementa el juego comenzando por las funciones más sencillas.
+    - Analiza puntos fuertes y débiles de la implementación.
 
 ## Dibujo
 
@@ -15,7 +18,11 @@ Antes de programar necesitamos saber qué queremos programar. En primer lugar,
 imagina el juego que quieres crear. Decide cuántos jugadores participarán,
 de dónde saldrán las palabras secretas, que se mostrará por pantalla, etc.
 
-Coge un papel. Ahora, coge un boli (o un lápiz). ¿Podrías explicar tu versión
+!!! info
+    Comienza por la versión más sencilla que sepas implementar.
+    Tendremos tiempo para refinar el juego más adelante.
+
+Ahora coge un papel y un boli (o un lápiz). ¿Podrías explicar tu versión
 del juego usando únicamente diagramas? Intenta dejar claro: 
 
 * ¿Qué entidades participan?
@@ -44,13 +51,18 @@ con las palabras idóneas para:
 
 ## Mecanografía
 
-¿Ya lo tienes todo preparado para comenzar a teclear? Te proponemos los siguientes pasos:
+¿Ya lo tienes todo preparado para comenzar a teclear?
+Estupendo pero, ¿por dónde comenzar y por dónde seguir?
+Te proponemos el siguiente plan de acción:
 
 1. Abre `quest/juego_peligroso` y comprueba que compila sin problema.
 
 2. Crea el fichero `hangman.h` en la raíz del quest.
-   Crea aquí las *declaraciones* de *funciones* y *structs* con la nomenclatura del punto anterior
-   antes de ponerte con la implementación.
+   Antes implementar nada:
+   - Añade en `hangman.h` las *declaraciones* de *funciones* y *structs* 
+     usando las palabras de la sección anterior.
+   - Asegúrate de documentar todas estas funciones.
+     Te explicamos cómo en {{ codex_link("documentation") }}
 
 3. Crea el fichero `hangman.cpp`, también en la raíz del quest.
    Una a una, implementa las funciones de hangman.h de la siguiente manera:
@@ -59,13 +71,8 @@ con las palabras idóneas para:
     2. Crea una primera versión de esa función en `hangman.cpp`.
     3. Prueba esa función desde `test.cpp` hasta que funcione. No olvides el `#include "hangman.h"`.
 
-4. En el `main()` de `main.cpp`, implementa la lógica del juego usando
+4. En el `main()` de `main.cpp`, ejecuta la lógica del juego usando
    únicamente las funciones que hayas implementado en `hangman.cpp`.
-
-!!! info
-      En todos los quests puedes hacer `#include "file.h"` de todos los ficheros `*.h`
-      en la carpeta del propio quest, y también de los ficheros en la carpeta
-      `src/` del proyecto SOL.
 
 Quizá te pueda ayudar:
 
@@ -73,6 +80,15 @@ Quizá te pueda ayudar:
 * {{ codex_link("add_file_quest") }}
 * {{ codex_link("run_quest") }}
 * {{ codex_link("cin_cout") }}
+
+## Debate
+
+* Si publicas `hangman.h` y `hangman.cpp` para que puedan jugar otra persona,
+  ¿cuántas funciones y structs necesita aprender a usar esa persona?
+
+* Si queremos elegir la palabra secreta de manera automática.
+  ¿De cuántas maneras podríamos hacerlo? ¿Entre cuántas palabras podríamos
+  elegir como mucho?
 
 # Tags
 
