@@ -7,19 +7,21 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
 
 ??? objetivo
 
-    - Diseña y dibuja las entidades, datos e interacciones que describen el juego.
-    - Nombra las acciones que tienen lugar en cada interacción.
-    - Implementa el juego comenzando por las funciones más sencillas.
+    - Diseña, dibuja y nombra las entidades, datos e interacciones que describen el juego.
+    - Implementa el juego comenzando por las funciones más sencillas
+      y acabando for la función {{ snippet_ref("play_hangman_game") }} 
     - Analiza puntos fuertes y débiles de la implementación.
 
-## Dibujo
+## Dibujo al natural
 
 Antes de programar necesitamos saber qué queremos programar. En primer lugar,
-imagina el juego que quieres crear. Decide cuántos jugadores participarán,
-de dónde saldrán las palabras secretas, que se mostrará por pantalla, etc.
+imagina el juego que quieres crear exactamente. Las únicas restricciones son:
 
+* Recibes la palabra secreta como un argumento (no necesitas generarla tú).
+* La persona que juega introduce las letras una una a través del teclado.
+  
 !!! info
-    Comienza por la versión más sencilla que sepas implementar.
+    Comienza pensando en la versión más sencilla que sepas implementar.
     Tendremos tiempo para refinar el juego más adelante.
 
 Ahora coge un papel y un boli (o un lápiz). ¿Podrías explicar tu versión
@@ -59,10 +61,11 @@ Te proponemos el siguiente plan de acción:
 
 2. Crea el fichero `hangman.h` en la raíz del quest.
    Antes implementar nada:
-   - Añade en `hangman.h` las *declaraciones* de *funciones* y *structs* 
-     usando las palabras de la sección anterior.
-   - Asegúrate de documentar todas estas funciones.
-     Te explicamos cómo en {{ codex_link("documentation") }}
+
+    - Añade en `hangman.h` las *declaraciones* de *funciones* y *structs* 
+      usando las palabras de la sección anterior.
+    - Asegúrate de documentar todas estas funciones.
+      Te explicamos cómo en {{ codex_link("documentation") }}
 
 3. Crea el fichero `hangman.cpp`, también en la raíz del quest.
    Una a una, implementa las funciones de hangman.h de la siguiente manera:
@@ -71,8 +74,9 @@ Te proponemos el siguiente plan de acción:
     2. Crea una primera versión de esa función en `hangman.cpp`.
     3. Prueba esa función desde `test.cpp` hasta que funcione. No olvides el `#include "hangman.h"`.
 
-4. En el `main()` de `main.cpp`, ejecuta la lógica del juego usando
-   únicamente las funciones que hayas implementado en `hangman.cpp`.
+4. Por último, añade la función {{ snippet_ref("play_hangman_game") }}
+    a `hangman.h/cpp` e impleméntala usando únicamente las otras funciones
+    que has implementado. Invoca esta función desde el `main()` de `main.cpp`.
 
 Quizá te pueda ayudar:
 
