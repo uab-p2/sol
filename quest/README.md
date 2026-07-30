@@ -2,6 +2,10 @@
 
 Listado alfabético de quests, con sus campañas y categorías.
 
+<a id="quest-contando-estrellas"></a>
+
+* **[Contando estrellas](contando_estrellas)** (en_ruta)
+
 <a id="quest-entre-gatos"></a>
 
 * **[Entre gatos](entre_gatos)** (oop)
