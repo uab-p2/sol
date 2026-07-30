@@ -2,8 +2,7 @@
 
 A veces nuestro código parece desafiar la razón: la ejecución del programa
 no parece consistente con el código que hemos escrito. Te retamos a resolver 
-un caso monstruoso de lógica lunática. No te asustes, también te decimos dónde 
-está el desinfectante.
+un caso monstruoso de lógica lunática. No te asustes, son sólo bugs.
 
 {{ img_badge("astronaut_ant.png") }}
 
