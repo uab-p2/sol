@@ -97,6 +97,4 @@ netamente original en {{ snippet_ref("smash") }}. Las únicas condiciones son:
   
 
 # Tags
-en_ruta:1
-semana:1
 time:60
