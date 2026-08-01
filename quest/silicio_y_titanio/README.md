@@ -11,33 +11,41 @@ compilar el código tu primer quest del proyecto SOL.
     Configura tu entorno de desarrollo y compila el código del quest `silicio_y_titanio`
     mediante los siguientes pasos.
 
-## Paso 1/4: Instala tu plataforma de desarrollo
+## Plataforma de desarrollo
 
-Elige tu(s) sistema(s) operativo(s) y sigue las instrucciones
-para instalar tu plataforma de desarrollo: {{ codex_link("plataforma") }}.
+!!! questions
 
-## Paso 2/4: Obtén el código del proyecto SOL
+    * Elige tu(s) sistema(s) operativo(s) y sigue las instrucciones
+      para instalar tu plataforma de desarrollo: {{ codex_link("plataforma") }}.
 
-Consigue el código completo del proyecto SOL de cualquiera de las 
-maneras propuestas: {{ codex_link("clone_project") }}.
-A continuación, cierra tu entorno de desarrollo (IDE).
+## Código del proyecto SOL
 
-## Paso 3/4: Abre el quest 'Silicio y titanio'
+!!! questions
 
-Sigue las instrucciones en {{ codex_link("open_quest") }} 
-para abrir este quest (`silicio_y_titanio`) en tu IDE.
+    * Consigue el código completo del proyecto SOL de cualquiera de las 
+      maneras propuestas: {{ codex_link("clone_project") }}.
+      A continuación, cierra tu entorno de desarrollo (IDE).
+
+## Quest 'Silicio y titanio'
+
+!!! questions
+
+    * Sigue las instrucciones en {{ codex_link("open_quest") }} 
+      para abrir este quest (`silicio_y_titanio`) en tu IDE.
 
 ## Paso 4/4: Prueba de humo
 
-Una prueba de humo consiste en enchufar un aparato nuevo o recién arreglado
-para comprobar si empieza a quemarse o si funciona bien. Te proponemos una
-prueba de humo para tu nuevo y flamante plataforma de desarrollo: compilar
-y ejecutar el código de este quest (`silicio_y_titanio`).
+!!! questions
 
-Siguiendo las instrucciones en {{ codex_link("run_quest") }}, podrás 
-ver un mensaje indicando cómo se compara
-la velocidad de tu máquina con la de la mía.
-¿Cuál de las dos nos lleva más rápido?
+    * Una prueba de humo consiste en enchufar un aparato nuevo o recién arreglado
+      para comprobar si empieza a quemarse o si funciona bien. Te proponemos una
+      prueba de humo para tu nuevo y flamante plataforma de desarrollo: compilar
+      y ejecutar el código de este quest (`silicio_y_titanio`).
+    
+    * Siguiendo las instrucciones en {{ codex_link("run_quest") }}, podrás 
+      ver un mensaje indicando cómo se compara
+      la velocidad de tu máquina con la de la mía.
+      ¿Cuál de las dos nos lleva más rápido?
 
 # Tags
 
