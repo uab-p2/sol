@@ -1,26 +1,36 @@
 #include "star.h"
+#include <cmath>
 
-Star::Star(const std::string& name, float x, float y, float z, float wavelength) :
+Star::Star() : Star("Sol", 0, 0, 0, "yellow") {}
+
+Star::Star(const std::string& name, double x, double y, double z, double wavelength) :
     m_name(name), m_x(x), m_y(y), m_z(z), m_wavelength(wavelength) {
 }
 
-Star::Star(const std::string& name, float x, float y, float z, const std::string& type) :
+Star::Star(const std::string& name, double x, double y, double z, const std::string& type) :
     m_name(name), m_x(x), m_y(y), m_z(z), m_wavelength(0) {
     set_type(type);
 }
 
+double Star::distance(const Star& other) const {
+    const double dx = m_x - other.m_x;
+    const double dy = m_y - other.m_y;
+    const double dz = m_z - other.m_z;
+    return std::sqrt(dx * dx + dy * dy + dz * dz);
+}
+
 std::string Star::get_type() const {
     std::string type = "other";
-    if (m_wavelength == 145) {
+    if (m_wavelength > 100 && m_wavelength <= 145) {
         type = "blue";
     }
-    else if (m_wavelength == 500) {
+    else if (m_wavelength <= 500) {
         type = "yellow";
     }
-    else if (m_wavelength == 970) {
+    else if (m_wavelength <= 970) {
         type = "red";
     }
-    else if (m_wavelength == 1100) {
+    else if (m_wavelength <= 1100) {
         type = "brown";
     }
     return type;
@@ -43,20 +53,19 @@ void Star::set_type(const std::string& type) {
 }
 
 void Star::set_name(const std::string& name) {
-    const unsigned MIN_LENGTH = 5;
     m_name = name;
-    while (m_name.length() < MIN_LENGTH) {
+    while (m_name.length() < MIN_NAME_LENGTH) {
         m_name = m_name + "0";
     }
 }
 
-void Star::get_position(float& x, float& y, float& z) const {
+void Star::get_position(double& x, double& y, double& z) const {
     x = m_x;
     y = m_y;
     z = m_z;
 }
 
-void Star::set_position(float x, float y, float z) {
+void Star::set_position(double x, double y, double z) {
     m_x = x;
     m_y = y;
     m_z = z;
