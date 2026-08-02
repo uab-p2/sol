@@ -93,14 +93,14 @@ Considera el siguiente ejemplo de *uso* de la clase `LightPoint`:
 #include "light_point.h"
 
 int main(void) {
-    LightPoint light(true, "white", 0.5);
-    std::cout << "Light 1, before: " << light.status() << std::endl;
-    light.turn_off();
-    std::cout << "Light 1, after:  " << light.status() << std::endl;
+    LightPoint light1(true, "white", 0.5);
+    std::cout << "Light 1, before: " << light1.status() << std::endl;
+    light1.turn_off();
+    std::cout << "Light 1, after:  " << light1.status() << std::endl;
     
-    LightPoint light2(true, "red", 0.2);
+    LightPoint light2(false, "red", 0.2);
     std::cout << "Light 2, before: " << light2.status() << std::endl;
-    light2.turn_off();
+    light2.turn_on();
     std::cout << "Light 2, after:  " << light2.status() << std::endl;
 
     return 0;
@@ -185,27 +185,37 @@ int main(void) {
 
 ## Light Jockey
 
-En este punto, lo tienes todo listo para conectar con el sistema de control
-de luces de la estación SOL y convertirte en su light jockey.
-     
-* El método `control_lights` comienza recibiendo una secuencia con el mismo formato 
-  y significado que la esperada por `receive_lights` de la sección anterior.
-
-* Tras recibir la secuencia de luces, el método `control_lights` puede recibir
-  uno o más comandos de control. ¿Qué comandos? ¿Con qué formato? Decídelo tú
-  y enséñanoslo. Algunas ideas:
-  
-    * encender/apagar todas las luces rojas
-    * añadir más luces
-    * cambiar intensidades
-
 !!! questions
 
-      * Implementa el método {{ snippet_ref("control_lights", include_declarations=True) }} 
-        en `light_jockey.h/cpp` y una demo en `main.cpp` que muestre su funcionamiento.
+    * En este punto, lo tienes todo listo para conectar con el sistema de control
+      de luces de la estación SOL y convertirte en su light jockey. Para ello,
+      implementa el método `control_lights` en `light_jockey.h/cpp`:
+    
+        * El método `control_lights` comienza recibiendo por teclado una secuencia con el mismo formato 
+          y significado que la esperada por `receive_lights` de la sección anterior.
+        
+        * Tras recibir la secuencia de luces anterior, el método `control_lights` recibe
+          palabras/comandos adicionales por teclado. Tú decides qué palabras/comandos 
+          reconocerá el sistema y significado. Algunas ideas:
+          
+            * "ALLON"/"REDOFF":  encender/apagar todas las luces, o sólo algunas.
+            * "ADDRED"/"ADDBLUE"/...: añadir nuevas luces a la secuencia.
+            * "DIMRED000"/"DIMRED001"/.../"DIMRED999":  cambiar la intensidad de las luces rojas
+        
+        * Escribe una demo en `main.cpp` que muestre su funcionamiento.
 
+{{ snippet_box("control_lights", include_declarations=True) }}
 
-{{ snippet_box("control_lights", include_declarations=True) }} 
+Por ejemplo, si hemos implementado el comando "ALLOFF", la siguiente entrada
+
+```text
+2
+whion
+redoff
+ALLOFF
+```
+
+Produciría un vector con 2 luces (blanca y roja), ambas apagadas debido al comando "ALLOFF". 
 
 # Tags
 en_ruta:0
