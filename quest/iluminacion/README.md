@@ -117,9 +117,7 @@ Estudia el código anterior y extrapola:
      * Si quisiéramos contar cuántas veces se enciende y se apaga cada luz,
         ¿qué ficheros necesitaríamos cambiar? ¿Más o menos que sin programación orientada a objetos?
 
-Quizá pueda ayudarte:
-
-* {{ codex_link("class_syntax") }}
+{{ codex_links("class_syntax") }}
 
 ### Tiras LED
 
@@ -183,9 +181,7 @@ int main(void) {
 
 {{ snippet_box("receive_lights", include_declarations=True, default_open=True) }}
 
-Quizá pueda ayudarte:
-
-* {{ codex_link("std_vector") }}
+{{ codex_links("cin_cout", "std_string", "std_vector") }}
 
 ## Light Jockey
 
@@ -209,15 +205,7 @@ de luces de la estación SOL y convertirte en su light jockey.
         en `light_jockey.h/cpp` y una demo en `main.cpp` que muestre su funcionamiento.
 
 
-{{ snippet_box("control_lights", include_declarations=True) }}
-
-
-
-
-
-!!! questions
-        
-                
+{{ snippet_box("control_lights", include_declarations=True) }} 
 
 # Tags
 en_ruta:0

@@ -39,9 +39,7 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
           * ¿Qué datos manejan?
           * ¿Qué entradas y salidas hay? ¿Usarás teclado, pantalla, ficheros...?
 
-Quizá pueda ayudarte:
-
-* {{ codex_link("diagrams") }}
+{{ codex_links("diagrams") }}
 
 ## Intercambio de idiomas
 
@@ -93,13 +91,13 @@ Te proponemos el siguiente plan de acción:
 
 {{ snippet_box("solution_juego_peligroso/main.cpp") }}
 
-Quizá te pueda ayudar:
-
-* {{ codex_link("open_quest") }}
-* {{ codex_link("add_file_quest") }}
-* {{ codex_link("run_quest") }}
-* {{ codex_link("cin_cout") }}
-* {{ codex_link("documentation") }}
+{{ codex_links(
+    "open_quest", 
+    "add_file_quest", 
+    "run_quest", 
+    "cin_cout", 
+    "documentation",
+) }}
 
 ## Debate
 
