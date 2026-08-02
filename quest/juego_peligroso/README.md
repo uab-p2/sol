@@ -89,7 +89,8 @@ Te proponemos el siguiente plan de acción:
         que has implementado. Invoca esta función desde el `main()` de `main.cpp`.
         Algo como lo siguiente podría ser suficiente:
 
-{{ snippet_box("solution_juego_peligroso/main.cpp") }}
+:::compile_and_run solution input="a\nx\nn\nt\np\nr\ni\nc"
+::: 
 
 {{ codex_links(
     "open_quest", 

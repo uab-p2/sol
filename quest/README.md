@@ -2,13 +2,13 @@
 
 Listado alfabético de quests, con sus campañas y categorías.
 
-<a id="quest-contando-estrellas"></a>
-
-* **[Contando estrellas](contando_estrellas)** (en_ruta)
-
 <a id="quest-entre-gatos"></a>
 
 * **[Entre gatos](entre_gatos)** (oop)
+
+<a id="quest-iluminacion"></a>
+
+* **[Iluminación](iluminacion)** (en_ruta)
 
 <a id="quest-juego-peligroso"></a>
 
@@ -17,6 +17,10 @@ Listado alfabético de quests, con sus campañas y categorías.
 <a id="quest-logica-lunatica"></a>
 
 * **[Lógica lunática](logica_lunatica)** (despegue)
+
+<a id="quest-navegacion"></a>
+
+* **[Navegación](navegacion)** (en_ruta)
 
 <a id="quest-silicio-y-titanio"></a>
 
