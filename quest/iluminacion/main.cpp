@@ -10,7 +10,7 @@ void turn_on(bool& is_on, string& color, float& intensity);
 /// Turn off a light point
 void turn_off(bool& is_on, string& color, float& intensity);
 
-int main(void) {
+int main() {
     // This is the light point
     bool is_on;
     string color;
