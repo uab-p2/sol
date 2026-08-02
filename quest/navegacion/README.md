@@ -77,42 +77,20 @@ reglas y sintaxis de este sistema llamado *encapsulamiento*.
 !!! questions
 
       * La estación SOL nos ha pedido producir una clase `Compass` en `compass.h/cpp`.
-        Impléntala cumpliendo los siguientes requisitos, y crea una demo 
-        en `main.cpp` que demuestre su funcionalidad.
+        Impléntala cumpliendo los siguientes requisitos.
 
-1. Se puede crear un objeto clase `Compass` pasándole un catálogo
+* Se puede crear un objeto clase `Compass` pasándole un catálogo
    de estrellas de tipo `const std::vector<Star>`.
-
-    ```cpp
-    int main(void) {
-    Star alpha("alpha", 0,0,0, "white");
-    Star beta("beta", 1,1,1, "white");
-    Star gamma("gamma", 2,2,2, "white");
-    const std::vector<Star> catalogue = {alpha, beta, gamma};
    
-    Compass compass(catalogue);
-    /// ...
-    ```
-   
-2. Se puede buscar la estrella del catálogo más cercana (en posición) a una buscada
-   con un método `Star find_closest(const Star& search) const` de `Compass`.
-   Continuando el código anterior, la siguiente búsqueda encuentra la estrella 
-   "alpha": 
-
-    ```cpp
-    /// ...
-    Star target("", 0.2, 0.17, 0.09, "white");
-    Star closest = compass.find_closest(target);
-    /// ...
-    ```
+* Se puede buscar la estrella del catálogo más cercana (en posición) a una buscada
+   con un método `Star Compass::find_closest(const Star& search) const`.
   
-3. Se puede encontrar el *diámetro* del catálogo, definido como la mayor
+* Se puede encontrar el *diámetro* del catálogo, definido como la mayor
    distancia entre dos estrellas dentro del mismo, e implementado
    en el método `double diameter() const`.
-
-    ```cpp
-    double diameter = compass.diameter();
-    ```
+   
+:::compile_and_run solution
+::: 
    
 
 # Tags

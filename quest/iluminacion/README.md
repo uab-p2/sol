@@ -206,18 +206,13 @@ int main(void) {
 
 {{ snippet_box("control_lights", include_declarations=True) }}
 
-Por ejemplo, si hemos implementado el comando "ALLOFF", la siguiente entrada
+A continuación puedes ver un ejemplo de salida si se implementa (y recibe) el comando "ALLOFF": 
 
-```text
-2
-whion
-redoff
-ALLOFF
-```
-
-Produciría un vector con 2 luces (blanca y roja), ambas apagadas debido al comando "ALLOFF". 
+:::compile_and_run solution input="2\nwhion\nredoff\nALLOFF"
+:::
 
 # Tags
 en_ruta:0
 semana:1
 time:60
+
