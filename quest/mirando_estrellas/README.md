@@ -46,8 +46,7 @@ de este quest (`quest/mirando_estrellas`).
 
 Quizá te pueda ayudar:
 
-* {{ codex_link("class_why") }}
-* {{ codex_link("class_syntax") }}
+* {{ codex_links("class_why", "class_syntax") }}
 
 ## Eclipse
 
@@ -69,8 +68,7 @@ y trata de responder a lo siguiente:
 
 Quizá te pueda ayudar:
 
-* {{ codex_link("open_quest") }}
-* {{ codex_link("class_encapsulation") }}
+* {{ codex_links("open_quest", "class_encapsulation") }}
 
 ## Constelación
 

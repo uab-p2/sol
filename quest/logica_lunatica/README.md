@@ -39,8 +39,7 @@ Tienes ante ti tres oponentes en traje espacial idéntico salvo por el casco.
 ¿Notas algo raro en lo que dicen? No pierdas la cordura y trata de restaurar 
 la lógica de sus afirmaciones.
 
-Si en cualquier momento te atascas o quieres ampliar tus habilidades 
-de desinfección, puedes visitar {{ codex_link("debugging") }}.
+{{ codex_links("debugging") }}
 
 ## Mr. Red
 
