@@ -114,4 +114,4 @@ Te proponemos el siguiente plan de acción:
 
 despegue:2
 semana:0
-time:90
+time:60
