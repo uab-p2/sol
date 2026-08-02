@@ -26,7 +26,7 @@ Sin programación orientada a objetos, podríamos modelar los puntos de luz
 con unas pocas variables y algunas funciones asociadas:
 
 ```cpp
-int main(void) {
+int main() {
     // This is the light point
     bool is_on;
     string color;
@@ -63,7 +63,7 @@ Sin programación orientada a objetos:
 #include <string>
 using namespace std;
 
-int main(void) {
+int main() {
     bool is_on;
     string color;
     float intensity;
@@ -92,7 +92,7 @@ Considera el siguiente ejemplo de *uso* de la clase `LightPoint`:
 #include <iostream>
 #include "light_point.h"
 
-int main(void) {
+int main() {
     LightPoint light1(true, "white", 0.5);
     std::cout << "Light 1, before: " << light1.status() << std::endl;
     light1.turn_off();
@@ -153,7 +153,7 @@ El siguiente ejemplo los pone todos en uso:
 #include <vector>
 using namespace std;
 
-int main(void) {
+int main() {
     string color1 = "red";
     string color2 = "blue";
 

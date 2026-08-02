@@ -45,7 +45,7 @@ public:
    }
 };
 
-int main(void) {
+int main() {
    Planet pluto;
    pluto.report();
    return 0;
