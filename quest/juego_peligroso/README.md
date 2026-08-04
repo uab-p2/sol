@@ -21,10 +21,8 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
       
         * Recibes la palabra secreta como un argumento (no necesitas generarla tú).
         * La persona que juega introduce las letras una una a través del teclado.
-          
-        !!! info
-            Comienza pensando en la versión más sencilla que sepas implementar.
-            Tendremos tiempo para refinar el juego más adelante.
+        * Comienza pensando en la versión más sencilla que sepas implementar.
+          Tendremos tiempo para refinar el juego más adelante.
 
 
 
