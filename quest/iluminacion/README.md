@@ -40,7 +40,9 @@ void turn_off(bool& is_on, string& color, float& intensity);
 ```
 
 Tienes el ejemplo completo en el `main.cpp` de este quest:
-{{ snippet_box("main.cpp") }}
+
+:::compile_and_run quest
+::: 
 
 Sin programación orientada a objetos:
 
@@ -80,10 +82,24 @@ Si usamos programación orientada a objetos, podemos agrupar los datos
 (las variables de estado) y las funciones (los métodos) para crear *clases*,
 como por ejemplo la clase `LightPoint`.
 
-La *cabecera* de la clase describe qué datos y métodos tiene esa clase:
+```mermaid
+classDiagram
+    class LightPoint {
+        - bool on
+        - string color
+        - float intensity
+        
+        + turn_on()
+        + turn_off()
+    }
+```
+
+La *cabecera* de la clase describe qué atributos (datos) y métodos (funciones) tiene esa clase,
+y quién puede usarlos:
 {{ snippet_box("LightPoint") }}
 
-La *implementación* de los métodos de la clase se incluyen en el `.cpp` correspondiente:
+La *implementación* de los métodos de la clase se incluyen en el `.cpp` correspondiente.
+Estos métodos tienen acceso a los atributos de su clase
 {{ snippet_box("light_point.cpp") }}
 
 Considera el siguiente ejemplo de *uso* de la clase `LightPoint`:
@@ -111,11 +127,13 @@ Estudia el código anterior y extrapola:
 
 !!! questions
 
+     * ¿Cuál es la diferencia entre clase y objeto?
      * ¿Cómo se crea un objeto (o *instancia*) de una clase?
      * ¿Cómo se invocan los métodos de un objeto?
      * ¿Qué variables usan los métodos de un objeto?
      * Si quisiéramos contar cuántas veces se enciende y se apaga cada luz,
-        ¿qué ficheros necesitaríamos cambiar? ¿Más o menos que sin programación orientada a objetos?
+        ¿qué ficheros necesitaríamos cambiar? ¿Pasa algo si ha hemos distribuido
+        el código y lo están usando otras personas?
 
 {{ codex_links("class_syntax") }}
 
@@ -125,25 +143,48 @@ El resto de clases funcionan igual que `LightPoint`. Por tanto, ya puedes aprove
 la potencia del código escrito y mantenido por miles de personas en todo el mundo.
 Hoy proponemos que uses:
 
-* Clase `std::string` (`#include <string>`): representa una cadena de caracteres,
-   por ejemplo `"hola"`.
+```mermaid
+classDiagram
+    class string["std::string"] {
+        + unsigned size()
+        + char operator[]()
+        + string substr()
+    }
 
-       - Método `string::substr(int pos, int len)`: 
-         permite extraer una parte de una cadena, comenzando en la posición `pos` y obteniendo
-         `len` caracteres.
+    class VectorString["std::vector&lt;string&gt;"] {
+        + unsigned size()
+        + string operator[]()
+        + void push_back(string)
+    }
 
-* Clase `std::vector<string>`: permite almacenar una secuencia de cadenas
-   por ejemplo `{"hola", "hasta luego"}`.
+    class VectorLightPoint["std::vector<LightPoint>"] {
+        + unsigned size()
+        + LightPoint operator[]()
+        + void push_back(LightPoint)
+    }
+```
 
-       - Método `vector<string>::push_back(const string& s)`: añade una cadena al final de la secuencia.
-        (No hay límite de tamaño para la secuencia).
+* Clase `std::string` (`#include <string>`)<br/>
+  Representa una cadena de caracteres.
 
-       - Método `vector<string>::size()`: obtiene la longitud actual de la secuencia. 
+       - Método `size()`: número de caracteres en la cadena.
+
+       - Corchetes `[i]`: permiten acceder directamente al i-ésimo caracter de la cadena. 
+
+       - Método `substr(int pos, int len)`: subcadena de `len` caracteres empezando en `pos`.
+
+* Clase `std::vector<string>`: lista dinámica de objetos `string`.
+
+       - Método `size()`: obtiene la longitud actual de la secuencia (número de objetos en la lista) 
 
        - Corchetes `[i]`: permiten acceder directamente al i-ésimo elemento de la secuencia.
 
+       - Método `push_back(const string& s)`: añade una cadena al final de la secuencia.
+        (No hay límite de tamaño para la secuencia).
+
 * Clase `std::vector<LightPoint>`: como `std::vector<string>`, pero almacena 
-  objetos de la clase `LightPoint` en lugar de cadenas de texto.
+  objetos de la clase `LightPoint` en lugar de `string`.
+
 
 El siguiente ejemplo los pone todos en uso:
 
@@ -151,6 +192,8 @@ El siguiente ejemplo los pone todos en uso:
 #include <iostream>
 #include <string>
 #include <vector>
+#include "light_point.h"
+
 using namespace std;
 
 int main() {
@@ -167,6 +210,11 @@ int main() {
     colors[1] = colors[1].substr(1, 2);
     cout << "variables: " << color1 << ", " << color2 << endl;
     cout << "vector:    " << colors[0] << ", " << colors[1] << endl;
+
+    vector<LightPoint> strip = { 
+        LightPoint(true, color1, 0.5), 
+        LightPoint(false, color2, 0.2) };
+    cout << "The strip has " << strip.size() << " lights." << endl;
 
     return 0;
 }
@@ -185,14 +233,17 @@ int main() {
 
 ## Light Jockey
 
+Te proponemos implementar un sistema de control de luces para la estación SOL.
+Prepárate, pues es posible que tengas que trabajar con miles o millones 
+de puntos de luz.
+
 !!! questions
 
-    * En este punto, lo tienes todo listo para conectar con el sistema de control
-      de luces de la estación SOL y convertirte en su light jockey. Para ello,
-      implementa el método `control_lights` en `light_jockey.h/cpp`:
+    * Implementa el método `control_lights` en `light_jockey.h/cpp`:
     
         * El método `control_lights` comienza recibiendo por teclado una secuencia con el mismo formato 
           y significado que la esperada por `receive_lights` de la sección anterior.
+          No debe haber límite para la cantidad de luces.
         
         * Tras recibir la secuencia de luces anterior, el método `control_lights` recibe
           palabras/comandos adicionales por teclado. Tú decides qué palabras/comandos 
@@ -204,7 +255,7 @@ int main() {
         
         * Escribe una demo en `main.cpp` que muestre su funcionamiento.
 
-{{ snippet_box("control_lights", include_declarations=True) }}
+{{ snippet_box("control_lights", include_declarations=True, default_open=True) }}
 
 A continuación puedes ver un ejemplo de salida si se implementa (y recibe) el comando "ALLOFF": 
 

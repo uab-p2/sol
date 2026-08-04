@@ -1,14 +1,16 @@
 #include "star.h"
 #include <cmath>
 
-Star::Star() : Star("Sol", 0, 0, 0, "yellow") {}
-
-Star::Star(const std::string& name, double x, double y, double z, double wavelength) :
-    m_name(name), m_x(x), m_y(y), m_z(z), m_wavelength(wavelength) {
+Star::Star()
+    : Star("Sol", 0, 0, 0, "yellow") {
 }
 
-Star::Star(const std::string& name, double x, double y, double z, const std::string& type) :
-    m_name(name), m_x(x), m_y(y), m_z(z), m_wavelength(0) {
+Star::Star(const std::string& name, double x, double y, double z, double wavelength)
+    : m_name(name), m_x(x), m_y(y), m_z(z), m_wavelength(wavelength) {
+}
+
+Star::Star(const std::string& name, double x, double y, double z, const std::string& type)
+    : m_name(name), m_x(x), m_y(y), m_z(z), m_wavelength(0) {
     set_type(type);
 }
 
