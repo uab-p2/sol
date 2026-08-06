@@ -51,4 +51,5 @@ compilar el código tu primer quest del proyecto SOL.
 
 despegue:0
 semana:0
+day:0
 time:30

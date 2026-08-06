@@ -111,6 +111,7 @@ Te proponemos el siguiente plan de acción:
 
 # Tags
 
-despegue:2
+despegue:1
 semana:0
+day:0
 time:60

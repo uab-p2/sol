@@ -200,21 +200,22 @@ int main() {
     string color1 = "red";
     string color2 = "blue";
 
+    cout << "Create, add, access vector:" << endl;
     vector<string> colors;
     colors.push_back(color1);
     colors.push_back(color2);
-
     cout << "variables: " << color1 << ", " << color2 << endl;
     cout << "vector:    " << colors[0] << ", " << colors[1] << endl;
-    
+
+    cout << endl << "Modify vector element:" << endl;
     colors[1] = colors[1].substr(1, 2);
     cout << "variables: " << color1 << ", " << color2 << endl;
     cout << "vector:    " << colors[0] << ", " << colors[1] << endl;
 
-    vector<LightPoint> strip = { 
-        LightPoint(true, color1, 0.5), 
-        LightPoint(false, color2, 0.2) };
-    cout << "The strip has " << strip.size() << " lights." << endl;
+    cout << endl << "Access the sequence of elements:" << endl;
+    for (string& color : colors) {
+        cout << "element:    " << color << endl;
+    }
 
     return 0;
 }
@@ -223,7 +224,7 @@ int main() {
 !!! questions
 
     * Implementa la función {{ snippet_ref("receive_lights", include_declarations=True) }} 
-      en `light_jockey.h/cpp`. Esta función recibe una secuencia de códigos indicando
+      en `light_jockey.h/cpp`. Esta función lee de teclado una secuencia de códigos indicando
       el color y estado on/off de las luces existentes y devuelve un array de objetos `LightPoint`
       con esos colores y estados.
 
@@ -265,5 +266,6 @@ A continuación puedes ver un ejemplo de salida si se implementa (y recibe) el c
 # Tags
 en_ruta:0
 semana:1
+day:1
 time:60
 
