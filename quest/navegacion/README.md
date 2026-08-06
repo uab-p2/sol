@@ -116,5 +116,6 @@ funcionalidad adicional y una demo que la muestre.
 :::
 
 # Tags
-time:60
 en_ruta:1
+day:2
+time:60

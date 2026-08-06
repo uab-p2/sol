@@ -3,7 +3,7 @@
 Las escuadrillas de reparación necesitarán un suministro fiable de oxígeno
 cuando lleguen a la estación SOL. Nos han pedida ayuda para 
 diseñar los tanques de aire comprimido y los puntos de dispensación.
-Te guiamos para para hacer un diseño a prueba de fallos. 
+Te retamos a hacer un diseño a prueba de fallos. 
 
 {{ img_badge("oxygen.png") }}
 
@@ -16,7 +16,7 @@ Te guiamos para para hacer un diseño a prueba de fallos.
 ## Tanques
 
 ### Creación
-Los tanques pueden ser de varios tipos. Sólo se pueden crear de los siguientes modos:
+Los tanques pueden ser de varios tipos. Sólo se pueden crear de los siguientes dos modos:
 
 - "micro", "normal", "jumbo": 100, 1000 y 10000 litros respectivamente.
   Estos se crean usando el nombre directamente, p.ej., `Tank tank1("micro");`
@@ -40,7 +40,8 @@ Una vez creado un tanque, quien lo use sólo debe poder hacer dos cosas:
 
 !!! questions
 
-    * Implementa la clase `Tank` en `tank.h/cpp` considerando los requisitos anteriores.
+    * Implementa la clase `Tank` en `tank.h/cpp` considerando los requisitos anteriores,
+      e incluye código de prueba.
 
     * Qué tipo de protección ofreces para evitar que se manipule la cantidad de aire sin permiso:
       ¿en tiempo de compilación, o en tiempo de ejecución? ¿Cuál es la diferencia?
@@ -117,9 +118,11 @@ int main() {
 
 !!! questions
 
-    * Implementa la clase `Dispenser` en `dispenser.h/cpp` cumpliendo con los requisitos anteriores.
-    * Implementa una demo en `main.cpp` que muestre el funcionamiento de `Tank` y `Dispenser`.
+    * Implementa la clase `Dispenser` en `dispenser.h/cpp` cumpliendo con los requisitos anteriores,
+      incluyendo código de prueba.
+    * Implementa una demo en `main.cpp` que muestre el funcionamiento de `Tank` y `Dispenser`. 
     * ¿Es posible controlar exactamente cuándo se ejecuta el destructor de una clase?
+    * ¿Cuántas veces se ejecuta el destructor de `Tank`? ¿Coincide con lo que esperas?
 
 :::compile_and_run solution
 :::
@@ -128,4 +131,5 @@ int main() {
 
 # Tags
 en_ruta:2
+day:2
 time:60
