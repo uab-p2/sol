@@ -2,7 +2,7 @@
 
 Tu equipo es el encargado de prototipar un nuevo sistema de control de luces
 para el proyecto SOL. Para ser compatible, deberás usar el mismo paradigma:
-la *programación orientada a objetos (OOP)*. Te invitamos a tomar contacto 
+la programación orientada a objetos (OOP). Te invitamos a tomar contacto 
 con la potencia de este paradigma.
 
 {{ img_badge("light_string.png") }}
@@ -265,7 +265,6 @@ A continuación puedes ver un ejemplo de salida si se implementa (y recibe) el c
 
 # Tags
 en_ruta:0
-semana:1
 day:1
 time:60
 
