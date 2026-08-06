@@ -117,6 +117,5 @@ Pensemos en qué repele y qué favorece su aparición.
 # Tags
 
 despegue:2
-semana:0
 day:1
 time:45
