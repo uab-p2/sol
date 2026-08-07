@@ -9,7 +9,7 @@ con la potencia de este paradigma.
 
 ??? Objetivo
     - Descubre las ventajas de la programación orientada a objetos.
-    - Implementa un sistema de control de luces utilizando clases ya implementadas.
+    - Implementa un sistema de control de luces utilizando clases ya creadas.
 
 ## Puntos de luz
 
