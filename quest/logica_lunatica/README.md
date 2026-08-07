@@ -7,10 +7,9 @@ un caso monstruoso de lógica lunática. No te asustes, son sólo bugs.
 {{ img_badge("astronaut_ant.png") }}
 
 {{ goals(
-    "Abre el quest `logica_lunatica` en tu IDE siguiendo las instrucciones en {{ quest_link(\"silicio_y_titanio\") }}.",
-    "Prepara respuestas para las preguntas guiadas.",
-    "Arregla el código para que funcione correctamente.",
-    "Discute cambios y hábitos de programación."
+    "Descubre técnicas de debugging pasivas y activas.",
+    "Ponte con tres casos prácticos.",
+    "Discute sobre hábitos que producen o evitan bugs.",
 ) }}
 
 ## Bichos de colores

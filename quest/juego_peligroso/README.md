@@ -6,9 +6,9 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
 {{ img_badge("hangman.png") }}
 
 {{ goals(
-    "Diseña, dibuja y nombra las entidades, datos e interacciones que describen el juego.",
-    "Implementa el juego comenzando por las funciones más sencillas y acabando for la función {{ snippet_ref(\"play_hangman_game\") }}",
-    "Analiza puntos fuertes y débiles de la implementación."
+    "Diseña, dibuja y nombra las entidades, datos e interacciones que describen el ahorcado.",
+    "Implementa funciones auxiliares, tests y por último<br/>{{ snippet_ref(\"play_hangman_game\") }}",
+    "Analiza puntos fuertes y débiles de tu implementación."
 ) }}
 
 ## Dibujo al natural
@@ -22,10 +22,6 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
         * La persona que juega introduce las letras una una a través del teclado.
         * Comienza pensando en la versión más sencilla que sepas implementar.
           Tendremos tiempo para refinar el juego más adelante.
-
-
-
-!!! questions
 
     * Ahora coge un papel y un boli (o un lápiz). ¿Podrías explicar tu versión
       del juego usando únicamente diagramas? Te proponemos 
