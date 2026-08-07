@@ -74,9 +74,17 @@ siguientes partes:
 
           * Todas las clases deben tener un *constructor por defecto*.
 
-      * ¿Es posible controlar el orden en que se crean y se destruyen los atributos
-         de un objeto?
+      * ¿Influye el orden de definición de los atributos en el orden de ejecución
+        a los constructores y destructores?
 
+      * ¿Influye el orden de inicialización directa
+        en el orden de ejecución de los constructores y destructores?
+
+!!! example "Ejemplo de inicialización directa"
+
+     ```cpp linenums="1" 
+     Constructor() : m_atributo1(atributo1), m_atributo2(atributo2) { ...
+     ```
 
 {{ snippet_box("Scene::action", include_definitions=False, include_declarations=True, default_open=False) }}
 
@@ -92,13 +100,14 @@ siguientes partes:
            (nudo y desenlace) se implementan en 
            `two_scenes.h/cpp` con las mismas reglas que en el ejemplo anterior.
 
-         * La implementación de tu ficción usa:
+         * La implementación de tu ficción usa al menos:
             - 2 clases ya implementadas en `src/atrezzo.h` y `src/atrezzo.cpp`
-            - 2 clases nuevas que implementes en el mismo fichero `two_scenes.h/cpp`
-              que `SceneBegin` y las otras.
+            - 2 clases nuevas que implementes `two_scenes.h/cpp`,
+              junto a `SceneBegin` y `SceneEnd`.
 
-         * Las nuevas clases deben interactuar y mostrar una salida dependiente
-           de las llamadas a métodos de otras clases.
+         * Las nuevas clases deben tener un estado, 
+           deben poder interactuar para cambiar ese setado 
+           y mostrar una salida dependiente de su estado.
 
       * Implementa tu demo en el `main.cpp` del quest de manera que la salida
         de una escena se complete antes de empezar la siguiente. Discute 
