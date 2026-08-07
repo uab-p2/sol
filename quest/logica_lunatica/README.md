@@ -6,12 +6,12 @@ un caso monstruoso de lógica lunática. No te asustes, son sólo bugs.
 
 {{ img_badge("astronaut_ant.png") }}
 
-??? objetivo
-    - Abre el quest `logica_lunatica` en tu IDE siguiendo las instrucciones en
-      {{ quest_link("silicio_y_titanio") }}. 
-    - Prepara respuestas para las preguntas guiadas.
-    - Arregla el código para que funcione correctamente.
-    - Discute cambios y hábitos de programación.
+{{ goals(
+    "Abre el quest `logica_lunatica` en tu IDE siguiendo las instrucciones en {{ quest_link(\"silicio_y_titanio\") }}.",
+    "Prepara respuestas para las preguntas guiadas.",
+    "Arregla el código para que funcione correctamente.",
+    "Discute cambios y hábitos de programación."
+) }}
 
 ## Bichos de colores
 

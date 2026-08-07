@@ -8,11 +8,11 @@ de estos elementos.
 
 {{ img_badge("storyboard.png") }}
 
-??? objetivo
-
-    - Crea nuevas clases usando otras existentes (*composición*).
-    - Analiza el efecto de la composición en constructores y destructores.
-    - Aprende sobre el ciclo de vida de las variables.
+{{ goals(
+    "Crea nuevas clases usando otras existentes (*composición*).",
+    "Analiza el efecto de la composición en constructores y destructores.",
+    "Aprende sobre el ciclo de vida de las variables."
+) }}
 
 ## Guión
  
@@ -111,7 +111,7 @@ siguientes partes:
 
       * Implementa tu demo en el `main.cpp` del quest de manera que la salida
         de una escena se complete antes de empezar la siguiente. Discute 
-        cómo lo has logrado.
+        cómo lo has logrado.  
 
 {{ snippet_box("atrezzo.h") }}
 

@@ -7,9 +7,9 @@ compilar el código tu primer quest del proyecto SOL.
 
 {{ img_badge("silicon.png") }}
 
-??? objetivo
-    Configura tu entorno de desarrollo y compila el código del quest `silicio_y_titanio`
-    mediante los siguientes pasos.
+{{ goals(
+    "Configura tu entorno de desarrollo y compila el código del quest `silicio_y_titanio` mediante los siguientes pasos."
+) }}
 
 ## Plataforma de desarrollo
 

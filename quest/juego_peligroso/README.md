@@ -5,12 +5,11 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
 
 {{ img_badge("hangman.png") }}
 
-??? objetivo
-
-    - Diseña, dibuja y nombra las entidades, datos e interacciones que describen el juego.
-    - Implementa el juego comenzando por las funciones más sencillas
-      y acabando for la función {{ snippet_ref("play_hangman_game") }} 
-    - Analiza puntos fuertes y débiles de la implementación.
+{{ goals(
+    "Diseña, dibuja y nombra las entidades, datos e interacciones que describen el juego.",
+    "Implementa el juego comenzando por las funciones más sencillas y acabando for la función {{ snippet_ref(\"play_hangman_game\") }}",
+    "Analiza puntos fuertes y débiles de la implementación."
+) }}
 
 ## Dibujo al natural
 

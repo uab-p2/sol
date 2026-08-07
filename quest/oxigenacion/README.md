@@ -7,11 +7,11 @@ Te retamos a hacer un diseño a prueba de fallos.
 
 {{ img_badge("oxygen.png") }}
 
-??? objetivo
-
-    * Implementa las clases `Tank` y `Dispenser` cumpliendo con los requisitos.
-    * Produce una demo que muestre el funcionamiento de ambas clases.
-    * Discute el funcionamiento de std::map y de los destructores.
+{{ goals(
+    "Implementa las clases `Tank` y `Dispenser` ofreciendo un acceso controlado.",
+    "Produce una demo que muestre el funcionamiento de ambas clases.",
+    "Discute el funcionamiento de std::map y de los destructores."
+) }}
 
 ## Tanques
 

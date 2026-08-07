@@ -8,10 +8,11 @@ implementar un elemento clave del sistema de navegación de la estación.
 
 {{ img_badge("observation.png") }}
 
-??? objetivo
-    - Razona acerca de los constructores de una clase.
-    - Deduce las reglas que rigen la interfaz pública y privada de una clase.
-    - Implementa la clase `Compass` cumpliendo una lista de requisitos.
+{{ goals(
+    "Razona acerca de los constructores de una clase.",
+    "Deduce las reglas que rigen la interfaz pública y privada de una clase.",
+    "Implementa la clase `Compass` cumpliendo una lista de requisitos."
+) }}
 
 ## Estrellas
 
