@@ -118,4 +118,4 @@ Pensemos en qué repele y qué favorece su aparición.
 
 despegue:2
 day:1
-time:45
+time:60
