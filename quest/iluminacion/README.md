@@ -7,9 +7,10 @@ con la potencia de este paradigma.
 
 {{ img_badge("light_string.png") }}
 
-??? Objetivo
-    - Descubre las ventajas de la programación orientada a objetos.
-    - Implementa un sistema de control de luces utilizando clases ya creadas.
+{{ goals(
+    "Descubre las ventajas de la programación orientada a objetos.",
+    "Implementa un sistema de control de luces utilizando clases ya creadas."
+) }}
 
 ## Puntos de luz
 
