@@ -8,17 +8,22 @@
     font-display: swap;
 }
 
-p.logo {
+div.main-logo p {
     font-family: "Mona Sans", sans-serif;
     font-variant: small-caps;
-    font-size: 2.5em;
+    font-size: 2.25em;
     font-weight: 2000;
     color: #ff6e42;
     padding: 0;
     margin: 0;
 }
 
-.md-typeset .admonition {
+div.main-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.md-typeset .admonition .detail * {
     font-size: inherit;
 }
 
@@ -32,6 +37,12 @@ p.logo {
     font-weight: 700;
     padding-bottom: .1rem;
     border-bottom: 2px solid rgba(0, 0, 0, .6);
+}
+
+.md-typeset * img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* More clear title contrast (dark) */
@@ -112,15 +123,18 @@ a.codex::after {
 }
 
 /* Quest links */
-a.quest {
+a.quest, a.campaign {
     text-decoration: none;
 }
 
 a.quest::before {
     content: "❂";
 }
+a.campaign::before {
+    content: "🛰";
+}
 
-a.quest::after {
+a.quest::after, a.campaign::after {
     content: "";
 }
 
@@ -198,7 +212,7 @@ details.articles:focus-within {
 
 /* Tabbed content */
 .md-typeset .tabbed-set {
-    border: 1px solid;
+    border: 1px solid color-mix(in srgb, var(--md-typeset-color) 50%, transparent);
 }
 
 div.tabbed-content {
@@ -450,3 +464,49 @@ body {
     margin: 0;
 }
 
+/* !!! campaign_brief admonition */
+.md-typeset .admonition.campaign_brief,
+.md-typeset details.campaign_brief {
+    font-size: inherit;
+    border: 1px solid color-mix(in srgb, var(--md-typeset-color) 50%, transparent);
+    background-color: transparent;
+    box-shadow: none;
+}
+
+details.campaign_brief:focus-within {
+    box-shadow: none;
+}
+
+/* Transparent title/summary bar, no background */
+.md-typeset .campaign_brief > .admonition-title,
+.md-typeset .campaign_brief > summary {
+    background-color: transparent;
+    padding-left: 0.6rem;
+}
+
+/* Hide the icon */
+.md-typeset .campaign_brief > .admonition-title::before,
+.md-typeset .campaign_brief > summary::before {
+    display: none;
+}
+
+/* No bullet points or vertical margin inside */
+.md-typeset .campaign_brief ul,
+.md-typeset .campaign_brief ol {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.md-typeset .campaign_brief li {
+    padding-left: 0;
+}
+
+/* Mermaid diagrams */
+div.mermaid {
+    width: fit-content;
+    min-width: 75%;
+    margin: auto;
+    height: auto;
+}
