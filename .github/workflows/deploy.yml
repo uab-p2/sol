@@ -39,9 +39,9 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update -y
-          sudo apt install -y $(grep -Ev '^\s*(#|$)' luna/dependencies_apt.txt)
+          sudo apt install -y $(grep -Ev '^\s*(#|$)' luna/requirements_apt.txt)
           python -m pip install --upgrade pip
-          python -m pip install -r luna/dependencies_python.txt
+          cd luna && python -m pip install -r requirements_pip.txt
 
       - name: Locate libclang and export env
         run: |
@@ -96,8 +96,25 @@ jobs:
           print("OK: clang.cindex can load libclang")
           PY
 
+      - name: Verify macros module import
+        working-directory: luna/doc/guide
+        env:
+          PYTHONPATH: ${{ github.workspace }}/luna/doc:${{ github.workspace }}/luna/doc/guide
+        run: |
+          python3 - <<'PY'
+          import traceback
+          try:
+              import main
+              print(f"OK: imported {main.__file__}")
+          except Exception:
+              traceback.print_exc()
+              raise
+          PY
+
       - name: Build site (via Makefile)
         working-directory: luna/doc/guide
+        env:
+          PYTHONPATH: ${{ github.workspace }}/luna/doc:${{ github.workspace }}/luna/doc/guide
         run: make build
 
       - name: Deploy to GitHub Pages
