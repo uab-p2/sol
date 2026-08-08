@@ -50,11 +50,11 @@ siguientes partes:
 {{ img("roadrunner.webp") }}
 :::
 
-## Plagio
+## Doblaje
 
 !!! questions
 
-      * No es plagio si se cita la fuente o se da permiso. Plagia el guión anterior
+      * Reproduce el guión anterior
         mediante un código que lo genere. Es importante que el código
         cumpla las especificaciones siguientes.
 
@@ -82,19 +82,27 @@ siguientes partes:
 
 !!! example "Ejemplo de inicialización directa"
 
-     ```cpp linenums="1" 
-     Constructor() : m_atributo1(atributo1), m_atributo2(atributo2) { ...
+     ```cpp linenums="1"
+     class A : {
+
+     public:
+        // Direct initialization 
+        A(int x, int y) : m_x(x), m_y(y) { }
+
+     protected:
+        int x, y;
+     };
      ```
 
 {{ snippet_box("Scene::action", include_definitions=False, include_declarations=True, default_open=False) }}
 
-{{ codex_links("class_constructor", "class_destructor", "class_encapsulation") }}
+{{ codex_links("class_constructor", "class_destructor", "class_encapsulation", "class_composition") }}
 
-## Tragedia en dos escenas
+## Piloto
 
 !!! questions
 
-      * Implementa una demo de una ficción en dos escenas.
+      * Implementa el código que genera dos escenas consecutivas.  
  
          * Las clases `SceneBegin`, `SceneEnd` 
            (nudo y desenlace) se implementan en 
@@ -105,13 +113,13 @@ siguientes partes:
             - 2 clases nuevas que implementes `two_scenes.h/cpp`,
               junto a `SceneBegin` y `SceneEnd`.
 
-         * Las nuevas clases deben tener un estado, 
-           deben poder interactuar para cambiar ese setado 
-           y mostrar una salida dependiente de su estado.
+         * Las clases que creen tienen estado, e interactuan con objetos
+           y personajes para cambiar su estado. La salida que producen
+           tus clases debe depender de su estado.
 
       * Implementa tu demo en el `main.cpp` del quest de manera que la salida
         de una escena se complete antes de empezar la siguiente. Discute 
-        cómo lo has logrado.  
+        cómo lo has logrado.
 
 {{ snippet_box("atrezzo.h") }}
 
