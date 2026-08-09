@@ -2,6 +2,10 @@
 
 Listado alfabético de quests, con sus campañas y categorías.
 
+<a id="quest-comunicacion"></a>
+
+* **[Comunicación](comunicacion)** (en_ruta)
+
 <a id="quest-distraccion"></a>
 
 * **[Distracción](distraccion)** (en_ruta)

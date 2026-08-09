@@ -5,20 +5,24 @@ Document::Document(const std::string& content, const std::string& id)
 }
 
 Document::Document(const Document& other)
-    : m_sequence_number(other.m_sequence_number + 1), m_content(other.m_content), m_id(other.m_id) {
+    : m_sequence_number(other.m_sequence_number + 1)
+      , m_content(other.m_content)
+      , m_id(other.m_id) {
 }
 
 std::string Document::get_content() const {
     return m_content;
 }
 
-void Document::append(const std::string& content) {
-    m_content += content;
-    m_sequence_number++;
+void Document::add_content(const std::string& content) {
+    if (!content.empty()) {
+        m_content += content;
+        m_sequence_number++;
+    }
 }
 
-std::string Document::get_id() const {
-    return m_id;
+bool Document::verify_id(const std::string& id) const {
+    return m_id == id;
 }
 
 unsigned Document::get_sequence_number() const {

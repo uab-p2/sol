@@ -18,10 +18,11 @@ public:
     std::string get_content() const;
     /// Add some text to the current content and increase the sequence_number.
     /// @param content text to add to the document.
-    void append(const std::string& content);
+    void add_content(const std::string& content);
 
-    /// @return the document name
-    std::string get_id() const;
+    /// @param id that is confirmed (or not)
+    /// @return true if `id` is identical to the document's id, false otherwise.
+    bool verify_id(const std::string& id) const;
 
     /// Get the current sequence number.
     unsigned get_sequence_number() const;
