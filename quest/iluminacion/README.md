@@ -225,7 +225,7 @@ int main() {
 !!! questions
 
     * Implementa la función {{ snippet_ref("receive_lights", include_declarations=True) }} 
-      en `light_jockey.h/cpp`. Esta función lee de teclado una secuencia de códigos indicando
+      en `light_jockey.h|cpp`. Esta función lee de teclado una secuencia de códigos indicando
       el color y estado on/off de las luces existentes y devuelve un array de objetos `LightPoint`
       con esos colores y estados.
 
@@ -241,7 +241,7 @@ de puntos de luz.
 
 !!! questions
 
-    * Implementa el método `control_lights` en `light_jockey.h/cpp`:
+    * Implementa el método `control_lights` en `light_jockey.h|cpp`:
     
         * El método `control_lights` comienza recibiendo por teclado una secuencia con el mismo formato 
           y significado que la esperada por `receive_lights` de la sección anterior.

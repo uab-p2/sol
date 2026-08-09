@@ -78,7 +78,7 @@ Te proponemos el siguiente plan de acción:
         3. Prueba esa función desde `test.cpp` hasta que funcione. No olvides el `#include "hangman.h"`.
  
     4. Por último, añade la función {{ snippet_ref("play_hangman_game") }}
-        a `hangman.h/cpp` e impleméntala usando únicamente las otras funciones
+        a `hangman.h|cpp` e impleméntala usando únicamente las otras funciones
         que has implementado. Invoca esta función desde el `main()` de `main.cpp`.
         Algo como lo siguiente podría ser suficiente:
 

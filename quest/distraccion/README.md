@@ -62,7 +62,7 @@ siguientes partes:
             en los constructores/destructores de las clases.
           
           * La clase `Scene`:
-               - Está implementada en `scene.h/cpp`
+               - Está implementada en `scene.h|cpp`
                - Contiene un sólo método público,  
                  {{ snippet_ref("Scene::action", include_definitions=False, include_declarations=True) }}.
                  Este método genera un número variable de líneas describiendo la acción,
@@ -106,11 +106,11 @@ siguientes partes:
  
          * Las clases `SceneBegin`, `SceneEnd` 
            (nudo y desenlace) se implementan en 
-           `two_scenes.h/cpp` con las mismas reglas que en el ejemplo anterior.
+           `two_scenes.h|cpp` con las mismas reglas que en el ejemplo anterior.
 
          * La implementación de tu ficción usa al menos:
             - 2 clases ya implementadas en `src/atrezzo.h` y `src/atrezzo.cpp`
-            - 2 clases nuevas que implementes `two_scenes.h/cpp`,
+            - 2 clases nuevas que implementes `two_scenes.h|cpp`,
               junto a `SceneBegin` y `SceneEnd`.
 
          * Las clases que creen tienen estado, e interactuan con objetos
