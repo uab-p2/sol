@@ -40,7 +40,7 @@ Una vez creado un tanque, quien lo use sólo debe poder hacer dos cosas:
 
 !!! questions
 
-    * Implementa la clase `Tank` en `tank.h/cpp` considerando los requisitos anteriores,
+    * Implementa la clase `Tank` en `tank.h|cpp` considerando los requisitos anteriores,
       e incluye código de prueba.
 
     * Qué tipo de protección ofreces para evitar que se manipule la cantidad de aire sin permiso:
@@ -118,7 +118,7 @@ int main() {
 
 !!! questions
 
-    * Implementa la clase `Dispenser` en `dispenser.h/cpp` cumpliendo con los requisitos anteriores,
+    * Implementa la clase `Dispenser` en `dispenser.h|cpp` cumpliendo con los requisitos anteriores,
       incluyendo código de prueba.
     * Implementa una demo en `main.cpp` que muestre el funcionamiento de `Tank` y `Dispenser`. 
     * ¿Es posible controlar exactamente cuándo se ejecuta el destructor de una clase?

@@ -116,6 +116,8 @@ funcionalidad adicional y una demo que la muestre.
 :::compile_and_run solution
 :::
 
+{{ codex_links("std_vector") }}
+
 # Tags
 en_ruta:1
 day:2
