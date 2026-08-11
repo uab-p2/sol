@@ -200,7 +200,7 @@ int main() {
   el estado de la máquina `Multi` y simplemente devuelve la probabilidad
   de un caracter `c` específico. Esta probabilidad se calcula como el número
   total de apariciones de `c` dividido entre el número total de caracteres inspeccionados,
-  $$ P(c) = \frac{N_\text{c}}{N_\text{total}}. $$
+  \( P(c) = \frac{N_\text{c}}{N_\text{total}}\).
 
 :::compile_and_run title="Uso de `get_char_probability`"
 #include <iostream>
