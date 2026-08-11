@@ -23,25 +23,23 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: uab-p2/sol
-          path: sol
+          path: sol.git
 
+      # Checked out next to sol.git: the luna plugin locates the SOL project
+      # in <luna_root>/../sol.git unless its `sol_dir` option says otherwise.
       - name: Checkout LUNA project
         uses: actions/checkout@v4
         with:
           repository: uab-p2/luna
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: luna
-
-      - name: Link SOL and LUNA projects
-        run: |
-          python luna/doc/tool/link.py sol
+          path: luna.git
 
       - name: Install dependencies
         run: |
           sudo apt update -y
-          sudo apt install -y $(grep -Ev '^\s*(#|$)' luna/requirements_apt.txt)
+          sudo apt install -y $(grep -Ev '^\s*(#|$)' luna.git/requirements_apt.txt)
           python -m pip install --upgrade pip
-          cd luna && python -m pip install -r requirements_pip.txt
+          cd luna.git && python -m pip install -e luna-plugin
 
       - name: Locate libclang and export env
         run: |
@@ -96,29 +94,14 @@ jobs:
           print("OK: clang.cindex can load libclang")
           PY
 
-      - name: Verify macros module import
-        working-directory: luna/doc/guide
-        env:
-          PYTHONPATH: ${{ github.workspace }}/luna/doc:${{ github.workspace }}/luna/doc/guide
-        run: |
-          python3 - <<'PY'
-          import traceback
-          try:
-              import main
-              print(f"OK: imported {main.__file__}")
-          except Exception:
-              traceback.print_exc()
-              raise
-          PY
-
+      # Builds site/ through the root Makefile; the luna plugin is already
+      # installed, so no PYTHONPATH is needed to find it or the macros.
       - name: Build site (via Makefile)
-        working-directory: luna/doc/guide
-        env:
-          PYTHONPATH: ${{ github.workspace }}/luna/doc:${{ github.workspace }}/luna/doc/guide
-        run: make build
+        working-directory: luna.git
+        run: make
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: luna/doc/guide/html
+          publish_dir: luna.git/site/html
