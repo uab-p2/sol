@@ -23,6 +23,14 @@ div.main-logo img {
     height: auto;
 }
 
+/* Selected menu element */
+.md-tabs__item--active .md-tabs__link {
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid;
+    font-weight: bolder;
+    color: var(--md-default-bg-color);
+}
+
 .md-typeset .admonition .detail * {
     font-size: inherit;
 }
@@ -377,7 +385,7 @@ div.decrypt-box p {
 }
 
 /* Quest duration */
-div.duration::before {
+.duration::before {
     font-size: 120%;
     font-weight: bold;
     content: "⏱ ";
@@ -386,6 +394,10 @@ div.duration::before {
 div.duration {
     margin-left: auto;
     width: fit-content;
+}
+
+span.duration {
+    display: inline-block;
 }
 
 /* quest-global index under !!! questions */
