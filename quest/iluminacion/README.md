@@ -224,7 +224,7 @@ int main() {
 
 !!! questions
 
-    * Implementa la función {{ snippet_ref("receive_lights", include_declarations=True) }} 
+    * Implementa la función {{ snippet_signature("receive_lights", include_declarations=True) }} 
       en `light_jockey.h|cpp`. Esta función lee de teclado una secuencia de códigos indicando
       el color y estado on/off de las luces existentes y devuelve un array de objetos `LightPoint`
       con esos colores y estados.
@@ -266,6 +266,6 @@ A continuación puedes ver un ejemplo de salida si se implementa (y recibe) el c
 
 # Tags
 en_ruta:0
-day:1
-time:60
+session:1
+duration:60
 

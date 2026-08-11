@@ -64,7 +64,7 @@ siguientes partes:
           * La clase `Scene`:
                - Está implementada en `scene.h|cpp`
                - Contiene un sólo método público,  
-                 {{ snippet_ref("Scene::action", include_definitions=False, include_declarations=True) }}.
+                 {{ snippet_signature("Scene::action", include_definitions=False, include_declarations=True) }}.
                  Este método genera un número variable de líneas describiendo la acción,
                  entre las líneas que comienzan por `"Escena: "` y `"Personaje: "`.
 
@@ -127,5 +127,5 @@ siguientes partes:
 
 # Tags
 en_ruta:3
-day:3
-time:60
+session:3
+duration:60

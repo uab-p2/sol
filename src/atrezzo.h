@@ -1,7 +1,5 @@
-/**
- * Fake objects and characters for fiction scenes.
- * Instead of actual effects, messages are shown via std::cout.
- */
+/// Fake objects and characters for fiction scenes.
+/// Instead of actual effects, messages are shown via std::cout.
 #pragma once
 
 /// An access card for restricted doors.

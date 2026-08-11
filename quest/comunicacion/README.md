@@ -16,7 +16,7 @@ entre original y copia, entre permitido y prohibido.
 
 ## Documentos
 
-La clase {{ snippet_ref("Document") }} implementa un trozo de papel digital. 
+La clase {{ snippet_signature("Document") }} implementa un trozo de papel digital. 
 Incorpora un id que se establece en la creación, y un número de secuencia
 que se incrementa en las copias o al modificar un documento.
 
@@ -267,5 +267,5 @@ const Document document("content", "id666");
 
 # Tags
 en_ruta:4
-day:3
-time:60
+session:3
+duration:60

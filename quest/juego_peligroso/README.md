@@ -7,7 +7,7 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
 
 {{ goals(
     "Diseña, dibuja y nombra las entidades, datos e interacciones que describen el ahorcado.",
-    "Implementa funciones auxiliares, tests y por último<br/>{{ snippet_ref(\"play_hangman_game\") }}",
+    "Implementa funciones auxiliares, tests y por último<br/>{{ snippet_signature(\"play_hangman_game\") }}",
     "Analiza puntos fuertes y débiles de tu implementación."
 ) }}
 
@@ -77,7 +77,7 @@ Te proponemos el siguiente plan de acción:
         2. Crea una primera versión de esa función en `hangman.cpp`.
         3. Prueba esa función desde `test.cpp` hasta que funcione. No olvides el `#include "hangman.h"`.
  
-    4. Por último, añade la función {{ snippet_ref("play_hangman_game") }}
+    4. Por último, añade la función {{ snippet_signature("play_hangman_game") }}
         a `hangman.h|cpp` e impleméntala usando únicamente las otras funciones
         que has implementado. Invoca esta función desde el `main()` de `main.cpp`.
         Algo como lo siguiente podría ser suficiente:
@@ -107,5 +107,5 @@ Te proponemos el siguiente plan de acción:
 # Tags
 
 despegue:1
-day:0
-time:60
+session:0
+duration:60
