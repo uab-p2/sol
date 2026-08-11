@@ -31,12 +31,12 @@ Una vez creado un tanque, quien lo use sólo debe poder hacer dos cosas:
   aire en el tanque para la respiración completa. El aire se gasta al respirar,
   pero sólo si hay aire para la respiración completa.
 
-{{ snippet_box("Tank::breathe", include_definitions=False, include_declarations=True) }}
+{{ snippet_box("Tank::breathe", declaration=True) }}
 
 - Comprobar la presión del aire. Debe ser 1.0 cuando 
   el tanque esté lleno, y 0.0 cuando esté vacío.
 
-{{ snippet_box("Tank::get_pressure", include_definitions=False, include_declarations=True) }}
+{{ snippet_box("Tank::get_pressure", declaration=True) }}
 
 !!! questions
 
@@ -55,7 +55,7 @@ Los puntos de dispensación (`Dispenser`) permiten distribuir los tanques
 entre el personal del proyecto SOL. El aire (ilimitado) se recoge en botellas,
 indicando el nombre de la persona y del tipo de botella con:
 
-{{ snippet_box("Dispenser::dispense", include_definitions=False, include_declarations=True) }}
+{{ snippet_box("Dispenser::dispense", declaration=True) }}
 
 
 ### Contadores
