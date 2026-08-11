@@ -224,12 +224,12 @@ int main() {
 
 !!! questions
 
-    * Implementa la función {{ snippet_signature("receive_lights", include_declarations=True) }} 
+    * Implementa la función {{ snippet_signature("receive_lights", declaration=True) }} 
       en `light_jockey.h|cpp`. Esta función lee de teclado una secuencia de códigos indicando
       el color y estado on/off de las luces existentes y devuelve un array de objetos `LightPoint`
       con esos colores y estados.
 
-{{ snippet_box("receive_lights", include_declarations=True, default_open=True) }}
+{{ snippet_box("receive_lights", declaration=True, open=True) }}
 
 {{ codex_links("cin_cout", "std_string", "std_vector") }}
 
@@ -257,7 +257,7 @@ de puntos de luz.
         
         * Escribe una demo en `main.cpp` que muestre su funcionamiento.
 
-{{ snippet_box("control_lights", include_declarations=True, default_open=True) }}
+{{ snippet_box("control_lights", declaration=True, open=True) }}
 
 A continuación puedes ver un ejemplo de salida si se implementa (y recibe) el comando "ALLOFF": 
 

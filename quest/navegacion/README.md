@@ -63,7 +63,7 @@ int main() {
 
 `Star`, como todos los objetos, muestra una parte accesible para todas 
 las demás clases y oculta otra, accesible sólo para la propia clase `Star`.
-Te invitamos a jugar con {{ snippet_tag("main.cpp") }} para deducir las
+Te invitamos a jugar con `main.cpp` para deducir las
 reglas y sintaxis de este sistema llamado *encapsulamiento*.
 
 !!! questions

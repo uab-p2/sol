@@ -51,7 +51,7 @@ la lógica de sus afirmaciones.
     * ¿Qué herramientas tienes para encontrar y solucionar este error?
 
 
-{{ snippet_box("is_a_bird") }}
+{{ snippet_box("is_a_bird", open=False) }}
 
 ## Mr. Green
 
@@ -78,9 +78,9 @@ con 10 euros durante 60 meses.
     * ¿Se deja sobornar?
     * ¿Sabrías explicar qué está pasando?
 
-{{ snippet_box("is_passing_grade") }}
+{{ snippet_box("is_passing_grade", open=False) }}
 
-{{ snippet_box("propose_bribe") }}
+{{ snippet_box("propose_bribe", open=False) }}
 
 ## Mr. Blue
 
@@ -92,7 +92,7 @@ No sé si me fio de la lógica de Mr. Blue.
     * ¿Lo hace correctamente?
     * ¿Qué herramientas te pueden ayudar con este caso?
 
-{{ snippet_box("g") }}
+{{ snippet_box("g", open=False) }}
 
 ## Repelente
 

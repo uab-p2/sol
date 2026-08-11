@@ -64,7 +64,7 @@ siguientes partes:
           * La clase `Scene`:
                - Está implementada en `scene.h|cpp`
                - Contiene un sólo método público,  
-                 {{ snippet_signature("Scene::action", include_definitions=False, include_declarations=True) }}.
+                 {{ snippet_signature("Scene::action", declaration=True) }}.
                  Este método genera un número variable de líneas describiendo la acción,
                  entre las líneas que comienzan por `"Escena: "` y `"Personaje: "`.
 
@@ -94,7 +94,7 @@ siguientes partes:
      };
      ```
 
-{{ snippet_box("Scene::action", include_definitions=False, include_declarations=True, default_open=False) }}
+{{ snippet_box("Scene::action", declaration=True, open=False) }}
 
 {{ codex_links("class_constructor", "class_destructor", "class_encapsulation", "class_composition") }}
 
@@ -121,9 +121,9 @@ siguientes partes:
         de una escena se complete antes de empezar la siguiente. Discute 
         cómo lo has logrado.
 
-{{ snippet_box("atrezzo.h") }}
+{{ snippet_box("atrezzo.h", open=False) }}
 
-{{ snippet_box("atrezzo.cpp") }}
+{{ snippet_box("atrezzo.cpp", open=False) }}
 
 # Tags
 en_ruta:3
