@@ -131,5 +131,5 @@ int main() {
 
 # Tags
 en_ruta:2
-day:2
-time:60
+session:2
+duration:60

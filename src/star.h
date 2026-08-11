@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
 
-/**
- * Hot and spherical object in space.
- */
+///
+/// Hot and spherical object in space.
+///
 class Star {
 public:
     /// By default, create Earth's sun

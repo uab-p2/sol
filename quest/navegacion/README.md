@@ -120,5 +120,5 @@ funcionalidad adicional y una demo que la muestre.
 
 # Tags
 en_ruta:1
-day:2
-time:60
+session:2
+duration:60

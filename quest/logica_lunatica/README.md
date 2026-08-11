@@ -116,5 +116,5 @@ Pensemos en qué repele y qué favorece su aparición.
 # Tags
 
 despegue:2
-day:1
-time:60
+session:1
+duration:60
