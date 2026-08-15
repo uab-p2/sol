@@ -47,7 +47,6 @@ siguientes partes:
      * Estudia el siguiente ejemplo mínimo de guión.
 
 :::compile_and_run solution
-{{ img("roadrunner.webp") }}
 :::
 
 ## Doblaje
@@ -128,4 +127,3 @@ siguientes partes:
 # Tags
 en_ruta:3
 session:3
-duration:60

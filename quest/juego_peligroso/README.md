@@ -6,9 +6,9 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
 {{ img_badge("hangman.png") }}
 
 {{ goals(
-    "Diseña, dibuja y nombra las entidades, datos e interacciones que describen el ahorcado.",
-    "Implementa funciones auxiliares, tests y por último<br/>{{ snippet_signature(\"play_hangman_game\") }}",
-    "Analiza puntos fuertes y débiles de tu implementación."
+    "Comienza a diseñar entidades, relaciones e interacciones usando diagramas.",
+    "Implementa funciones auxiliares, tests y puntos de entrada.",
+    "Repasa el uso básico de entrada y salida por teclado y pantalla."
 ) }}
 
 ## Dibujo al natural
@@ -88,7 +88,8 @@ Te proponemos el siguiente plan de acción:
 {{ codex_links(
     "open_quest", 
     "add_file_quest", 
-    "run_quest", 
+    "run_quest",
+    "std_string",
     "cin_cout", 
     "documentation",
 ) }}
@@ -108,4 +109,3 @@ Te proponemos el siguiente plan de acción:
 
 despegue:1
 session:0
-duration:60

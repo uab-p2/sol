@@ -9,9 +9,9 @@ entre original y copia, entre permitido y prohibido.
 {{ img_badge("tablet.png") }}
 
 {{ goals(
-    "Parámetros por valor y por referencia.",
-    "Objetos, parámetros y métodos const.",
-    "Definición y uso de constructores copia.",
+    "Distingue entre parámetros/retorno por valor/referencia.",
+    "Diseña objetos, parámetros y métodos const.",
+    "Estudia y utiliza constructores copia proporcionados.",
 ) }}
 
 ## Documentos
@@ -200,7 +200,7 @@ int main() {
   el estado de la máquina `Multi` y simplemente devuelve la probabilidad
   de un caracter `c` específico. Esta probabilidad se calcula como el número
   total de apariciones de `c` dividido entre el número total de caracteres inspeccionados,
-  \( P(c) = \frac{N_\text{c}}{N_\text{total}}\).
+  \( P(c) = N_\text{c} / N_\text{total} \).
 
 :::compile_and_run title="Uso de `get_char_probability`"
 #include <iostream>
@@ -268,4 +268,3 @@ const Document document("content", "id666");
 # Tags
 en_ruta:4
 session:3
-duration:60
