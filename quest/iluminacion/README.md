@@ -9,7 +9,8 @@ con la potencia de este paradigma.
 
 {{ goals(
     "Descubre las ventajas de la programación orientada a objetos.",
-    "Implementa un sistema de control de luces utilizando clases ya creadas."
+    "Utiliza clases creadas de antemano.",
+    "Crea y utiliza las listas de longitud libre de `std::vector`.",
 ) }}
 
 ## Puntos de luz
@@ -136,7 +137,7 @@ Estudia el código anterior y extrapola:
         ¿qué ficheros necesitaríamos cambiar? ¿Pasa algo si ha hemos distribuido
         el código y lo están usando otras personas?
 
-{{ codex_links("class_syntax") }}
+{{ codex_links("class_why", "class_syntax") }}
 
 ### Tiras LED
 
@@ -267,5 +268,4 @@ A continuación puedes ver un ejemplo de salida si se implementa (y recibe) el c
 # Tags
 en_ruta:0
 session:1
-duration:60
 

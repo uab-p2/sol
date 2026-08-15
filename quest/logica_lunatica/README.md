@@ -8,7 +8,7 @@ un caso monstruoso de lógica lunática. No te asustes, son sólo bugs.
 
 {{ goals(
     "Descubre técnicas de debugging pasivas y activas.",
-    "Ponte con tres casos prácticos.",
+    "Practica con tres casos prácticos.",
     "Discute sobre hábitos que producen o evitan bugs.",
 ) }}
 
@@ -117,4 +117,3 @@ Pensemos en qué repele y qué favorece su aparición.
 
 despegue:2
 session:1
-duration:60

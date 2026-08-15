@@ -8,12 +8,15 @@ Te retamos a hacer un diseño a prueba de fallos.
 {{ img_badge("oxygen.png") }}
 
 {{ goals(
-    "Implementa las clases `Tank` y `Dispenser` ofreciendo un acceso controlado.",
-    "Produce una demo que muestre el funcionamiento de ambas clases.",
-    "Discute el funcionamiento de std::map y de los destructores."
+    "Diseña clases ofreciendo un interfaz público controlado y deliberado.",
+    "Aprende sobre los constructores e implementa uno sencillo.",
+    "Descubre y utiliza los diccionarios ofrecidos por `std::map`.",
 ) }}
 
 ## Tanques
+
+La clase `Tank` implementa los tanques de aire a utilizar. 
+Considera los siguientes requisitos:
 
 ### Creación
 Los tanques pueden ser de varios tipos. Sólo se pueden crear de los siguientes dos modos:
@@ -50,9 +53,11 @@ Una vez creado un tanque, quien lo use sólo debe poder hacer dos cosas:
 
 ## Puntos de dispensación
 
+Los puntos de dispensación (`Dispenser`) permiten distribuir los tanques
+entre el personal del proyecto SOL. Considera sus requisitos:
+
 ### Dispensación
-Los puntos de dispensación (`Dispenser`) permiten distribuir los tanques 
-entre el personal del proyecto SOL. El aire (ilimitado) se recoge en botellas,
+El aire (ilimitado) se recoge en botellas,
 indicando el nombre de la persona y del tipo de botella con:
 
 {{ snippet_box("Dispenser::dispense", declaration=True) }}
@@ -132,4 +137,3 @@ int main() {
 # Tags
 en_ruta:2
 session:2
-duration:60

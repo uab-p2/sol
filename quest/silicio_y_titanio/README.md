@@ -8,7 +8,8 @@ compilar el código tu primer quest del proyecto SOL.
 {{ img_badge("silicon.png") }}
 
 {{ goals(
-    "Configura tu entorno de desarrollo y compila el código del quest",
+    "Configura tu entorno de desarrollo.",
+    "Compila tu primer quest.",
 ) }}
 
 ## Plataforma de desarrollo
@@ -51,4 +52,3 @@ compilar el código tu primer quest del proyecto SOL.
 
 despegue:0
 session:0
-duration:30
