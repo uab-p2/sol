@@ -39,7 +39,7 @@ siguientes partes:
    antes de la siguiente escena. Esta línea empieza por `"Escena: "`.
  
 5. Salida de personajes.<br/>
-   Para cada personas de la escena, se muestra 
+   Para cada personaje de la escena, se muestra 
    una única línea describiéndolo. Cada línea empieza por `"Personaje: "`.
 
 !!! questions
@@ -62,7 +62,7 @@ siguientes partes:
           
           * La clase `Scene`:
                - Está implementada en `scene.h|cpp`
-               - Contiene un sólo método público,  
+               - Contiene un solo método público,  
                  {{ snippet_signature("Scene::action", declaration=True) }}.
                  Este método genera un número variable de líneas describiendo la acción,
                  entre las líneas que comienzan por `"Escena: "` y `"Personaje: "`.
@@ -74,7 +74,7 @@ siguientes partes:
           * Todas las clases deben tener un *constructor por defecto*.
 
       * ¿Influye el orden de definición de los atributos en el orden de ejecución
-        a los constructores y destructores?
+        de los constructores y destructores?
 
       * ¿Influye el orden de inicialización directa
         en el orden de ejecución de los constructores y destructores?
@@ -112,7 +112,7 @@ siguientes partes:
             - 2 clases nuevas que implementes `two_scenes.h|cpp`,
               junto a `SceneBegin` y `SceneEnd`.
 
-         * Las clases que creen tienen estado, e interactuan con objetos
+         * Las clases creadas tienen estado, e interactúan con objetos
            y personajes para cambiar su estado. La salida que producen
            tus clases debe depender de su estado.
 
