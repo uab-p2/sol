@@ -28,7 +28,7 @@ Estudia el código de la clase `Star` y un ejemplo de su uso.
 
 !!! questions
  
-      * ¿Qué código crea una clase y qué codigo un objeto?
+      * ¿Qué código crea una clase y qué código un objeto?
       * ¿En qué se parecen/diferencian los "métodos" que se llaman igual que la clase
         (se llaman *constructores*) y el resto de métodos?
       * Explica la salida del siguiente código y comprueba con tu IDE 
@@ -70,7 +70,7 @@ reglas y sintaxis de este sistema llamado *encapsulamiento*.
 
       * ¿Es posible crear una estrella de cualquier tipo?
       * Una vez creada una estrella, ¿es posible renombrar una estrella a "SOL"?
-      * ¿Se puede cambiar su `wavelength a 150 nm? ¿Y a 145 nm?
+      * ¿Se puede cambiar su `wavelength` a 150 nm? ¿Y a 145 nm?
       * ¿Qué significado crees que tiene el prefijo `m_`?
       * Dibuja un diagrama de clase para `Star` como el mostrado 
         en {{ quest_link("iluminacion") }} para `LightPoint`

@@ -9,18 +9,18 @@ que puedan usar. ¿Nos echas un cable?
 {{ img_badge("cloning.png") }}
 
 {{ goals(
-    "Implementación de constructores copia.",
-    "Implementación de operadores asignación.",
-    "Interacciones entre composición y constructores.",
-    "Copia de `std::vector`."
+    "Implementa constructores copia.",
+    "Implementa operadores asignación.",
+    "Practica las interacciones entre composición y constructores.",
+    "Utiliza copias y referencias de instancias `std::vector`."
 ) }}
 
 ## Androides autoclonables
 
 ### Diseño inicial
 
-Ya habíamos avanzado con el diseño del androide que queremos crear.
-Sabemos que queremos una clase `Android` con el siguiente interfaz público
+El diseño del androide que queremos crear está únicamente comenzado.
+Sabemos que queremos una clase `Android` con la siguiente interfaz pública
 y funcionalidad:
 
 ```mermaid
@@ -143,13 +143,11 @@ int main() {
 
 Para la estación SOL, el verdadero valor de estos androides reside en poder
 hacer múltiples copias a la vez, en lugar de hacerlas de una en una.
-Veamos cómo. 
 
 ### Vectorización 
 
-Un candidato claro para la multiclonación es utilizar `std::vector<Android>`,
-pero necesitamos entender cómo interactúa con la clonación.
-Considera el siguiente ejemplo:
+Una herramienta útil para representar "lotes" de androides es `std::vector<Android>`.
+Considera cómo interactúa con la copia de objetos:
 
 :::compile_and_run title="Ejemplo `std::vector<Android>::push_back`"
 #include <iostream>
@@ -188,17 +186,21 @@ int main() {
 
 ### Clonación por lotes
 
+La estación SOL agradecerá tener una variedad de opciones para clonar
+androides. Utilizando lo anterior, te proponemos crear una clase `BatchCloner`
+que permita clonar o generar lotes de androides. 
+
+Tú decides la funcionalidad e interfaz pública concretos que quieres ofrecerles.
+
 !!! questions
 
-    * Diseña el interfaz de una clase `BatchCloner` en `batch.h`
-      que permita multiplicar el número de androides. Tú decides el nombre
-      y la funcionalidad del interfaz expuesto.
+    * Diseña y documenta la interfaz de una clase `BatchCloner` en `batch_cloner.h`
+      que permita multiplicar rápidamente el número de androides usando vectores.  
 
-    * Implementa los métodos de tu clase en `batch.cpp`, y crea una demo 
+    * Implementa los métodos de tu clase en `batch_cloner.cpp`, y crea una demo 
       en `main.cpp` que muestre su funcionamiento.
 
-    * Documenta los métodos publicos explicando los números de generación
-      de los androides involucrados.
+    * Compara tu solución con otras. ¿Qué es común a todas ellas?
 
 # Tags
 en_ruta:5

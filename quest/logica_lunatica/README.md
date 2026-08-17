@@ -84,7 +84,7 @@ con 10 euros durante 60 meses.
 
 ## Mr. Blue
 
-No sé si me fio de la lógica de Mr. Blue. 
+No sé si me fío de la lógica de Mr. Blue. 
 
 !!! questions
 
@@ -108,7 +108,7 @@ Pensemos en qué repele y qué favorece su aparición.
     * ¿Alguno de los tres bichos te ha parecido más difícil de cazar?
     ¿Qué aspectos del código te han facilitado/dificultado la tarea de desinfección?
 
-    * Existen herramientas de *análisis estático* de codigo que pueden ayudar a 
+    * Existen herramientas de *análisis estático* de código que pueden ayudar a 
     detectar errores lógicos antes de ejecutar el programa. 
     Una de ellas son los *compiladores*. ¿Te había avisado tu compilador
     de alguno de los bugs de estos oponentes?

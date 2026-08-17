@@ -70,11 +70,11 @@ tus respuestas en `test.cpp`.
 ## Máquina multifunción
 
 El material, la forma y hasta el contenido pueden ser iguales en un libro y un cuaderno.
-Una diferencia estriba en que podemos hacer con el objeto: sólo uno de los dos nos
+Una diferencia estriba en qué podemos hacer con el objeto: sólo uno de los dos nos
 invita a modificarlo. Profundicemos en esta diferencia mientras trabajamos en 
 la máquina multifunción que nos han pedido.
 
-Necesitamos producir una clase `Multi` en `multi.h|cpp` con el siguiente interfaz
+Necesitamos producir una clase `Multi` en `multi.h|cpp` con la siguiente interfaz
 pública (no es código C++).
 
 ```mermaid
@@ -142,10 +142,10 @@ int main() {
          Este es el criterio usado para decidir si se lamina o ya había sido
          laminado.
 
-      3. El número de secuencia del documento se incrementado en 1 al laminar.
+      3. El número de secuencia del documento se incrementa en 1 al laminar.
 
       4. Al terminar la laminación, `laminate` devuelve el documento original
-         (no una copia!) tras el laminado. El método `laminate` debe señalizar
+         (¡no una copia!) tras el laminado. El método `laminate` debe señalizar
          que este documento laminado retornado no se ha de modificar.
 
 :::compile_and_run indent=2 title="Uso de `laminate`"
@@ -170,7 +170,7 @@ int main() {
 !!! questions
 
     * En los métodos `inspect`, `duplicate` y `laminate`, 
-      ¿qué parametros son copias y qué parámetros son "originales" (referencias)?
+      ¿qué parámetros son copias y qué parámetros son "originales" (referencias)?
       ¿cuáles son inmutables?
       ¿y los retornos?
 
@@ -191,14 +191,14 @@ int main() {
 
 * El método `inspect` no modifica ni copia el documento original, y no devuelve nada.
   Esta función sí lee el contenido del documento 
-  y lleva la cuenta de cuántas veces aparece cada caracter (`char`) 
+  y lleva la cuenta de cuántas veces aparece cada carácter (`char`) 
   en el contenido (`std::string`) de todos los documentos
   que se han inspeccionado hasta el momento.
   Recomendamos usar `std::map`.
 
 * El método `get_char_probability` es la única que no modifica 
   el estado de la máquina `Multi` y simplemente devuelve la probabilidad
-  de un caracter `c` específico. Esta probabilidad se calcula como el número
+  de un carácter `c` específico. Esta probabilidad se calcula como el número
   total de apariciones de `c` dividido entre el número total de caracteres inspeccionados,
   \( P(c) = N_\text{c} / N_\text{total} \).
 

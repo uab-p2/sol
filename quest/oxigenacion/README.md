@@ -1,14 +1,14 @@
 # Oxigenación
 
 Las escuadrillas de reparación necesitarán un suministro fiable de oxígeno
-cuando lleguen a la estación SOL. Nos han pedida ayuda para 
+cuando lleguen a la estación SOL. Nos han pedido ayuda para 
 diseñar los tanques de aire comprimido y los puntos de dispensación.
 Te retamos a hacer un diseño a prueba de fallos. 
 
 {{ img_badge("oxygen.png") }}
 
 {{ goals(
-    "Diseña clases ofreciendo un interfaz público controlado y deliberado.",
+    "Diseña clases ofreciendo una interfaz pública controlada y deliberada.",
     "Aprende sobre los constructores e implementa uno sencillo.",
     "Descubre y utiliza los diccionarios ofrecidos por `std::map`.",
 ) }}
@@ -46,7 +46,7 @@ Una vez creado un tanque, quien lo use sólo debe poder hacer dos cosas:
     * Implementa la clase `Tank` en `tank.h|cpp` considerando los requisitos anteriores,
       e incluye código de prueba.
 
-    * Qué tipo de protección ofreces para evitar que se manipule la cantidad de aire sin permiso:
+    * ¿Qué tipo de protección ofreces para evitar que se manipule la cantidad de aire sin permiso:
       ¿en tiempo de compilación, o en tiempo de ejecución? ¿Cuál es la diferencia?
 
 {{ codex_links("class_constructor", "class_encapsulation") }}

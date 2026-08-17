@@ -57,7 +57,7 @@ Sin programación orientada a objetos:
           * ¿Cómo lo modelarías?
           * ¿En cuántos sitios necesitamos cambiar nuestro código si tenemos 2 puntos de luz?
           * ¿Y si tenemos 10?
-    * ¿Es posible confundir el `turn_on` the una lámpara con el de una lavadora?
+    * ¿Es posible confundir el `turn_on` de una lámpara con el de una lavadora?
     * ¿Cómo podríamos hacer que todas las luces comiencen encendidas?
      Nos gustaría evitar algo como lo siguiente:
 
@@ -134,7 +134,7 @@ Estudia el código anterior y extrapola:
      * ¿Cómo se invocan los métodos de un objeto?
      * ¿Qué variables usan los métodos de un objeto?
      * Si quisiéramos contar cuántas veces se enciende y se apaga cada luz,
-        ¿qué ficheros necesitaríamos cambiar? ¿Pasa algo si ha hemos distribuido
+        ¿qué ficheros necesitaríamos cambiar? ¿Pasa algo si ya hemos distribuido
         el código y lo están usando otras personas?
 
 {{ codex_links("class_why", "class_syntax") }}
@@ -171,7 +171,7 @@ classDiagram
 
        - Método `size()`: número de caracteres en la cadena.
 
-       - Corchetes `[i]`: permiten acceder directamente al i-ésimo caracter de la cadena. 
+       - Corchetes `[i]`: permiten acceder directamente al i-ésimo carácter de la cadena. 
 
        - Método `substr(int pos, int len)`: subcadena de `len` caracteres empezando en `pos`.
 
