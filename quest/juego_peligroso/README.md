@@ -63,7 +63,7 @@ Te proponemos el siguiente plan de acción:
     1. Abre `quest/juego_peligroso` y comprueba que compila sin problema.
  
     2. Crea el fichero `hangman.h` en la raíz del quest.
-       Antes implementar nada:
+       Antes de implementar nada:
  
         - Añade en `hangman.h` las *declaraciones* de *funciones* y *structs* 
           usando las palabras de la sección anterior.
@@ -98,11 +98,11 @@ Te proponemos el siguiente plan de acción:
 
 !!! questions
 
-    * Si publicas `hangman.h` y `hangman.cpp` para que puedan jugar otra persona,
-      ¿cuántas funciones y structs necesita aprender a usar esa persona?
+    * Si publicas `hangman.h` y `hangman.cpp` para que puedan jugar otras personas,
+      ¿cuántas funciones y structs necesitan aprender a usar esas personas?
   
-    * Si queremos elegir la palabra secreta de manera automática.
-      ¿De cuántas maneras podríamos hacerlo? ¿Entre cuántas palabras podríamos
+    * Si queremos elegir la palabra secreta de manera automática,
+      ¿de cuántas maneras podríamos hacerlo? ¿Entre cuántas palabras podríamos
       elegir como mucho?
 
 # Tags

@@ -110,7 +110,7 @@ classDiagram
   en el método `double diameter() const`.
   Esto nos ayuda a diseñar naves con alcance adaptado a los catálogos.
 
-Ejemplo de uso y salida esperada la clase pedida. Te invitamos a crear 
+Ejemplo de uso y salida esperada de la clase pedida. Te invitamos a crear 
 funcionalidad adicional y una demo que la muestre.
    
 :::compile_and_run solution

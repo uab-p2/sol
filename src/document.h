@@ -28,7 +28,7 @@ public:
     unsigned get_sequence_number() const;
 
     /// Copy the original document into this one, keeping the sequence
-    /// number next to the original's.
+    /// number one greater than the original's.
     Document& operator=(const Document& original);
 
 protected:

@@ -17,7 +17,7 @@ nuevo sistema de simulación que funcione con cualquier tipo de nave.
 
 La clase `Ship` implementada en `src/ship.h|cpp` describe la "esencia" 
 del concepto nave: aquellos atributos y funcionalidades comunes a todos los tipos
-de nave posible.
+de nave posibles.
 
 {{ snippet_box("ship.h", open=False) }}
 
@@ -69,7 +69,7 @@ usando la siguiente cabecera (puede extenderse con atributos y métodos adiciona
 
         1. Creación:
 
-               - Los transportes se crean con `100` unidades de bateria (`battery`)
+               - Los transportes se crean con `100` unidades de batería (`battery`)
                - Los transportes comienzan en \( \bar{v}_0 = (0,0,0) \) por defecto, 
                  aunque se puede especificar la posición inicial durante la creación.
                - Si se indica un número de personas a bordo
@@ -109,7 +109,7 @@ crea también un transporte ligero `LightTransport` como especialización de `Tr
         1. El número máximo de personas a bordo de un `LightTransport` 
            está limitado a 100 (el mínimo sigue siendo 10).
 
-        2. El coste de movimiento por persona por unidad de movimiento es 1/1000.
+        2. El coste de movimiento por persona por unidad de movimiento es 1/1000,
            en lugar de 1/250.
 
 :::compile_and_run title="Ejemplo `Transport` y `LightTransport`" open=false
@@ -181,7 +181,7 @@ Una vez perfilado el comportamiento de `Station`, podemos pasar a la implementac
     * Implementa en `station.cpp` las funciones declaradas en `station.h`.
 
     * En `main.cpp`, implementa una demo que simule alguna operación
-      utilizando todo el interfaz público de `Station`. 
+      utilizando toda la interfaz pública de `Station`. 
 
 :::compile_and_run solution title="Una demo trivial e incompleta" open=false
 :::

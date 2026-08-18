@@ -30,7 +30,7 @@ Los tanques pueden ser de varios tipos. Sólo se pueden crear de los siguientes 
 ### Uso
 Una vez creado un tanque, quien lo use sólo debe poder hacer dos cosas:
 
-- Respirar. El retorno será `true` sólo si había suficiente
+- Respirar. El retorno será `true` sólo si hay suficiente
   aire en el tanque para la respiración completa. El aire se gasta al respirar,
   pero sólo si hay aire para la respiración completa.
 

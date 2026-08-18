@@ -1,7 +1,7 @@
 # Distracción
 
 Naves y estaciones remotas como SOL cuentan con sistemas para generar 
-contenido audiovisual a partir de guiones. La tripulación os ha rogado
+contenido audiovisual a partir de guiones. La tripulación ha rogado a tu equipo
 que creéis un sistema para producir guiones a partir de objetos que
 representan personajes y atrezzo. Te retamos a componer escenas a partir
 de estos elementos.
@@ -109,7 +109,7 @@ siguientes partes:
 
          * La implementación de tu ficción usa al menos:
             - 2 clases ya implementadas en `src/atrezzo.h` y `src/atrezzo.cpp`
-            - 2 clases nuevas que implementes `two_scenes.h|cpp`,
+            - 2 clases nuevas que implementes en `two_scenes.h|cpp`,
               junto a `SceneBegin` y `SceneEnd`.
 
          * Las clases creadas tienen estado, e interactúan con objetos

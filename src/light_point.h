@@ -30,7 +30,7 @@ public:
     void set_intensity(float intensity);
 
 protected:
-    /// True of the light is on
+    /// True if the light is on
     bool m_on;
     /// Emission color
     std::string m_color;
