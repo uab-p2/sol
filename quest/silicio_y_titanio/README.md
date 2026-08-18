@@ -3,7 +3,7 @@
 Tu primera misión es configurar un buen entorno de desarrollo
 que te sirva para todo el proyecto. Te proponemos una 
 *prueba de humo* para tu nuevo sistema:
-compilar el código tu primer quest del proyecto SOL.
+compilar el código de tu primer quest del proyecto SOL.
 
 {{ img_badge("silicon.png") }}
 

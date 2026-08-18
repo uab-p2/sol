@@ -196,7 +196,7 @@ int main() {
   que se han inspeccionado hasta el momento.
   Recomendamos usar `std::map`.
 
-* El método `get_char_probability` es la única que no modifica 
+* El método `get_char_probability` es el único que no modifica 
   el estado de la máquina `Multi` y simplemente devuelve la probabilidad
   de un carácter `c` específico. Esta probabilidad se calcula como el número
   total de apariciones de `c` dividido entre el número total de caracteres inspeccionados,

@@ -18,7 +18,7 @@ public:
     /// Create a custom star given its type
     /// @param name star name
     /// @param x,y,z position relative to Earth's sun.
-    /// @param type one of the possible valid type (see set_type)
+    /// @param type one of the possible valid types (see set_type)
     Star(const std::string& name, double x, double y, double z,
          const std::string& type);
 
@@ -37,7 +37,7 @@ public:
     /// @return the current star name
     std::string get_name() const { return m_name; }
     /// @param name new star name. If it is shorter than a minimum,
-    /// "0" is appended untill it isn't.
+    /// "0" is appended until it isn't.
     void set_name(const std::string& name);
 
     /// @param x,y,z variables where the current star's position is saved.

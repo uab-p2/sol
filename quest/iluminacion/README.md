@@ -100,8 +100,8 @@ La *cabecera* de la clase describe qué atributos (datos) y métodos (funciones)
 y quién puede usarlos:
 {{ snippet_box("LightPoint") }}
 
-La *implementación* de los métodos de la clase se incluyen en el `.cpp` correspondiente.
-Estos métodos tienen acceso a los atributos de su clase
+La *implementación* de los métodos de la clase se incluye en el `.cpp` correspondiente.
+Estos métodos tienen acceso a los atributos de su clase.
 {{ snippet_box("light_point.cpp") }}
 
 Considera el siguiente ejemplo de *uso* de la clase `LightPoint`:
@@ -245,12 +245,12 @@ de puntos de luz.
     * Implementa el método `control_lights` en `light_jockey.h|cpp`:
     
         * El método `control_lights` comienza recibiendo por teclado una secuencia con el mismo formato 
-          y significado que la esperada por `receive_lights` de la sección anterior.
+          y significado que el esperado por `receive_lights` de la sección anterior.
           No debe haber límite para la cantidad de luces.
         
         * Tras recibir la secuencia de luces anterior, el método `control_lights` recibe
           palabras/comandos adicionales por teclado. Tú decides qué palabras/comandos 
-          reconocerá el sistema y significado. Algunas ideas:
+          reconocerá el sistema, y su significado. Algunas ideas:
           
             * "ALLON"/"REDOFF":  encender/apagar todas las luces, o sólo algunas.
             * "ADDRED"/"ADDBLUE"/...: añadir nuevas luces a la secuencia.
