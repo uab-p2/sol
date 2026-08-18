@@ -9,8 +9,7 @@ que puedan usar. ¿Nos echas un cable?
 {{ img_badge("cloning.png") }}
 
 {{ goals(
-    "Implementa constructores copia.",
-    "Implementa operadores asignación.",
+    "Implementa y distingue constructores, constructores copia y operadores asignación.",
     "Practica las interacciones entre composición y constructores.",
     "Utiliza copias y referencias de instancias `std::vector`."
 ) }}
