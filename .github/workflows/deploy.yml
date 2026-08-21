@@ -25,8 +25,8 @@ jobs:
           repository: uab-p2/sol
           path: sol.git
 
-      # Checked out next to sol.git: the luna plugin locates the SOL project
-      # in <luna_root>/../sol.git unless its `sol_dir` option says otherwise.
+      # Checked out next to sol.git so the "Link SOL project" step below can
+      # symlink it in with a plain relative path.
       - name: Checkout LUNA project
         uses: actions/checkout@v4
         with:
@@ -93,6 +93,14 @@ jobs:
               raise
           print("OK: clang.cindex can load libclang")
           PY
+
+      # sol.git and luna.git are checked out as siblings above, but the luna
+      # plugin only finds the SOL project through the sol/quest/src symlinks
+      # that `luna link` creates in the LUNA project dir - it doesn't fall
+      # back to a sibling sol.git checkout on its own.
+      - name: Link SOL project
+        working-directory: luna.git
+        run: luna link ../sol.git
 
       # Builds site/ through the root Makefile; the luna plugin is already
       # installed, so no PYTHONPATH is needed to find it or the macros.
