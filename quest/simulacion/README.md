@@ -44,7 +44,7 @@ int main() {
 }
 :::
 
-{{ codex_links("class_constructor", "class_encapsulation") }}
+{{ codex_links("class_constructor_destructor", "class_encapsulation") }}
 
 ## Especialización
 

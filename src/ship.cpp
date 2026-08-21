@@ -8,6 +8,10 @@ Ship::~Ship() {
 Ship::Ship(double battery_charge,
            double x, double y, double z)
     : m_x(x), m_y(y), m_z(z), m_battery(battery_charge) {
+    // Executed *after* direct initialization
+    if (m_battery < 0) {
+        m_battery = 0;
+    }
 }
 
 void Ship::get_position(double& x, double& y, double& z) const {

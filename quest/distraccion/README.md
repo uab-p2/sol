@@ -53,9 +53,11 @@ siguientes partes:
 
 !!! questions
 
-      * Reproduce el guión anterior
-        mediante un código que lo genere. Es importante que el código
-        cumpla las especificaciones siguientes.
+      * Reproduce el guión anterior usando {{ def("composición") }}, 
+        {{ def("constructor", text="constructores") }}
+        y {{ def("destructor", text="destructores") }}
+        para gestionar el {{ def("ciclo de vida") }} de las variables.
+        Es importante que el código cumpla las especificaciones siguientes.
 
           * Todos los mensajes `"Escena: "` y `"Personaje :"` se generan únicamente
             en los constructores/destructores de las clases.
@@ -95,7 +97,7 @@ siguientes partes:
 
 {{ snippet_box("Scene::action", declaration=True, open=False) }}
 
-{{ codex_links("class_constructor", "class_destructor", "class_encapsulation", "class_composition") }}
+{{ codex_links("class_constructor_destructor", "class_encapsulation", "class_composition") }}
 
 ## Piloto
 

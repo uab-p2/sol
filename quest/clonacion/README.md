@@ -69,7 +69,7 @@ int main(void) {
     * Implementa este diseño básico en `android.h` y `android.cpp`
       y verifica su funcionamiento localmente.
 
-{{ codex_links("class_constructor") }}
+{{ codex_links("class_constructor_destructor") }}
 
 ### Clonación
 
@@ -136,7 +136,7 @@ int main() {
       requisitos anteriores.
 
 
-{{ codex_links("class_destructor", "class_copy_constructor", "class_assignment") }}
+{{ codex_links("class_constructor_destructor", "class_copy_constructor", "class_assignment") }}
 
 ## Multiclonación
 

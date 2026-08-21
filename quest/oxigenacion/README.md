@@ -16,7 +16,9 @@ Te retamos a hacer un diseño a prueba de fallos.
 ## Tanques
 
 La clase `Tank` implementa los tanques de aire a utilizar. 
-Considera los siguientes requisitos:
+Considera los siguientes requisitos sobre sus
+{{ def("constructor", text="constructores") }} y su 
+{{ def("encapsulamiento") }}:
 
 ### Creación
 Los tanques pueden ser de varios tipos. Sólo se pueden crear de los siguientes dos modos:
@@ -44,12 +46,12 @@ Una vez creado un tanque, quien lo use sólo debe poder hacer dos cosas:
 !!! questions
 
     * Implementa la clase `Tank` en `tank.h|cpp` considerando los requisitos anteriores,
-      e incluye código de prueba.
+      e incluye código de prueba en el `test.cpp` del quest.
 
     * ¿Qué tipo de protección ofreces para evitar que se manipule la cantidad de aire sin permiso:
       ¿en tiempo de compilación, o en tiempo de ejecución? ¿Cuál es la diferencia?
 
-{{ codex_links("class_constructor", "class_encapsulation") }}
+{{ codex_links("class_constructor_destructor", "class_encapsulation") }}
 
 ## Puntos de dispensación
 
@@ -66,7 +68,8 @@ indicando el nombre de la persona y del tipo de botella con:
 ### Contadores
 
 Queremos saber cuántas botellas se ha llevado cada persona.
-Te proponemos implementarlo con un mapa (diccionario) de string a unsigned int,
+Te proponemos implementarlo con un
+{{ def("map", text="mapa (diccionario)") }} de string a unsigned int,
 `std::map<std::string, unsigned int>` (aunque no es la única manera).
 
 :::compile_and_run open=false
@@ -124,7 +127,7 @@ int main() {
 !!! questions
 
     * Implementa la clase `Dispenser` en `dispenser.h|cpp` cumpliendo con los requisitos anteriores,
-      incluyendo código de prueba.
+      incluyendo código de prueba en `test.cpp`.
     * Implementa una demo en `main.cpp` que muestre el funcionamiento de `Tank` y `Dispenser`. 
     * ¿Es posible controlar exactamente cuándo se ejecuta el destructor de una clase?
     * ¿Cuántas veces se ejecuta el destructor de `Tank`? ¿Coincide con lo que esperas?
@@ -132,7 +135,7 @@ int main() {
 :::compile_and_run solution
 :::
 
-{{ codex_links("std_map", "class_destructor") }}
+{{ codex_links("std_map", "class_constructor_destructor") }}
 
 # Tags
 en_ruta:2
