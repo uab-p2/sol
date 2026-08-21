@@ -2,7 +2,9 @@
 
 El sistema de navegación de la estación SOL usa la versión moderna
 de uno de los métodos más antiguos: las estrellas. Te invitamos a
-estudiar primero la clase `Star` para profundizar en cómo se crean los objetos,
+estudiar primero la 
+clase `Star` para profundizar en cómo se crean los 
+objetos,
 y qué partes quedan accesibles u ocultas. Después, te proponemos
 implementar un elemento clave del sistema de navegación de la estación.
 
@@ -33,7 +35,8 @@ Estudia el código de la clase `Star` y un ejemplo de su uso.
         (se llaman *constructores*) y el resto de métodos?
       * Explica la salida del siguiente código y comprueba con tu IDE 
         si es posible obtener algo igual de bizarro con la clase `Star`.
-      * Propón ventajas e inconvenientes del uso de constructores.
+      * Propón ventajas e inconvenientes del uso de 
+        {{ def("constructor", text="constructores") }}.
 
 :::compile_and_run
 #include <iostream>
@@ -57,14 +60,14 @@ int main() {
 }
 ::: 
 
-{{ codex_links("class_syntax", "class_constructor") }}
+{{ codex_links("class_what", "class_constructor_destructor") }}
 
 ### Inalcanzables
 
 `Star`, como todos los objetos, muestra una parte accesible para todas 
 las demás clases y oculta otra, accesible sólo para la propia clase `Star`.
 Te invitamos a jugar con `main.cpp` para deducir las
-reglas y sintaxis de este sistema llamado *encapsulamiento*.
+reglas y sintaxis de este sistema llamado {{ def("encapsulamiento") }}.
 
 !!! questions
 
@@ -72,8 +75,7 @@ reglas y sintaxis de este sistema llamado *encapsulamiento*.
       * Una vez creada una estrella, ¿es posible renombrar una estrella a "SOL"?
       * ¿Se puede cambiar su `wavelength` a 150 nm? ¿Y a 145 nm?
       * ¿Qué significado crees que tiene el prefijo `m_`?
-      * Dibuja un diagrama de clase para `Star` como el mostrado 
-        en {{ quest_link("iluminacion") }} para `LightPoint`
+      * Dibuja un {{ def("diagrama de clase") }} para `Star`.
       * Discute ventajas e inconvenientes de usar encapsulamiento.
 
 {{ codex_links("class_encapsulation") }}
@@ -82,10 +84,6 @@ reglas y sintaxis de este sistema llamado *encapsulamiento*.
 
 La estación SOL necesita tu ayuda para reparar un subsistema de navegación.
 Te han pedido que encapsules dos funcionalidades críticas.
-
-!!! questions
-
-      * Crea la clase `Compass` cumpliendo con los siguientes requisitos.
 
 ```mermaid
 classDiagram
@@ -96,22 +94,28 @@ classDiagram
     }
 ```
 
-* Los ficheros `compass.h` y `compass.cpp` contienen la implementación de la clase `Compass`.
+!!! questions
 
-* Se puede crear un objeto clase `Compass` pasándole un catálogo
-  de estrellas de tipo `const std::vector<Star>`.
-   
-* Se puede buscar la estrella del catálogo más cercana (en posición) a una buscada
-  con un método `Star Compass::find_closest(const Star& search) const`.
-  Este sistema ha salvado vidas en el pasado. 
-  
-* Se puede encontrar el *diámetro* del catálogo, definido como la mayor
-  distancia entre dos estrellas dentro del mismo, e implementado
-  en el método `double diameter() const`.
-  Esto nos ayuda a diseñar naves con alcance adaptado a los catálogos.
+      * Crea la clase `Compass` cumpliendo con los siguientes requisitos:
 
-Ejemplo de uso y salida esperada de la clase pedida. Te invitamos a crear 
-funcionalidad adicional y una demo que la muestre.
+          * Los ficheros `compass.h` y `compass.cpp` contienen la implementación de la clase `Compass`.
+          
+          * Se puede crear un objeto clase `Compass` pasándole un catálogo
+            de estrellas de tipo `const std::vector<Star>` 
+            (los {{ def("vector", text="vectores") }} pueden ser las clases
+             que decidamos).
+           
+          * Se puede buscar la estrella del catálogo más cercana (en posición) a una buscada
+            con un método `Star Compass::find_closest(const Star& search) const`.
+            Este sistema ha salvado vidas en el pasado. 
+          
+          * Se puede encontrar el *diámetro* del catálogo, definido como la mayor
+            distancia entre dos estrellas dentro del mismo, e implementado
+            en el método `double diameter() const`.
+            Esto nos ayuda a diseñar naves con alcance adaptado a los catálogos.
+
+      * Implementa una demo en `main.cpp` que muestre el funcionamiento de 
+        la clase `Compass`.
    
 :::compile_and_run solution
 :::

@@ -90,7 +90,7 @@ Te proponemos el siguiente plan de acción:
     "add_file_quest", 
     "run_quest",
     "std_string",
-    "cin_cout", 
+    "std_cin_cout", 
     "documentation",
 ) }}
 

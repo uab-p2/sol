@@ -81,8 +81,8 @@ int main() {
 ### Bombillas
 
 Si usamos programación orientada a objetos, podemos agrupar los datos
-(las variables de estado) y las funciones (los métodos) para crear *clases*,
-como por ejemplo la clase `LightPoint`.
+(las variables de estado) y las funciones (los métodos) para crear 
+{{ def("clase", text="clases") }}, como por ejemplo la clase `LightPoint`.
 
 ```mermaid
 classDiagram
@@ -97,7 +97,7 @@ classDiagram
 ```
 
 La *cabecera* de la clase describe qué atributos (datos) y métodos (funciones) tiene esa clase,
-y quién puede usarlos:
+y quién puede usarlos (no te preocupes si hay partes que no entiendes todavía):
 {{ snippet_box("LightPoint") }}
 
 La *implementación* de los métodos de la clase se incluye en el `.cpp` correspondiente.
@@ -109,17 +109,18 @@ Considera el siguiente ejemplo de *uso* de la clase `LightPoint`:
 :::compile_and_run
 #include <iostream>
 #include "light_point.h"
+using namespace std;
 
 int main() {
     LightPoint light1(true, "white", 0.5);
-    std::cout << "Light 1, before: " << light1.status() << std::endl;
+    cout << "Light 1, before: " << light1.status() << endl;
     light1.turn_off();
-    std::cout << "Light 1, after:  " << light1.status() << std::endl;
+    cout << "Light 1, after:  " << light1.status() << endl;
     
     LightPoint light2(false, "red", 0.2);
-    std::cout << "Light 2, before: " << light2.status() << std::endl;
+    cout << "Light 2, before: " << light2.status() << endl;
     light2.turn_on();
-    std::cout << "Light 2, after:  " << light2.status() << std::endl;
+    cout << "Light 2, after:  " << light2.status() << endl;
 
     return 0;
 }
@@ -137,7 +138,7 @@ Estudia el código anterior y extrapola:
         ¿qué ficheros necesitaríamos cambiar? ¿Pasa algo si ya hemos distribuido
         el código y lo están usando otras personas?
 
-{{ codex_links("class_why", "class_syntax") }}
+{{ codex_links("class_what", "class_why", "diagrams") }}
 
 ### Tiras LED
 
@@ -227,12 +228,15 @@ int main() {
 
     * Implementa la función {{ snippet_signature("receive_lights", declaration=True) }} 
       en `light_jockey.h|cpp`. Esta función lee de teclado una secuencia de códigos indicando
-      el color y estado on/off de las luces existentes y devuelve un array de objetos `LightPoint`
-      con esos colores y estados.
+      el color y estado on/off de las luces existentes y devuelve un 
+      {{ def("vector") }}
+      de {{ def("objeto", text="objetos") }} `LightPoint`
+      con esos colores y estados. Considera la documentación de la función,
+      mostrada a continuación.
 
 {{ snippet_box("receive_lights", declaration=True, open=True) }}
 
-{{ codex_links("cin_cout", "std_string", "std_vector") }}
+{{ codex_links("std_cin_cout", "std_string", "std_vector") }}
 
 ## Light Jockey
 
