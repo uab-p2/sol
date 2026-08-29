@@ -16,7 +16,8 @@ public:
 
     /// Attempt to move the ship to the destination (x,y,z).
     /// The base Ship class simply changes position without
-    /// affecting the battery charge. Subclasses may modify this behavior.
+    /// affecting the battery charge. Subclasses may modify
+    /// this behavior.
     /// @param x,y,z destination
     /// @return true if the ship moved to the destination
     ///   (potentially using battery charge), or false
@@ -28,7 +29,8 @@ protected:
     /// Create a ship with the specified battery charge and position.
     Ship(double battery_charge, double x=0, double y=0, double z=0);
 
-    /// @return the distance from the current position to (x,y,z), in distance units.
+    /// @return the distance from the current position to (x,y,z),
+    ///   in distance units.
     double distance_to(double x, double y, double z) const;
 
     /// Ship position with respect to some reference point.

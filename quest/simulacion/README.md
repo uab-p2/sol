@@ -9,8 +9,8 @@ nuevo sistema de simulación que funcione con cualquier tipo de nave.
 
 {{ goals(
     "Utiliza *herencia* para especializar clases de objetos.",
-    "Diseña jerarquías de clases.",
-    "Usa la clase base para manejar las especializaciones."
+    "Reconoce jerarquías de clases.",
+    "Usa la clase base para manejar las especializaciones (*polimorfismo*)."
 ) }}
 
 ## Esencia
@@ -165,6 +165,7 @@ Estudia la cabecera definida en `station.h` y responde:
 !!! questions
 
     * ¿Qué tipo de objetos pueden pasarse en el primer argumento de `send_passengers`?
+    * ¿De qué manera puede ayudarnos el {{ def("polimorfismo", text="polimorfismo") }}?
         
 {{ snippet_box("Station::send_passengers", indent=1, open=False, declaration=True) }}
 
@@ -185,8 +186,6 @@ Una vez perfilado el comportamiento de `Station`, podemos pasar a la implementac
 
 :::compile_and_run solution title="Una demo trivial e incompleta" open=false
 :::
-
-
 
 # Tags
 en_ruta:5

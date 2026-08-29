@@ -1,6 +1,3 @@
-/**
- * Example of how to model a light point WITHOUT using OOP.
- */
 #include <iostream>
 #include <string>
 using namespace std;

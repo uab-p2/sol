@@ -7,17 +7,12 @@ public:
     /// @param x,y,z: the position where the waypoint is placed.
     Waypoint(double x=0, double y=0, double z=0);
 
+    /// Get the waypoint's position in space.
+    /// @param x,y,z: variables where the waypoint coordinates are stored.
+    void get_position(double& x, double& y, double& z) const;
+
     /// Move the waypoint to new coordinates.
     void set_position(double x, double y, double z);
-
-    /// @return the x coordinate.
-    double get_x() const;
-
-    /// @return the y coordinate.
-    double get_y() const;
-
-    /// @return the z coordinate.
-    double get_z() const;
 
 private:
     /// X coordinate.
