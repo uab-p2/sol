@@ -1,3 +1,6 @@
+---
+tags: [en_ruta:7, session:5]
+---
 # Extracción
 
 Ya casi hemos llegado a la estación SOL. No tenemos certeza de qué veremos al llegar,
@@ -123,7 +126,3 @@ para trabajar los asteroides cercanos.
 {{ snippet_box("Mine::get_next_miner", declaration=True, frame=False, indent=1) }}
 
 {{ codex_links("class_composition", "std_vector") }}
-
-# Tags
-en_ruta:7
-session:5

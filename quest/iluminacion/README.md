@@ -1,3 +1,6 @@
+---
+tags: [en_ruta:0, session:1]
+---
 # Iluminación
 
 Tu equipo es el encargado de prototipar un nuevo sistema de control de luces
@@ -268,8 +271,3 @@ A continuación puedes ver un ejemplo de salida si se implementa (y recibe) el c
 
 :::compile_and_run solution input="2\nwhion\nredoff\nALLOFF"
 :::
-
-# Tags
-en_ruta:0
-session:1
-

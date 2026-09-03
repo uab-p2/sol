@@ -1,3 +1,6 @@
+---
+tags: [en_ruta:4, session:3]
+---
 # Comunicación
 
 La comunicación asíncrona vía documentos es particularmente crítica 
@@ -264,7 +267,3 @@ const Document document("content", "id666");
 {{ codex_links(
   "std_map",
 ) }}
-
-# Tags
-en_ruta:4
-session:3

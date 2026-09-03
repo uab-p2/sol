@@ -1,3 +1,6 @@
+---
+tags: [en_ruta:1, session:2]
+---
 # Navegación
 
 El sistema de navegación de la estación SOL usa la versión moderna
@@ -121,7 +124,3 @@ classDiagram
 :::
 
 {{ codex_links("std_vector") }}
-
-# Tags
-en_ruta:1
-session:2

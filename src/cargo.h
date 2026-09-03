@@ -50,7 +50,7 @@ public:
     /// There must be enough battery (at least the cost reported
     /// by `move_cost`) or the move is not performed at all
     /// (and no battery is spent).
-    /// @return true if the ship moved and consumed the battery. false if
+    /// @return true if the ship moved and consumed the battery. False if
     ///   the ship did not move nor spend any battery.
     bool move(double x, double y, double z) override;
 

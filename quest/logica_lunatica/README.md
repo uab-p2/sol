@@ -1,3 +1,6 @@
+---
+tags: [despegue:2, session:1]
+---
 # Lógica lunática
 
 A veces nuestro código parece desafiar la razón: la ejecución del programa
@@ -112,8 +115,3 @@ Pensemos en qué repele y qué favorece su aparición.
     detectar errores lógicos antes de ejecutar el programa. 
     Una de ellas son los *compiladores*. ¿Te había avisado tu compilador
     de alguno de los bugs de estos oponentes?
-
-# Tags
-
-despegue:2
-session:1

@@ -1,3 +1,6 @@
+---
+tags: [despegue:0, session:0]
+---
 # Silicio y titanio
 
 Tu primera misión es configurar un buen entorno de desarrollo
@@ -47,8 +50,3 @@ compilar el código de tu primer quest del proyecto SOL.
       ver un mensaje indicando cómo se compara
       la velocidad de tu máquina con la de la mía.
       ¿Cuál de las dos nos lleva más rápido?
-
-# Tags
-
-despegue:0
-session:0

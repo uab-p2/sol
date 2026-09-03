@@ -1,3 +1,6 @@
+---
+tags: [en_ruta:5, session:4]
+---
 # Simulación
 
 Antes de cualquier actuación en el espacio, la tripulación realiza 
@@ -186,7 +189,3 @@ Una vez perfilado el comportamiento de `Station`, podemos pasar a la implementac
 
 :::compile_and_run solution title="Una demo trivial e incompleta" open=false
 :::
-
-# Tags
-en_ruta:5
-session:4

@@ -1,3 +1,6 @@
+---
+tags: [en_ruta:2, session:2]
+---
 # Oxigenación
 
 Las escuadrillas de reparación necesitarán un suministro fiable de oxígeno
@@ -136,7 +139,3 @@ int main() {
 :::
 
 {{ codex_links("std_map", "class_constructor_destructor") }}
-
-# Tags
-en_ruta:2
-session:2

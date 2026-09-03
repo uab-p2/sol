@@ -1,3 +1,6 @@
+---
+tags: [en_ruta:5, session:4]
+---
 # Clonación
 
 Como es habitual en cualquier instalación científica en {{ future_year() }},
@@ -200,7 +203,3 @@ Tú decides la funcionalidad e interfaz pública concretos que quieres ofrecerle
       en `main.cpp` que muestre su funcionamiento.
 
     * Compara tu solución con otras. ¿Qué es común a todas ellas?
-
-# Tags
-en_ruta:5
-session:4

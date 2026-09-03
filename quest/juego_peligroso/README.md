@@ -1,3 +1,6 @@
+---
+tags: [despegue:1, session:0]
+---
 # Juego peligroso
 
 El camino será largo. ¿Por qué no fabricarte algo de entretenimiento?
@@ -104,8 +107,3 @@ Te proponemos el siguiente plan de acción:
     * Si queremos elegir la palabra secreta de manera automática,
       ¿de cuántas maneras podríamos hacerlo? ¿Entre cuántas palabras podríamos
       elegir como mucho?
-
-# Tags
-
-despegue:1
-session:0

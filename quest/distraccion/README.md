@@ -1,3 +1,6 @@
+---
+tags: [en_ruta:3, session:3]
+---
 # Distracción
 
 Naves y estaciones remotas como SOL cuentan con sistemas para generar 
@@ -125,7 +128,3 @@ siguientes partes:
 {{ snippet_box("atrezzo.h", open=False) }}
 
 {{ snippet_box("atrezzo.cpp", open=False) }}
-
-# Tags
-en_ruta:3
-session:3
