@@ -28,11 +28,18 @@ void Histogram::print(const std::vector<float>& frequencies,
     } else {
         std::cout << "+" << std::string(inner_width, '-')
             << "+" << std::endl;
+        float max_frequency = 0;
+        for (float frequency : frequencies) {
+            max_frequency = std::max(max_frequency, frequency);
+        }
+
         std::vector<unsigned> filled_rows(frequencies.size(), 0);
         for (unsigned i = 0; i < frequencies.size(); i++) {
-            float normalized = std::max(0.0f, frequencies[i]);
+            float normalized = max_frequency > 0
+                ? std::max(0.0f, frequencies[i]) / max_frequency
+                : 0.0f;
             filled_rows[i] = static_cast<unsigned>(
-                std::round(normalized * height));
+                std::round(normalized * static_cast<float>(height)));
         }
 
         for (unsigned row = height; row-- > 0;) {

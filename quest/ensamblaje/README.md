@@ -34,9 +34,7 @@ la cual devuelve una nueva secuencia en la que:
 !!! questions
 
     * Identifica los métodos de `IntVectorSkills` que se pueden combinar
-      para implementar la función pedida.
-
-    * Implementa la función en `assembly.h|cpp` y prueba esos métodos.
+      para solucionar la función pedida. Impleméntalos y pruébalos.
 
     * Implementa la función `prepare_assembly` en `assembly.cpp`
       usando los métodos de `IntVectorSkills`. 
