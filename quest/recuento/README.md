@@ -8,6 +8,11 @@ En este ejercicio, practicaremos el recuento.
 
 {{ img_badge("swarm.png") }}
 
+{{ goals(
+"Amplía tu implementación de la biblioteca en `IntVectorSkills`.",
+"Combina operaciones básicas sobre `std::vector` para solucionar problemas complejos.",
+) }}
+
 La entrada para el recuento es un `std::vector<int>` con los números de modelo de todos los nanobots.
 Múltiples bots de cada modelo pueden aparecer, y los números de modelo aparecen en cualquier orden.
 
@@ -19,7 +24,6 @@ Cuando necesitan contarse, los nanobots hacen lo siguiente:
 
 2. Considerando la población de nanobots restantes, se calcula la probabilidad (frecuencia relativa)
    de cada modelo. Se devuelve en un `std::vector<float>` por orden creciente de número de modelo. Recuerda:
-
    \( P(x) = \frac{N_x}{N_\text{total}} \)
 
 !!! questions
