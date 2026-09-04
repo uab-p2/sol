@@ -1,7 +1,7 @@
 ---
 tags: [vector_gym:4, homework:3-7]
 ---
-# Nutrición
+# Energía
 
 Los nanobots entrenan tan duro que hasta la nutrición, basada en tokens, es un ejercicio.
 Hoy te han invitado a comer.
