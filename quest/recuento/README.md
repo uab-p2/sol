@@ -39,3 +39,5 @@ visualizar la distribución de las entradas como aquí:
 
 :::compile_and_run solution highlight=(17,18)
 :::
+
+{{ codex_links("std_vector", "vector_operations") }}

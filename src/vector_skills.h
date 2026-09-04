@@ -159,16 +159,6 @@ public:
     /// @param operation the rule applied to every element.
     static void transform(std::vector<int>& seq,
                           const IntOperation& operation);
-
-    /// Check whether `seq` could be the degree sequence of some
-    /// simple undirected graph.
-    /// @param seq a candidate graph degree sequence, reduced in
-    ///   place by Havel-Hakimi's greedy algorithm (left at all
-    ///   zeros if `seq` is graphical; only partially reduced
-    ///   otherwise).
-    /// @return true if `seq` is graphical, i.e. some simple
-    ///   undirected graph has exactly these vertex degrees.
-    static bool havel_hakimi(std::vector<int>& seq);
 };
 
 /// A yes/no test on one element, e.g. "is it even?". There are no
