@@ -112,6 +112,16 @@ public:
     ///   their original order.
     static std::vector<int> unique(const std::vector<int>& seq);
 
+    /// Build a copy of `seq` keeping only the elements that satisfy
+    /// `criterion`, discarding the rest.
+    /// @param seq the sequence to filter.
+    /// @param criterion the predicate every kept element must
+    ///   satisfy; elements that fail it are left out of the result.
+    /// @return a new sequence with the elements of `seq` that
+    ///   satisfy `criterion`, preserving their relative order.
+    static std::vector<int> filter(const std::vector<int>& seq,
+                                   const IntPredicate& criterion);
+
     /// Un-interleave `seq` into its even- and odd-position elements,
     /// without touching `seq` itself.
     /// @param seq an interleaved sequence following the pattern
@@ -120,7 +130,8 @@ public:
     ///   `a`'s), in order.
     /// @param b set to every element of `seq` at an odd index (the
     ///   `b`'s), in order.
-    static void split(const std::vector<int>& seq, std::vector<int>& a,
+    static void split(const std::vector<int>& seq,
+                      std::vector<int>& a,
                       std::vector<int>& b);
 
     // Modify: these change `seq`
@@ -148,14 +159,6 @@ public:
     /// @param operation the rule applied to every element.
     static void transform(std::vector<int>& seq,
                           const IntOperation& operation);
-
-    /// Keep only the elements of `seq` that satisfy `criterion`,
-    /// discarding the rest.
-    /// @param seq the sequence to filter, in place.
-    /// @param criterion the predicate every kept element must
-    ///   satisfy; elements that fail it are dropped from `seq`.
-    static void filter(std::vector<int>& seq,
-                       const IntPredicate& criterion);
 
     /// Check whether `seq` could be the degree sequence of some
     /// simple undirected graph.
