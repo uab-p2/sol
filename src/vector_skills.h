@@ -36,14 +36,6 @@ public:
     /// @return how many elements of `seq` equal `value`.
     static int count(const std::vector<int>& seq, int value);
 
-    /// Find the best-scoring contiguous run of `seq`.
-    /// @param seq the sequence to inspect.
-    /// @return the largest sum achievable by a contiguous, non-empty
-    ///   run of elements of `seq` (0 if `seq` is empty). The run's
-    ///   elements must be adjacent in `seq`, e.g. for `{2, -100, 3}`
-    ///   the answer is `3`, not `5`.
-    static int max_contiguous_sum(const std::vector<int>& seq);
-
     // Search
 
     /// Find the smallest value in `seq`.
@@ -104,14 +96,6 @@ public:
     static std::vector<int> concatenate(const std::vector<int>& a,
                                         const std::vector<int>& b);
 
-    /// Build a copy of `seq` with repeated values collapsed down to
-    /// their first occurrence.
-    /// @param seq the sequence to inspect.
-    /// @return a new sequence with the elements of `seq`, keeping
-    ///   only the first occurrence of each value and preserving
-    ///   their original order.
-    static std::vector<int> unique(const std::vector<int>& seq);
-
     /// Build a copy of `seq` keeping only the elements that satisfy
     /// `criterion`, discarding the rest.
     /// @param seq the sequence to filter.
@@ -121,18 +105,6 @@ public:
     ///   satisfy `criterion`, preserving their relative order.
     static std::vector<int> filter(const std::vector<int>& seq,
                                    const IntPredicate& criterion);
-
-    /// Un-interleave `seq` into its even- and odd-position elements,
-    /// without touching `seq` itself.
-    /// @param seq an interleaved sequence following the pattern
-    ///   `a, b, a, b, ...`.
-    /// @param a set to every element of `seq` at an even index (the
-    ///   `a`'s), in order.
-    /// @param b set to every element of `seq` at an odd index (the
-    ///   `b`'s), in order.
-    static void split(const std::vector<int>& seq,
-                      std::vector<int>& a,
-                      std::vector<int>& b);
 
     // Modify: these change `seq`
 
