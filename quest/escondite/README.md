@@ -44,7 +44,7 @@ de la entrada. Considera los siguientes tiempos:
 #include <vector>
 #include "clock.h"
 #include "hunt.h"
-#include "vector_skills.h"
+#include "int_vector_skills.h"
 using namespace std;
 
 /// Build a row of 20M nanobots.
@@ -68,7 +68,7 @@ int main() {
         for (int i = 0; i < SEARCH_COUNT; i++) {
             hunt_unordered(ids, ids.size()); // does not exist
         }
-        cout << "Time case 1: " << clock.get_seconds() << " s" << endl;         
+        cout << "Time case 1: " << fixed << clock.get_seconds() << " s" << endl;         
     }
 
     // Second case
@@ -79,7 +79,7 @@ int main() {
         for (int i = 0; i < SEARCH_COUNT; i++) {
             hunt_ascending(ids, ids.size()); // does not exist
         }
-        cout << "Time case 2: " << clock.get_seconds() << " s" << endl;         
+        cout << "Time case 2: " << fixed << clock.get_seconds() << " s" << endl;         
     }
 
     return 0;
