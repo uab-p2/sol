@@ -1,5 +1,4 @@
 #include <iostream>
-#include <ostream>
 
 #include "red.h"
 #include "green.h"

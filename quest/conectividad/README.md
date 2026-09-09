@@ -1,5 +1,5 @@
 ---
-tags: [vector_gym:5, homework:3-7]
+tags: [vector_gym:7, homework:3-7]
 ---
 # Conectividad
 

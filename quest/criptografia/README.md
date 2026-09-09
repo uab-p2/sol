@@ -43,6 +43,9 @@ operaciones realizadas y cuántas veces. Algo como `A1C2A1B3`:
 * Las operaciones pueden aparecer en cualquier orden, siempre en mayúscula.
 * A cada letra le sigue un número entre 1 y 9.
 
+:::compile_and_run solution
+:::
+
 Puedes asumir que las claves están bien formadas y
 que el tamaño de la entrada es acorde a la descripción.
 
@@ -61,9 +64,5 @@ y las primitivas de cifrado y descifrado.
 
     * Implementa las funciones `nanobot_encrypt` y `nanobot_decrypt`
       combinando las operaciones anteriores.
-
-
-:::compile_and_run solution
-:::
 
 {{ codex_links("std_vector", "vector_operations") }}
