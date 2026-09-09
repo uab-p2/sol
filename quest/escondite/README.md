@@ -1,5 +1,5 @@
 ---
-tags: [ vector_gym:6, homework:3-7 ]
+tags: [ vector_gym:6, session:5 ]
 ---
 
 # Escondite
@@ -36,8 +36,56 @@ Los IDs de la fila llegan ordenados de manera creciente, así que las aparicione
 mismo ID quedan juntas. Aquí se capturan todos los nanobots con el ID buscado, no sólo uno.
 La fila resultante tiene que seguir estando ordenada.
 
-La idea de este ejercicio es usar un método de búsqueda más optimizado aprovechando el orden
-de la entrada.
+Importante: utiliza una búsqueda optimizada aprovechando el orden
+de la entrada. Considera los siguientes tiempos:
+
+:::compile_and_run title="Comparativa tiempos" highlight=((26,29),(37,40))
+#include <iostream>
+#include <vector>
+#include "clock.h"
+#include "hunt.h"
+#include "vector_skills.h"
+using namespace std;
+
+/// Build a row of 20M nanobots.
+vector<int> make_row() {
+    const int NANOBOT_COUNT = 20'000'000;
+    vector<int> ids(NANOBOT_COUNT);
+    for (int i = 0; i < NANOBOT_COUNT; i++) {
+        ids[i] = i;
+    }
+    return ids;
+}
+
+int main() {
+    const int SEARCH_COUNT = 10;
+
+    // First case
+    {
+        vector<int> ids = make_row();
+        WallClock clock;
+        clock.start();
+        for (int i = 0; i < SEARCH_COUNT; i++) {
+            hunt_unordered(ids, ids.size()); // does not exist
+        }
+        cout << "Time case 1: " << clock.get_seconds() << " s" << endl;         
+    }
+
+    // Second case
+    {
+        vector<int> ids = make_row();
+        WallClock clock;
+        clock.start();
+        for (int i = 0; i < SEARCH_COUNT; i++) {
+            hunt_ascending(ids, ids.size()); // does not exist
+        }
+        cout << "Time case 2: " << clock.get_seconds() << " s" << endl;         
+    }
+
+    return 0;
+}
+:::
+
 
 !!! questions
 
@@ -46,6 +94,8 @@ de la entrada.
 
     * Implementa las funciones `hunt_unordered` y `hunt_ascending` en `hunt.h|cpp`,
       usando los métodos de `IntVectorSkills`.
+
+    * Explica las diferencias de tiempos de ejecución en el ejemplo superior.
 
 :::compile_and_run solution
 :::

@@ -1,5 +1,5 @@
 ---
-tags: [en_ruta:7, session:5]
+tags: [en_ruta:7, session:6]
 ---
 # Extracción
 
