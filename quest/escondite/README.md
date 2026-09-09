@@ -95,7 +95,10 @@ int main() {
     * Implementa las funciones `hunt_unordered` y `hunt_ascending` en `hunt.h|cpp`,
       usando los métodos de `IntVectorSkills`.
 
-    * Explica las diferencias de tiempos de ejecución en el ejemplo superior.
+    * Implementa una demo en `main.cpp` que mida, con `WallClock`, los tiempos de tus dos
+      búsquedas sobre filas de \(10^n\) nanobots, y muestre cómo evolucionan al crecer \(n\).
+
+    * Explica las diferencias de tiempos de ejecución que obtienes.
 
 :::compile_and_run solution
 :::
