@@ -48,7 +48,7 @@ de la entrada. Considera los siguientes tiempos:
 using namespace std;
 
 /// Build a row of 20M nanobots.
-vector<int> make_row() {
+vector<int> get_nanobot_row() {
     const int NANOBOT_COUNT = 20'000'000;
     vector<int> ids(NANOBOT_COUNT);
     for (int i = 0; i < NANOBOT_COUNT; i++) {
@@ -62,7 +62,7 @@ int main() {
 
     // First case
     {
-        vector<int> ids = make_row();
+        vector<int> ids = get_nanobot_row();
         WallClock clock;
         clock.start();
         for (int i = 0; i < SEARCH_COUNT; i++) {
@@ -73,7 +73,7 @@ int main() {
 
     // Second case
     {
-        vector<int> ids = make_row();
+        vector<int> ids = get_nanobot_row();
         WallClock clock;
         clock.start();
         for (int i = 0; i < SEARCH_COUNT; i++) {
