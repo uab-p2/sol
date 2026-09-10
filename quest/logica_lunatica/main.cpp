@@ -4,7 +4,7 @@
 #include "green.h"
 #include "blue.h"
 
-/// Quest entry point
+/// Use this main for your demo
 int main(int argc, char* argv[]) {
     talk_to_red();
 
