@@ -65,4 +65,4 @@ y las primitivas de cifrado y descifrado.
     * Implementa las funciones `nanobot_encrypt` y `nanobot_decrypt`
       combinando las operaciones anteriores.
 
-{{ codex_links("std_vector", "vector_operations") }}
+{{ help_links("std_vector", "vector_operations") }}

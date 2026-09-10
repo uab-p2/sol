@@ -82,7 +82,7 @@ como la siguiente y usarla con nuestra jerarquía.
       * ¿Hace falta cambiar algo para que `describe_mining` permita minar
          diferentemente cada tipo de asteroide?
 
-{{ codex_link("class_inheritance") }}
+{{ help_link("class_inheritance") }}
 
 ## Minado en dos tiempos
 
@@ -125,4 +125,4 @@ para trabajar los asteroides cercanos.
 
 {{ snippet_box("Mine::get_next_miner", declaration=True, frame=False, indent=1) }}
 
-{{ codex_links("class_composition", "std_vector") }}
+{{ help_links("class_composition", "std_vector") }}

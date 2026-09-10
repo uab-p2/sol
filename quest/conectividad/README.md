@@ -53,4 +53,4 @@ Recomendamos utilizar el algoritmo de {{ def("havel-hakimi", text="Havel-Hakimi"
 :::compile_and_run solution
 :::
 
-{{ codex_links("std_vector", "vector_operations") }}
+{{ help_links("std_vector", "vector_operations") }}

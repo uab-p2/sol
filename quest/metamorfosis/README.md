@@ -36,7 +36,7 @@ La misma lógica, y casi el mismo código, te puede servir para trabajar con
      `std::vector<int>`, `std::vector<float>` y `std::vector<std::string>`.
 
 
-{{ codex_links("template") }}
+{{ help_links("template") }}
 
 
 ## Concreción
@@ -46,6 +46,6 @@ La misma lógica, y casi el mismo código, te puede servir para trabajar con
 ## TODO
 
 - Enunciado: convertir cada operación de `sequence.h`/.cpp a `template <typename T>`, mismos nombres.
-- Enlazar codex de templates (`site/sections/codex/template.md`, revisar si hace falta ampliarlo).
+- Enlazar el artículo de ayuda de templates (`site/sections/help/template.md`, revisar si hace falta ampliarlo).
 - test.cpp sistemático sobre las operaciones pedidas.
 

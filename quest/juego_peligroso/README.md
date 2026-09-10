@@ -35,7 +35,7 @@ Te guiamos para montar un juego peligroso: el del ahorcado.
           * ¿Qué datos manejan?
           * ¿Qué entradas y salidas hay? ¿Usarás teclado, pantalla, ficheros...?
 
-{{ codex_links("diagrams") }}
+{{ help_links("diagrams") }}
 
 ## Intercambio de idiomas
 
@@ -71,7 +71,7 @@ Te proponemos el siguiente plan de acción:
         - Añade en `hangman.h` las *declaraciones* de *funciones* y *structs* 
           usando las palabras de la sección anterior.
         - Asegúrate de documentar todas estas funciones.
-          Te explicamos cómo en {{ codex_link("documentation") }}
+          Te explicamos cómo en {{ help_link("documentation") }}
  
     3. Crea el fichero `hangman.cpp`, también en la raíz del quest.
        Una a una, implementa las funciones de hangman.h de la siguiente manera:
@@ -88,7 +88,7 @@ Te proponemos el siguiente plan de acción:
 :::compile_and_run solution input="a\nx\nn\nt\np\nr\ni\nc"
 ::: 
 
-{{ codex_links(
+{{ help_links(
     "open_quest", 
     "add_file_quest", 
     "run_quest",

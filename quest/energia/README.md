@@ -42,4 +42,4 @@ se almacenan en los otros dos parámetros de la función.
 :::compile_and_run solution
 :::
 
-{{ codex_links("std_vector", "vector_operations") }}
+{{ help_links("std_vector", "vector_operations") }}
