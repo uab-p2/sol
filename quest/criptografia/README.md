@@ -1,7 +1,7 @@
 ---
 tags: [vector_gym:5, homework:3-7]
 ---
-# Criptografía
+# Cripto
 
 Hoy los nanobots quieren jugar con la criptografía.
 Están reorganizando datos hasta hacerlos irreconocibles,
