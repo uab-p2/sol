@@ -115,10 +115,9 @@ public:
     static void remove_value(std::vector<int>& seq, int value);
 
     /// Insert `value` into an already-ascending `seq`, in place,
-    /// keeping it ascending; if `value` already occurs in `seq`, it
-    /// is inserted before the first occurrence. This could be done
-    /// with `std::vector::insert`, but the point of the exercise is
-    /// to build it by hand: use only `push_back` and `[]` access to
+    /// keeping it ascending. This could be done with
+    /// `std::vector::insert`, but the point of the exercise is to
+    /// build it by hand: use only `push_back` and `[]` access to
     /// find the spot and shift the elements yourself.
     /// @param seq the sequence to insert into, in place. Must
     ///   already be sorted in ascending order (see `is_ascending`).
