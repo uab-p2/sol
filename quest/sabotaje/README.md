@@ -1,5 +1,5 @@
 ---
-tags: [vector_gym:10]
+tags: [vector_gym:9, session:9]
 ---
 # Sabotaje
 
@@ -15,5 +15,5 @@ Ya no basta con medir: ahora los nanobots deben sabotear sus propios algoritmos,
 ## TODO
 
 - 3 algoritmos: fácil = búsqueda lineal (`rastreo`); difícil = inserción ordenada (`ensamblaje`); imposible (peor≈medio) = búsqueda binaria (`rastreo`).
-- Reutilizar el framework de medición de `cronometraje`.
+- Reutilizar el framework de medición de `carrera`.
 - PIN: futuro cuestionario/juego sobre complejidades (fuera de esta campaña por ahora).
