@@ -10,8 +10,8 @@ public:
     /// @param x,y,z variables where the ship's position is saved.
     void get_position(double& x, double& y, double& z) const;
 
-    /// @return true if and only if the health and the battery
-    ///   are strictly above zero.
+    /// @return true if and only if the battery
+    ///   is strictly above zero.
     virtual bool is_working() const;
 
     /// Attempt to move the ship to the destination (x,y,z).
@@ -22,7 +22,7 @@ public:
     /// @return true if the ship moved to the destination
     ///   (potentially using battery charge), or false
     ///   if the ship could not move to the destination
-    ///   (e.g., no fuel, no health, it's a fixed station...).
+    ///   (e.g., no fuel, it's a fixed station...).
     virtual bool move(double x, double y, double z);
 
 protected:
