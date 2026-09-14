@@ -10,7 +10,7 @@
 /// finished file). LinePlot and HistogramPlot each add their own
 /// data and drawing on top of this. Not meant to be used on its
 /// own: its constructor and every method are protected.
-class Chart {
+class PlotBase {
 protected:
     /// @param filename SVG file to write.
     /// @param title chart title, shown above the plot; omitted if empty.
@@ -25,10 +25,10 @@ protected:
     ///   its x-axis tick labels and axis label.
     /// @param font_size size every piece of text is drawn at (the
     ///   title is bold instead of larger).
-    Chart(const std::string& filename, const std::string& title,
-         float width, float height,
-         float margin_left, float margin_right, float margin_top, float margin_bottom,
-         float font_size);
+    PlotBase(const std::string& filename, const std::string& title,
+            float width, float height,
+            float margin_left, float margin_right, float margin_top, float margin_bottom,
+            float font_size);
 
     /// @return the plot area's left edge, in canvas pixels.
     float plot_left() const;
@@ -68,12 +68,12 @@ protected:
 /// Example:
 /// @code
 /// LinePlot plot("complexity.svg", "Complexity comparison",
-///                "input size", "steps", true, false);
+///                "input size", "steps");
 /// plot.plot(sizes, linear_steps, "linear");
-/// plot.plot(sizes, log_steps, "logarithmic");
+/// plot.plot(sizes, quadratic_steps, "quadratic");
 /// plot.save();
 /// @endcode
-class LinePlot : private Chart {
+class LinePlot : private PlotBase {
 public:
     /// Start a new line plot. Call plot() at least once, then
     /// save() (or just let the object be destroyed) to write it.
@@ -81,8 +81,6 @@ public:
     /// @param title plot title, shown above the plot; omitted if empty.
     /// @param xlabel horizontal axis label.
     /// @param ylabel vertical axis label.
-    /// @param logx draw the horizontal axis in logarithmic scale.
-    /// @param logy draw the vertical axis in logarithmic scale.
     /// @param xticks x-axis tick values to label; leave empty for
     ///   evenly spaced automatic ticks.
     /// @param yticks y-axis tick values to label; leave empty for
@@ -91,8 +89,6 @@ public:
              const std::string& title = "",
              const std::string& xlabel = "",
              const std::string& ylabel = "",
-             bool logx = false,
-             bool logy = false,
              const std::vector<float>& xticks = {},
              const std::vector<float>& yticks = {});
 
@@ -100,10 +96,8 @@ public:
     ~LinePlot();
 
     /// Add one curve to the plot.
-    /// @param x horizontal-axis values, in ascending order; must be
-    ///   strictly positive if the plot uses a logarithmic x-axis.
-    /// @param y one value per entry of `x`; must be strictly
-    ///   positive if the plot uses a logarithmic y-axis.
+    /// @param x horizontal-axis values, in ascending order.
+    /// @param y one value per entry of `x`.
     /// @param label legend label for this curve, shown in a row
     ///   above the plot; leave empty to omit this curve from the
     ///   legend. Drawing more than 4 curves repeats colors.
@@ -112,8 +106,7 @@ public:
               const std::string& label = "");
 
     /// Add one curve to the plot, using 0, 1, 2, ... as its x values.
-    /// @param y one value per point; must be strictly positive if
-    ///   the plot uses a logarithmic y-axis.
+    /// @param y one value per point.
     /// @param label legend label for this curve, shown in a row
     ///   above the plot; leave empty to omit this curve from the
     ///   legend. Drawing more than 4 curves repeats colors.
@@ -140,10 +133,6 @@ private:
     std::string m_xlabel;
     /// Vertical axis label.
     std::string m_ylabel;
-    /// True to draw the horizontal axis in logarithmic scale.
-    bool m_logx;
-    /// True to draw the vertical axis in logarithmic scale.
-    bool m_logy;
     /// True once save() has written the file.
     bool m_saved;
     /// x-axis tick values to label; empty for automatic ticks.
@@ -171,7 +160,7 @@ private:
 /// plot.draw(distribution);
 /// plot.save();
 /// @endcode
-class HistogramPlot : private Chart {
+class HistogramPlot : private PlotBase {
 public:
     /// Start a new histogram. Call draw() once, then save() (or
     /// just let the object be destroyed) to write it.
