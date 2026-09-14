@@ -7,7 +7,7 @@
 
 /// Generic, project-agnostic SVG string-building: elements,
 /// escaping, number formatting, file output. Knows nothing about
-/// this project's own colors -- see ChartStyle for those.
+/// this project's own colors. See ChartStyle for those.
 class SvgBuilder {
 public:
     /// Escape the characters that are special inside SVG text content.
@@ -34,8 +34,8 @@ public:
 
     /// @return a rough estimate, in pixels, of how wide `text` will
     ///   render at `size`. No real font metrics are available here,
-    ///   so this just assumes an average glyph width -- good enough
-    ///   to lay out a legend without it running off the canvas.
+    ///   so this just assumes an average glyph width, good enough to
+    ///   lay out a legend without it running off the canvas.
     static float text_width(const std::string& text, float size);
 
     /// @return a `<text>` element.
@@ -47,7 +47,7 @@ public:
     /// @return a `<rect>` element, e.g. a box framing the legend.
     static std::string rect(float x, float y, float width, float height,
                             float corner_radius, const std::string& fill,
-                            const std::string& stroke);
+                            const std::string& stroke, float stroke_width);
 
     /// @return a `<line>` element.
     static std::string line(float x1, float y1, float x2, float y2,
@@ -133,8 +133,9 @@ std::string SvgBuilder::text(float x, float y, const std::string& content,
 
 std::string SvgBuilder::rect(float x, float y, float width, float height,
                              float corner_radius, const std::string& fill,
-                             const std::string& stroke) {
-    std::string stroke_attr = stroke.empty() ? "" : " stroke=\"" + stroke + "\" stroke-width=\"2\"";
+                             const std::string& stroke, float stroke_width) {
+    std::string stroke_attr = stroke.empty() ? "" :
+        " stroke=\"" + stroke + "\" stroke-width=\"" + format_number(stroke_width) + "\"";
     return "<rect x=\"" + format_number(x) + "\" y=\"" + format_number(y) +
         "\" width=\"" + format_number(width) + "\" height=\"" + format_number(height) +
         "\" rx=\"" + format_number(corner_radius) + "\" fill=\"" + fill + "\"" + stroke_attr + "/>";
@@ -208,8 +209,56 @@ const char* const ChartStyle::ERROR_BACKGROUND = "#fdecea";
 const char* const ChartStyle::BOX_BACKGROUND = "#f7f7f9";
 const char* const ChartStyle::BOX_BORDER = "#dcdce0";
 
+Chart::Chart(const std::string& filename, const std::string& title,
+            float width, float height,
+            float margin_left, float margin_right, float margin_top, float margin_bottom,
+            float font_size)
+    : m_filename(filename), m_title(title), m_width(width), m_height(height),
+      m_margin_left(margin_left), m_margin_right(margin_right),
+      m_margin_top(margin_top), m_margin_bottom(margin_bottom), m_font_size(font_size) {
+}
+
+float Chart::plot_left() const {
+    return m_margin_left;
+}
+
+float Chart::plot_top() const {
+    return m_margin_top;
+}
+
+float Chart::plot_width() const {
+    return m_width - m_margin_left - m_margin_right;
+}
+
+float Chart::plot_height() const {
+    return m_height - m_margin_top - m_margin_bottom;
+}
+
+std::string Chart::draw_header() const {
+    std::string svg = SvgBuilder::header(m_width, m_height, ChartStyle::BACKGROUND);
+    if (!m_title.empty()) {
+        svg += SvgBuilder::text(m_width / 2, 30, m_title, "middle", m_font_size,
+            ChartStyle::TEXT_COLOR, 0, true);
+    }
+    return svg;
+}
+
+void Chart::draw_axes(std::string& svg) const {
+    float left = plot_left();
+    float top = plot_top();
+    float width = plot_width();
+    float height = plot_height();
+    svg += SvgBuilder::line(left, top, left, top + height, ChartStyle::AXIS_COLOR, 2);
+    svg += SvgBuilder::line(left, top + height, left + width, top + height, ChartStyle::AXIS_COLOR, 2);
+}
+
+void Chart::write_svg(std::string svg) const {
+    svg += "</svg>";
+    SvgBuilder::write_file(m_filename, svg);
+}
+
 const float LinePlot::WIDTH = 640;
-const float LinePlot::HEIGHT = 400;
+const float LinePlot::HEIGHT = 640;
 const float LinePlot::MARGIN_LEFT = 108;
 // Wide enough that the rightmost x-tick label (middle-anchored right
 // on the plot's edge, so half its width sits in this margin) doesn't
@@ -217,7 +266,7 @@ const float LinePlot::MARGIN_LEFT = 108;
 const float LinePlot::MARGIN_RIGHT = 48;
 // Tall enough for a legend wrapped onto 2 rows (see the "rows" wrap
 // in save()), the common case at this font size with more than 2
-// curves -- a legend needing a 3rd row will overlap the plot itself.
+// curves. A legend needing a 3rd row will overlap the plot itself.
 const float LinePlot::MARGIN_TOP = 132;
 const float LinePlot::MARGIN_BOTTOM = 76;
 const int LinePlot::TICK_COUNT = 5;
@@ -227,7 +276,8 @@ LinePlot::LinePlot(const std::string& filename, const std::string& title,
                    const std::string& xlabel, const std::string& ylabel,
                    bool logx, bool logy,
                    const std::vector<float>& xticks, const std::vector<float>& yticks)
-    : m_filename(filename), m_title(title), m_xlabel(xlabel), m_ylabel(ylabel),
+    : Chart(filename, title, WIDTH, HEIGHT, MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM, FONT_SIZE),
+      m_xlabel(xlabel), m_ylabel(ylabel),
       m_logx(logx), m_logy(logy), m_saved(false), m_xticks(xticks), m_yticks(yticks) {
 }
 
@@ -253,10 +303,10 @@ void LinePlot::plot(const std::vector<float>& y, const std::string& label) {
 }
 
 void LinePlot::save() {
-    float plot_left = MARGIN_LEFT;
-    float plot_top = MARGIN_TOP;
-    float plot_width = WIDTH - MARGIN_LEFT - MARGIN_RIGHT;
-    float plot_height = HEIGHT - MARGIN_TOP - MARGIN_BOTTOM;
+    float left = plot_left();
+    float top = plot_top();
+    float area_width = plot_width();
+    float area_height = plot_height();
 
     float x_min = SvgBuilder::axis_value(m_x[0][0], m_logx);
     float x_max = x_min;
@@ -277,7 +327,7 @@ void LinePlot::save() {
     float x_range = x_max != x_min ? x_max - x_min : 1;
     float y_range = y_max != y_min ? y_max - y_min : 1;
 
-    std::string svg = SvgBuilder::header(WIDTH, HEIGHT, ChartStyle::BACKGROUND);
+    std::string svg = draw_header();
 
     svg += "<defs>";
     for (int i = 0; i < 4; i++) {
@@ -285,12 +335,8 @@ void LinePlot::save() {
     }
     svg += "</defs>";
 
-    if (!m_title.empty()) {
-        svg += SvgBuilder::text(WIDTH / 2, 30, m_title, "middle", FONT_SIZE, ChartStyle::TEXT_COLOR, 0, true);
-    }
-
     // Legend: one entry per labeled curve, in a boxed row right-
-    // aligned above the plot -- each item reads left to right as
+    // aligned above the plot. Each item reads left to right as
     // [label][colored line], the row itself flush against the
     // plot's right edge. A curve with an empty label is drawn but
     // left out of the legend.
@@ -327,7 +373,7 @@ void LinePlot::save() {
         for (size_t i = 0; i < legend_curves.size(); i++) {
             float needed = rows.empty() || rows.back().empty()
                 ? item_widths[i] : row_width + item_gap + item_widths[i];
-            if (!rows.empty() && !rows.back().empty() && needed > plot_width) {
+            if (!rows.empty() && !rows.back().empty() && needed > area_width) {
                 row_widths.push_back(row_width);
                 rows.push_back({});
                 row_width = item_widths[i];
@@ -347,11 +393,11 @@ void LinePlot::save() {
         }
         box_width += box_pad_x * 2;
         float box_height = row_height * static_cast<float>(rows.size()) + box_pad_y * 2;
-        float box_right = plot_left + plot_width;
+        float box_right = left + area_width;
         float box_left = box_right - box_width;
 
         svg += SvgBuilder::rect(box_left, box_top, box_width, box_height, 8,
-            ChartStyle::BOX_BACKGROUND, ChartStyle::BOX_BORDER);
+            ChartStyle::BOX_BACKGROUND, ChartStyle::BOX_BORDER, 1);
 
         for (size_t r = 0; r < rows.size(); r++) {
             float legend_y = box_top + box_pad_y + row_height * (static_cast<float>(r) + 0.5f) +
@@ -381,10 +427,10 @@ void LinePlot::save() {
     }
     for (size_t t = 0; t < yticks.size(); t++) {
         float value = SvgBuilder::axis_value(yticks[t], m_logy);
-        float py = plot_top + plot_height - (value - y_min) / y_range * plot_height;
-        svg += SvgBuilder::line(plot_left, py, plot_left + plot_width, py, ChartStyle::GRID_COLOR, 1);
+        float py = top + area_height - (value - y_min) / y_range * area_height;
+        svg += SvgBuilder::line(left, py, left + area_width, py, ChartStyle::GRID_COLOR, 1);
         std::string label = SvgBuilder::format_axis_label(yticks[t], m_logy);
-        svg += SvgBuilder::text(plot_left - 12, py + 6, label, "end", FONT_SIZE, ChartStyle::TEXT_COLOR, 0);
+        svg += SvgBuilder::text(left - 12, py + 6, label, "end", FONT_SIZE, ChartStyle::TEXT_COLOR, 0);
     }
 
     // x-axis ticks.
@@ -397,24 +443,21 @@ void LinePlot::save() {
     }
     for (size_t t = 0; t < xticks.size(); t++) {
         float value = SvgBuilder::axis_value(xticks[t], m_logx);
-        float px = plot_left + (value - x_min) / x_range * plot_width;
+        float px = left + (value - x_min) / x_range * area_width;
         std::string label = SvgBuilder::format_axis_label(xticks[t], m_logx);
-        svg += SvgBuilder::text(px, plot_top + plot_height + 28, label, "middle", FONT_SIZE, ChartStyle::TEXT_COLOR, 0);
+        svg += SvgBuilder::text(px, top + area_height + 28, label, "middle", FONT_SIZE, ChartStyle::TEXT_COLOR, 0);
     }
 
-    // Axes, drawn on top of the gridlines.
-    svg += SvgBuilder::line(plot_left, plot_top, plot_left, plot_top + plot_height, ChartStyle::AXIS_COLOR, 2);
-    svg += SvgBuilder::line(plot_left, plot_top + plot_height, plot_left + plot_width,
-        plot_top + plot_height, ChartStyle::AXIS_COLOR, 2);
+    draw_axes(svg);
 
     // Curves.
     for (size_t curve = 0; curve < m_x.size(); curve++) {
         std::string points;
         for (size_t i = 0; i < m_x[curve].size(); i++) {
-            float px = plot_left +
-                (SvgBuilder::axis_value(m_x[curve][i], m_logx) - x_min) / x_range * plot_width;
-            float py = plot_top + plot_height -
-                (SvgBuilder::axis_value(m_y[curve][i], m_logy) - y_min) / y_range * plot_height;
+            float px = left +
+                (SvgBuilder::axis_value(m_x[curve][i], m_logx) - x_min) / x_range * area_width;
+            float py = top + area_height -
+                (SvgBuilder::axis_value(m_y[curve][i], m_logy) - y_min) / y_range * area_height;
             points += SvgBuilder::format_number(px) + "," + SvgBuilder::format_number(py) + " ";
         }
         svg += "<polyline points=\"" + points + "\" fill=\"none\" stroke=\"" +
@@ -425,16 +468,15 @@ void LinePlot::save() {
 
     // Axis labels, drawn last so they sit above everything else.
     if (!m_xlabel.empty()) {
-        svg += SvgBuilder::text(plot_left + plot_width / 2, HEIGHT - 16, m_xlabel,
-            "middle", FONT_SIZE, ChartStyle::TEXT_COLOR, 0);
+        svg += SvgBuilder::text(left + area_width / 2, HEIGHT - 16, m_xlabel,
+            "middle", FONT_SIZE, ChartStyle::TEXT_COLOR, 0, true);
     }
     if (!m_ylabel.empty()) {
-        svg += SvgBuilder::text(24, plot_top + plot_height / 2, m_ylabel, "middle", FONT_SIZE,
-            ChartStyle::TEXT_COLOR, -90);
+        svg += SvgBuilder::text(24, top + area_height / 2, m_ylabel, "middle", FONT_SIZE,
+            ChartStyle::TEXT_COLOR, -90, true);
     }
 
-    svg += "</svg>";
-    SvgBuilder::write_file(m_filename, svg);
+    write_svg(svg);
     m_saved = true;
 }
 
@@ -447,52 +489,59 @@ const float HistogramPlot::MARGIN_BOTTOM = 32;
 const int HistogramPlot::TICK_COUNT = 5;
 const float HistogramPlot::FONT_SIZE = 19;
 
-void HistogramPlot::draw(const std::vector<float>& frequencies,
-                         const std::string& filename,
-                         const std::string& title, float tolerance) {
+HistogramPlot::HistogramPlot(const std::string& filename, const std::string& title, float tolerance)
+    : Chart(filename, title, WIDTH, HEIGHT, MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM, FONT_SIZE),
+      m_tolerance(tolerance), m_saved(false) {
+}
+
+HistogramPlot::~HistogramPlot() {
+    if (!m_saved) {
+        save();
+    }
+}
+
+void HistogramPlot::draw(const std::vector<float>& frequencies) {
+    m_frequencies = frequencies;
+}
+
+void HistogramPlot::save() {
     float sum = 0;
-    for (size_t i = 0; i < frequencies.size(); i++) {
-        sum += frequencies[i];
+    for (size_t i = 0; i < m_frequencies.size(); i++) {
+        sum += m_frequencies[i];
     }
 
-    float plot_left = MARGIN_LEFT;
-    float plot_top = MARGIN_TOP;
-    float plot_width = WIDTH - MARGIN_LEFT - MARGIN_RIGHT;
-    float plot_height = HEIGHT - MARGIN_TOP - MARGIN_BOTTOM;
+    float left = plot_left();
+    float top = plot_top();
+    float area_width = plot_width();
+    float area_height = plot_height();
 
-    std::string svg = SvgBuilder::header(WIDTH, HEIGHT, ChartStyle::BACKGROUND);
+    std::string svg = draw_header();
     svg += "<defs>"
         "<linearGradient id=\"histBar\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">"
         "<stop offset=\"0%\" stop-color=\"#ffb199\"/>"
         "<stop offset=\"100%\" stop-color=\"" + std::string(ChartStyle::PALETTE[1]) + "\"/></linearGradient>" +
         ChartStyle::glow_filter("histGlow", ChartStyle::PALETTE[1]) + "</defs>";
 
-    if (!title.empty()) {
-        svg += SvgBuilder::text(WIDTH / 2, 30, title, "middle", FONT_SIZE, ChartStyle::TEXT_COLOR, 0, true);
-    }
+    draw_axes(svg);
 
-    svg += SvgBuilder::line(plot_left, plot_top, plot_left, plot_top + plot_height, ChartStyle::AXIS_COLOR, 2);
-    svg += SvgBuilder::line(plot_left, plot_top + plot_height, plot_left + plot_width,
-        plot_top + plot_height, ChartStyle::AXIS_COLOR, 2);
-
-    if (std::abs(sum - 1.0f) > tolerance) {
+    if (std::abs(sum - 1.0f) > m_tolerance) {
         std::string line1 = "Error: frequencies don't add up to 1.";
         std::string line2 = "(sum = " + SvgBuilder::format_number(sum) + ", tolerance = " +
-            SvgBuilder::format_number(tolerance) + ")";
+            SvgBuilder::format_number(m_tolerance) + ")";
         float content_width = std::max(
             SvgBuilder::text_width(line1, FONT_SIZE), SvgBuilder::text_width(line2, FONT_SIZE));
         float panel_w = std::min(content_width + 40, WIDTH - 32);
         float panel_h = 84;
         float panel_x = (WIDTH - panel_w) / 2;
-        float panel_y = plot_top + (plot_height - panel_h) / 2;
+        float panel_y = top + (area_height - panel_h) / 2;
         svg += SvgBuilder::rect(panel_x, panel_y, panel_w, panel_h, 8,
-            ChartStyle::ERROR_BACKGROUND, ChartStyle::ERROR_COLOR);
+            ChartStyle::ERROR_BACKGROUND, ChartStyle::ERROR_COLOR, 2);
         svg += SvgBuilder::text(WIDTH / 2, panel_y + 34, line1, "middle", FONT_SIZE, ChartStyle::ERROR_COLOR, 0);
         svg += SvgBuilder::text(WIDTH / 2, panel_y + 62, line2, "middle", FONT_SIZE, ChartStyle::ERROR_COLOR, 0);
     } else {
         float max_frequency = 0;
-        for (size_t i = 0; i < frequencies.size(); i++) {
-            max_frequency = std::max(max_frequency, frequencies[i]);
+        for (size_t i = 0; i < m_frequencies.size(); i++) {
+            max_frequency = std::max(max_frequency, m_frequencies[i]);
         }
         if (max_frequency <= 0) {
             max_frequency = 1;
@@ -500,20 +549,20 @@ void HistogramPlot::draw(const std::vector<float>& frequencies,
 
         for (int t = 0; t < TICK_COUNT; t++) {
             float value = max_frequency * t / (TICK_COUNT - 1);
-            float py = plot_top + plot_height - value / max_frequency * plot_height;
-            svg += SvgBuilder::line(plot_left, py, plot_left + plot_width, py, ChartStyle::GRID_COLOR, 1);
-            svg += SvgBuilder::text(plot_left - 12, py + 6, SvgBuilder::format_number(value), "end", FONT_SIZE,
+            float py = top + area_height - value / max_frequency * area_height;
+            svg += SvgBuilder::line(left, py, left + area_width, py, ChartStyle::GRID_COLOR, 1);
+            svg += SvgBuilder::text(left - 12, py + 6, SvgBuilder::format_number(value), "end", FONT_SIZE,
                 ChartStyle::TEXT_COLOR, 0);
         }
 
-        float count = static_cast<float>(frequencies.size());
-        float slot = count > 0 ? plot_width / count : plot_width;
+        float count = static_cast<float>(m_frequencies.size());
+        float slot = count > 0 ? area_width / count : area_width;
         float bar_width = slot * 0.6f;
         svg += "<g filter=\"url(#histGlow)\">";
-        for (size_t i = 0; i < frequencies.size(); i++) {
-            float bar_height = frequencies[i] / max_frequency * plot_height;
-            float bx = plot_left + slot * static_cast<float>(i) + (slot - bar_width) / 2;
-            float by = plot_top + plot_height - bar_height;
+        for (size_t i = 0; i < m_frequencies.size(); i++) {
+            float bar_height = m_frequencies[i] / max_frequency * area_height;
+            float bx = left + slot * static_cast<float>(i) + (slot - bar_width) / 2;
+            float by = top + area_height - bar_height;
             svg += "<rect x=\"" + SvgBuilder::format_number(bx) + "\" y=\"" + SvgBuilder::format_number(by) +
                 "\" width=\"" + SvgBuilder::format_number(bar_width) + "\" height=\"" +
                 SvgBuilder::format_number(bar_height) + "\" rx=\"3\" fill=\"url(#histBar)\"/>";
@@ -521,6 +570,6 @@ void HistogramPlot::draw(const std::vector<float>& frequencies,
         svg += "</g>";
     }
 
-    svg += "</svg>";
-    SvgBuilder::write_file(filename, svg);
+    write_svg(svg);
+    m_saved = true;
 }
