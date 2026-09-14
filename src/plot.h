@@ -85,6 +85,9 @@ private:
     static const float MARGIN_TOP;
     static const float MARGIN_BOTTOM;
     static const int TICK_COUNT;
+    // Every piece of text is drawn at this size (the title is bold
+    // instead of larger).
+    static const float FONT_SIZE;
 
     /// SVG file to write, set at construction.
     std::string m_filename;
@@ -154,4 +157,7 @@ private:
     static const float MARGIN_TOP;
     static const float MARGIN_BOTTOM;
     static const int TICK_COUNT;
+    // Every piece of text is drawn at this size (the title is bold
+    // instead of larger).
+    static const float FONT_SIZE;
 };
