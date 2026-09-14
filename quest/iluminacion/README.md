@@ -181,7 +181,7 @@ classDiagram
 
 * Clase `std::vector<string>`: lista dinámica de objetos `string`.
 
-       - Método `size()`: obtiene la longitud actual de la secuencia (número de objetos en la lista) 
+       - Método `size()`: obtiene la longitud actual de la secuencia (número de objetos en la lista). 
 
        - Corchetes `[i]`: permiten acceder directamente al i-ésimo elemento de la secuencia.
 

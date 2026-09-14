@@ -5,7 +5,7 @@ tags: [vector_gym:7, homework:3-7]
 
 Los nanobots disfrutan con los ejercicios de análisis de datos. 
 Uno de sus favoritos consiste en estudiar propuestas de diseño de chips, 
-y ver si es posible interconectarlos de la manera pedida usando grafos. Después de varte
+y ver si es posible interconectarlos de la manera pedida usando grafos. Después de verte
 varias veces por el gimnasio, te han invitado a probar el ejercicio.
 
 {{ img_badge("graph.png") }}
@@ -24,7 +24,7 @@ El vector contiene un número positivo por cada chip del diseño:
 
 El diseño sólo es válido si:
 
-* Todos los chips tiene todas sus conexiones satisfechas.
+* Todos los chips tienen todas sus conexiones satisfechas.
 * El vector de entrada llega ordenado de mayor a menor número de conexiones.
 * No está vacío ni contiene ningún valor menor que 1.
 

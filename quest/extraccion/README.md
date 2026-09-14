@@ -53,7 +53,7 @@ con estas restricciones:
 
 Todas las naves de minería deben tener un 
 {{ def("constructor por defecto", text="constructor por defecto") }} 
-método `mine` que:
+y un método `mine` que:
 
 - Acepte como único parámetro una {{ def("referencia", text="referencia") }} 
   a cualquier tipo de asteroide.
@@ -87,7 +87,7 @@ como la siguiente y usarla con nuestra jerarquía.
 ## Minado en dos tiempos
 
 Para completar el paquete de funcionalidad, sólo falta crear la clase `Mine`.
-Esta mina usará dos naves mineras de tipo `MineA` y `MineB` alternativamente
+Esta mina usará dos naves mineras de tipo `MinerA` y `MinerB` alternativamente
 para trabajar los asteroides cercanos.
 
 !!! questions

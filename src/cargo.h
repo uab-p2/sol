@@ -1,7 +1,7 @@
 #pragma once
 #include "ship.h"
 
-/// Cargo transportation ship
+/// Cargo transportation ship.
 class Cargo : public Ship {
 public:
     /// Create a cargo ship carrying `units` cargo units, estimated
@@ -72,6 +72,6 @@ protected:
     float m_estimated_cost;
 
 private:
-    /// Maximum cargo loadable in this cargo ship
+    /// Maximum cargo loadable in this cargo ship.
     const unsigned MAXIMUM_CARGO = 50000;
 };
