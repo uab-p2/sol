@@ -485,7 +485,7 @@ const float HistogramPlot::HEIGHT = 320;
 const float HistogramPlot::MARGIN_LEFT = 76;
 const float HistogramPlot::MARGIN_RIGHT = 24;
 const float HistogramPlot::MARGIN_TOP = 54;
-const float HistogramPlot::MARGIN_BOTTOM = 32;
+const float HistogramPlot::MARGIN_BOTTOM = 56;
 const int HistogramPlot::TICK_COUNT = 5;
 const float HistogramPlot::FONT_SIZE = 19;
 
@@ -500,8 +500,9 @@ HistogramPlot::~HistogramPlot() {
     }
 }
 
-void HistogramPlot::draw(const std::vector<float>& frequencies) {
+void HistogramPlot::draw(const std::vector<float>& frequencies, const std::vector<float>& x) {
     m_frequencies = frequencies;
+    m_x = x;
 }
 
 void HistogramPlot::save() {
@@ -568,6 +569,14 @@ void HistogramPlot::save() {
                 SvgBuilder::format_number(bar_height) + "\" rx=\"3\" fill=\"url(#histBar)\"/>";
         }
         svg += "</g>";
+
+        if (m_x.size() == m_frequencies.size()) {
+            for (size_t i = 0; i < m_x.size(); i++) {
+                float bx = left + slot * (static_cast<float>(i) + 0.5f);
+                svg += SvgBuilder::text(bx, top + area_height + 28, SvgBuilder::format_number(m_x[i]),
+                    "middle", FONT_SIZE, ChartStyle::TEXT_COLOR, 0);
+            }
+        }
     }
 
     write_svg(svg);

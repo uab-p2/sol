@@ -193,7 +193,9 @@ public:
     /// @param frequencies relative frequencies to plot; must add up
     ///   to 1, since each value is drawn as a fraction of the
     ///   tallest bar.
-    void draw(const std::vector<float>& frequencies);
+    /// @param x label for each bar, in the same order as
+    ///   `frequencies`; leave empty to label bars 0, 1, 2, ...
+    void draw(const std::vector<float>& frequencies, const std::vector<float>& x = {});
 
     /// Write the SVG file now. Safe to call more than once, or not
     /// at all (the destructor then does it instead). draw() must
@@ -220,4 +222,7 @@ private:
     bool m_saved;
     /// Relative frequencies to plot, set by draw().
     std::vector<float> m_frequencies;
+    /// Label for each bar, set by draw(); empty to label bars
+    /// 0, 1, 2, ...
+    std::vector<float> m_x;
 };

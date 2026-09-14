@@ -37,7 +37,7 @@ Cuando necesitan contarse, los nanobots hacen lo siguiente:
 Hemos preparado por ti la clase `HistogramPlot` en `src/plot.h|cpp` para que puedas
 visualizar la distribución de las entradas como aquí:
 
-:::compile_and_run solution highlight=(21,25)
+:::compile_and_run solution highlight=(25,28)
 :::
 
 {{ help_links("std_vector", "vector_operations") }}
