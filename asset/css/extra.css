@@ -1,6 +1,6 @@
 :root {
-    /* Octicon "law" (scroll-like), shared by the "articles" (codex_links)
-       admonition icon and .page-title-icon.codex — kept as a single
+    /* Octicon "law" (scroll-like), shared by the "articles" (help_links)
+       admonition icon and .page-title-icon.article — kept as a single
        variable so the data URI isn't duplicated. */
     --icon-scroll: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M5 8.25a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5h-4A.75.75 0 0 1 5 8.25ZM4 10.5A.75.75 0 0 0 4 12h4a.75.75 0 0 0 0-1.5H4Z"/><path d="M13-.005c1.654 0 3 1.328 3 3 0 .982-.338 1.933-.783 2.818-.443.879-1.028 1.758-1.582 2.588l-.011.017c-.568.853-1.104 1.659-1.501 2.446-.398.789-.623 1.494-.623 2.136a1.5 1.5 0 1 0 2.333-1.248.75.75 0 0 1 .834-1.246A3 3 0 0 1 13 16H3a3 3 0 0 1-3-3c0-1.582.891-3.135 1.777-4.506.209-.322.418-.637.623-.946.473-.709.923-1.386 1.287-2.048H2.51c-.576 0-1.381-.133-1.907-.783A2.68 2.68 0 0 1 0 2.995a3 3 0 0 1 3-3Zm0 1.5a1.5 1.5 0 0 0-1.5 1.5c0 .476.223.834.667 1.132A.75.75 0 0 1 11.75 5.5H5.368c-.467 1.003-1.141 2.015-1.773 2.963-.192.289-.381.571-.558.845C2.13 10.711 1.5 11.916 1.5 13A1.5 1.5 0 0 0 3 14.5h7.401A2.989 2.989 0 0 1 10 13c0-.979.338-1.928.784-2.812.441-.874 1.023-1.748 1.575-2.576l.017-.026c.568-.853 1.103-1.658 1.501-2.448.398-.79.623-1.497.623-2.143 0-.838-.669-1.5-1.5-1.5Zm-10 0a1.5 1.5 0 0 0-1.5 1.5c0 .321.1.569.27.778.097.12.325.227.74.227h7.674A2.737 2.737 0 0 1 10 2.995c0-.546.146-1.059.401-1.5Z"/></svg>');
 }
@@ -117,17 +117,17 @@ div.main-logo img {
 
 /* Links */
 
-/* Codex links */
-a.codex {
+/* Help article links */
+a.article {
     display: inline-block;
     text-decoration: none;
 }
 
-a.codex::before {
+a.article::before {
     content: "📜";
 }
 
-a.codex::after {
+a.article::after {
     content: "";
 }
 
@@ -147,11 +147,12 @@ a.quest::after, a.campaign::after {
     content: "";
 }
 
-/* Icon to the left of a quest/codex page's own H1 title, mirroring the
-   glyph already shown by a.quest/a.codex links elsewhere. Injected as an
-   empty span (see _CODEX_TITLE_RE in autosection.py, and
-   generate_quest_sections) so the glyph is CSS-generated content, not
-   text — it doesn't leak into the rendered <title> tag or nav. */
+/* Icon to the left of a quest/campaign/article page's own H1 title,
+   mirroring the glyph already shown by a.quest/a.campaign/a.article links
+   elsewhere. Injected as an empty span (see _PAGE_TITLE_RE in
+   autosection.py, and generate_quest_sections) so the glyph is
+   CSS-generated content, not text — it doesn't leak into the rendered
+   <title> tag or nav. */
 .page-title-icon {
     display: inline-flex;
     align-items: center;
@@ -166,9 +167,13 @@ a.quest::after, a.campaign::after {
     content: "❂";
 }
 
-/* Same scroll icon as the "articles" (codex_links) admonition. Sized in
+.page-title-icon.campaign::before {
+    content: "🛰";
+}
+
+/* Same scroll icon as the "articles" (help_links) admonition. Sized in
    rem, not em, so it stays fixed regardless of the H1's own font-size. */
-.page-title-icon.codex::before {
+.page-title-icon.article::before {
     content: "";
     display: inline-block;
     width: 1.05rem;
@@ -194,7 +199,7 @@ a.definition {
 
 /* Small "Δ" flagging a section heading (any attr_list-tagged one — see
    Definition._tagged_sections) as a glossary definition, injected by
-   Autosection.complete_codex_markdown as an empty span. The glyph itself is
+   Autosection.complete_help_markdown as an empty span. The glyph itself is
    generated content (::before), not text, so the `toc` extension — which
    reads a heading's text content to build the nav/TOC — never sees it. */
 .definition-marker {
@@ -321,8 +326,37 @@ body.popup-open {
 }
 
 .solution-status-unlocked {
+    color: #2e7d32;
     -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5.5 4v2h7A1.5 1.5 0 0 1 14 7.5v6a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5v-6A1.5 1.5 0 0 1 3.499 6H4V4a4 4 0 0 1 7.371-2.154.75.75 0 0 1-1.264.808A2.5 2.5 0 0 0 5.5 4Zm-2 3.5v6h9v-6h-9Z"/></svg>');
     mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5.5 4v2h7A1.5 1.5 0 0 1 14 7.5v6a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5v-6A1.5 1.5 0 0 1 3.499 6H4V4a4 4 0 0 1 7.371-2.154.75.75 0 0 1-1.264.808A2.5 2.5 0 0 0 5.5 4Zm-2 3.5v6h9v-6h-9Z"/></svg>');
+}
+
+[data-md-color-scheme="slate"] .solution-status-unlocked {
+    color: #66bb6a;
+}
+
+/* Same locked/unlocked glyph, flushed to the right of a quest page's own H1
+   (see generate_quest_sections in autosection.py) so a quest's solution
+   status is visible without scrolling to the bottom "Solución" link. The H1
+   is turned into a flex row (rather than floating the link) so the icon is
+   vertically centered against the title text regardless of the H1's own
+   font-size. */
+.md-typeset h1:has(.solution-status-link) {
+    display: flex;
+    align-items: center;
+}
+
+.solution-status-link {
+    flex-shrink: 0;
+    margin-left: auto;
+    padding-left: 0.5em;
+    font-size: 1rem;
+    color: var(--md-default-fg-color);
+}
+
+.solution-status-link .solution-status {
+    width: 0.85em;
+    height: 0.85em;
 }
 
 /* Admonitions */
@@ -367,7 +401,7 @@ details.goals:focus-within {
     mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 1,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 1,1 20,12A8,8 0 0,1 12,20M12,6A6,6 0 1,0 18,12A6,6 0 0,0 12,6M12,16A4,4 0 1,1 16,12A4,4 0 0,1 12,16M12,10A2,2 0 1,0 14,12A2,2 0 0,0 12,10Z"/></svg>');
 }
 
-/* !!! articles : Related codex links admonition */
+/* !!! articles : Related help article links admonition */
 .md-typeset .admonition.articles,
 .md-typeset details.articles {
     border-color: rgb(215 179 131);
@@ -682,7 +716,7 @@ div.decrypt-box p {
     display: none;
 }
 
-/* Macro warnings (missing snippets, quests, codex entries, etc.) */
+/* Macro warnings (missing snippets, quests, help articles, etc.) */
 .macro-warning {
     display: inline-block;
     background-color: #ff003388;
@@ -722,6 +756,68 @@ span.duration::after {
 
 span.duration {
     display: inline-block;
+}
+
+/* Gradescope example report (gradescope_report_example() macro, macro.py):
+   the HTML comes straight from luna.gradescope._Reporter's own
+   inline-styled markup, built for Gradescope's sanitized, stylesheet-less
+   page -- so it assumes plain browser defaults, which this site's own
+   rules below would otherwise override. Scoped to the macro's own wrapper
+   div so nothing here leaks into the rest of the site. */
+
+/* Scaled down a bit so the report doesn't dominate the help page next to
+   its surrounding prose. `zoom` (not `transform: scale`) so the box's
+   layout size shrinks along with its contents, instead of leaving blank
+   space around a visually-smaller box. */
+.gradescope-report-embed {
+    zoom: 0.9;
+}
+
+/* Undo `.md-typeset * img`'s display:block + auto side-margins: the
+   report's own inline img styles (`margin:10px 0`, no left/right) rely on
+   the browser-default inline display and the parent div's
+   text-align:center to center the SOL/quest badges -- forcing
+   display:block here cancels that centering. */
+.gradescope-report-embed img {
+    display: initial !important;
+    margin-left: initial !important;
+    margin-right: initial !important;
+}
+
+/* Undo Material's admonition styling on bare <details>/<summary>: the
+   report's collapsible "detalle"/"Sugerencias de formato" blocks are plain
+   HTML tags, not `???` admonitions, but Material's CSS targets bare
+   details/summary regardless of class. Restored to the native browser
+   widget, whose disclosure triangle already reads as Gradescope's own
+   (and already renders in the report's own accent orange, inherited from
+   summary's inline `color:` style). */
+.gradescope-report-embed details {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0.5em 0 !important;
+    display: revert !important;
+}
+
+.gradescope-report-embed summary {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: static !important;
+    display: revert !important;
+}
+
+.gradescope-report-embed summary::before,
+.gradescope-report-embed summary::after {
+    content: none !important;
+    display: none !important;
+}
+
+.gradescope-report-embed summary::marker,
+.gradescope-report-embed summary::-webkit-details-marker {
+    display: revert !important;
 }
 
 /* Mermaid diagrams */
@@ -768,4 +864,366 @@ pre.ansi-output {
     white-space: pre;
     font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
     font-size: 0.85em;
+}
+
+/* An SVG file embedded (as a data: URI <img>, see example.py's
+   _build_rendered_markdown) in a compile_and_run block's "Salida"
+   tab, e.g. a plot.h chart -- the SVG's own width/height would
+   otherwise force its literal pixel size regardless of the tab's
+   actual width. Vertical margin (not just the blank markdown line
+   between entries) keeps consecutive files from touching when a
+   block produces more than one. */
+.md-typeset details.example .tabbed-block img {
+    display: block;
+    margin: 16px auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Session timeline (session_timeline() macro, calendar page): a horizontal,
+   session-indexed CSS grid with two lanes -- "En clase" (session:<n> quests)
+   and "En casa" (homework:<n>-<m> quests, drawn as a bar spanning from the
+   assigned session's column up to, but not including, the discussed
+   session's column). Cell placement (grid-row/grid-column) is set inline
+   per cell by the macro; this file only styles the grid shell, the cards
+   within it, and the click-and-drag panning set up by timeline.js. */
+
+.md-typeset .timeline {
+    /* Break out of the prose-width content column to reach both screen
+       edges, without widening that column (and everything else in it) --
+       a viewport-centered box, sized and positioned independently of
+       whatever width the parent happens to have. */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    /* Opaque, and stacked above the nav/toc sidebars it now visually
+       overlaps (they'd otherwise show through at this width). */
+    background: var(--md-default-bg-color);
+    z-index: 1;
+}
+
+.md-typeset .timeline-scroll {
+    overflow-x: auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    cursor: grab;
+    /* Hide the native scrollbar -- timeline.js's edge arrows are the
+       "there's more" affordance instead. */
+    scrollbar-width: none;
+}
+
+.md-typeset .timeline-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.md-typeset .timeline-scroll.timeline-dragging {
+    cursor: grabbing;
+    user-select: none;
+}
+
+.md-typeset .timeline-arrow {
+    position: absolute;
+    top: 50%;
+    width: 2.4em;
+    height: 2.4em;
+    margin-top: -1.2em;
+    border: none;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--md-default-bg-color) 85%, transparent);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--md-typeset-color) 25%, transparent);
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    padding: 0;
+    transition: opacity 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    /* Above the frozen row-label column (z-index: 3) so the arrows stay
+       visible over it instead of being hidden underneath. */
+    z-index: 4;
+}
+
+.md-typeset .timeline-arrow.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.md-typeset .timeline-arrow.visible:hover,
+.md-typeset .timeline-arrow.visible:focus-visible {
+    background: color-mix(in srgb, #ff6e42 15%, var(--md-default-bg-color));
+    box-shadow: 0 0 12px 2px color-mix(in srgb, #ff6e42 70%, transparent);
+}
+
+.md-typeset .timeline-arrow-left {
+    left: 0.35rem;
+}
+
+.md-typeset .timeline-arrow-right {
+    right: 0.35rem;
+}
+
+.md-typeset .timeline-arrow::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.5em;
+    height: 0.5em;
+    border-style: solid;
+    border-width: 0 0.14em 0.14em 0;
+    border-color: #ff6e42;
+}
+
+.md-typeset .timeline-arrow-left::before {
+    transform: translate(-30%, -50%) rotate(135deg);
+}
+
+.md-typeset .timeline-arrow-right::before {
+    transform: translate(-70%, -50%) rotate(-45deg);
+}
+
+.md-typeset .timeline-grid {
+    display: grid;
+    gap: 0.5em;
+    align-items: stretch;
+}
+
+.md-typeset .timeline-cell {
+    min-width: 0;
+}
+
+.md-typeset .timeline-corner {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: var(--md-default-bg-color);
+}
+
+.md-typeset .timeline-header {
+    position: sticky;
+    top: 0;
+    padding: 0.4em 0.6em;
+    font-weight: 700;
+    text-align: center;
+    color: var(--md-default-fg-color);
+    background: color-mix(in srgb, var(--md-typeset-color) 8%, transparent);
+    border-radius: 0.5em;
+}
+
+.md-typeset .timeline-lane-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 0.5em 0.25em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    color: color-mix(in srgb, var(--md-typeset-color) 65%, transparent);
+    border-radius: 0.5em;
+    /* Frozen row header: stays pinned to the left edge of .timeline-scroll
+       while the grid pans/scrolls horizontally underneath it, so the "En
+       clase"/"En casa" labels remain visible at all times. Opaque
+       background (matched to the page, not the translucent tint below)
+       is required so lane cards don't show through as they scroll past. */
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: var(--timeline-row-bg);
+}
+
+/* Base row tint ("En clase"). "En casa" (row band, lane and cards) stays
+   transparent -- its cards are instead set apart by a thicker border in
+   this same color (.timeline-card-homework below). */
+.md-typeset .timeline {
+    --timeline-row-bg: color-mix(in srgb, var(--md-typeset-color) 5%, var(--md-default-bg-color));
+}
+
+.md-typeset .timeline-lane-label-homework {
+    background: transparent;
+}
+
+/* Row bands (macro.py): one grid item per row spanning every column,
+   inserted before that row's label/lane cells so it paints underneath
+   them -- tints the whole row, gaps between cards included, rather than
+   just the individual lane cells. */
+.md-typeset .timeline-row-band {
+    border-radius: 0.75em;
+    background: var(--timeline-row-bg);
+}
+
+.md-typeset .timeline-row-band-homework {
+    background: transparent;
+}
+
+.md-typeset .timeline-lane {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.25em;
+    border-radius: 0.75em;
+    border: 1px dashed color-mix(in srgb, var(--md-typeset-color) 20%, transparent);
+}
+
+.md-typeset .timeline-lane-homework {
+    border: none;
+}
+
+.md-typeset .timeline-lane-session {
+    border: none;
+}
+
+.md-typeset .timeline-lane-session .timeline-card {
+    border: none;
+}
+
+/* A session with a single quest centers its card in the row rather than
+   leaving it hanging from the top, next to the columns that do stack two
+   cards. Auto block margins center a lone item in the lane's flex
+   column, so no rule has to count the cards. */
+.md-typeset .timeline-lane-session .timeline-card:only-child {
+    margin-block: auto;
+}
+
+/* "Tear here" perforation between session columns in the "En clase" row:
+   a page-bg-colored dashed line (10px wide, 50px dash/50px gap -- a 5:1
+   dash-length:width ratio, same as the original thin version) centered
+   in the 0.5em grid gutter, so it reads as a cut through the row tint
+   rather than a border on the cards themselves. */
+.md-typeset .timeline-lane-session {
+    position: relative;
+}
+
+.md-typeset .timeline-lane-session:not(:first-of-type)::before {
+    content: "";
+    position: absolute;
+    top: 0.75em;
+    bottom: 0.75em;
+    left: calc(-0.25em - 5px);
+    width: 10px;
+    background: repeating-linear-gradient(to bottom,
+        var(--md-default-bg-color) 0 50px, transparent 50px 65px);
+    pointer-events: none;
+}
+
+.md-typeset .timeline-lane-homework .timeline-card {
+    border: 10px solid var(--timeline-row-bg);
+}
+
+/* Several quests sharing a campaign and homework period render as one
+   .timeline-card (_timeline_card_group() in macro.py) -- one border,
+   one full entry per quest laid out side by side, each with the same
+   badge/title/campaign/meta lines a lone card has. The entries share
+   the band's full width
+   (flex: 1 on equal 0 bases) so they spread out evenly across it
+   instead of huddling in the middle of a wide homework block. */
+.md-typeset .timeline-card-group-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.75em;
+}
+
+.md-typeset .timeline-card-group-item {
+    display: flex;
+    flex: 1 1 0;
+    min-width: min-content;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25em;
+}
+
+.md-typeset .timeline-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25em;
+    padding: 0.6em;
+    border-radius: 0.75em;
+    background-color: transparent;
+    border: 1px solid color-mix(in srgb, var(--md-typeset-color) 15%, transparent);
+    text-align: center;
+}
+
+.md-typeset .timeline-badge-link {
+    display: inline-block;
+    line-height: 0;
+}
+
+/* Campaign color: every card carries its campaign's color as an inline
+   --timeline-campaign-color (session_timeline() in macro.py, whose
+   _CAMPAIGN_COLORS is where a new campaign's color has to be chosen),
+   so that two campaigns sharing a session are told apart at a glance.
+   The fallback keeps the badge's original accent orange for a card
+   rendered without one. */
+.md-typeset .timeline-badge {
+    width: 150px;
+    height: 150px;
+    max-width: 150px;
+    object-fit: cover;
+    border-radius: 0.5em;
+    border: 2px solid var(--timeline-campaign-color, #ff6e42);
+}
+
+.md-typeset .timeline-card-mission a.campaign {
+    color: var(--timeline-campaign-color, inherit);
+}
+
+/* Images (and, as belt-and-braces, any link/text) inside the timeline must
+   never start the browser's own native drag-and-drop -- that would hijack
+   timeline.js's click-and-drag panning. draggable="false" on the <img>
+   itself (macro.py) covers Chrome/Firefox; -webkit-user-drag covers
+   Safari, which ignores the attribute for background/foreground images. */
+.md-typeset .timeline a,
+.md-typeset .timeline img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+}
+
+.md-typeset .timeline-card-title a.quest {
+    font-weight: 700;
+}
+
+.md-typeset .timeline-card-mission {
+    font-size: 0.8em;
+    color: color-mix(in srgb, var(--md-typeset-color) 65%, transparent);
+    /* Tightens the .timeline-card flex gap (0.25em) between the quest
+       title above it and this campaign-title line. */
+    margin-top: -0.6em;
+}
+
+/* The quest's position within its campaign (`3/9`) closes the campaign
+   line, in that campaign's color so it reads as part of the campaign
+   name it follows (the name itself stays a link). */
+.md-typeset .timeline-card-progress {
+    margin-left: 0.4em;
+    color: var(--timeline-campaign-color, inherit);
+}
+
+/* Last line of every timeline entry: the quest's duration, in the same
+   dulled tone the quest pages use for durations (div.duration above). */
+.md-typeset .timeline-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.4em;
+    font-size: 0.8em;
+    color: color-mix(in srgb, var(--md-typeset-color) 50%, transparent);
+    /* Tightens the flex gap (0.25em) above it, matching the campaign
+       line it sits under (.timeline-card-mission). */
+    margin-top: -0.6em;
+}
+
+.md-typeset .timeline-card-duration::before {
+    font-weight: bold;
+    content: "⏱ ";
 }
