@@ -3,17 +3,87 @@ tags: [vector_gym:9, session:9]
 ---
 # Sabotaje
 
-Ya no basta con medir: ahora los nanobots deben sabotear sus propios algoritmos, construyendo la entrada más adversa posible para cada uno.
+Durante la última carrera `linear_race` hubo un accidente,
+y se cree que fue juego sucio.
+Únete a la investigación y forma tu propia opinión.
 
-{{ img_badge("placeholder.png") }}
+{{ img_badge("sabotage.png") }}
 
 {{ goals(
-    "Construye entradas de tamaño N que fuercen el peor caso de un algoritmo dado.",
-    "Distingue algoritmos cuyo peor caso es muy distinto del caso medio de aquellos en los que coinciden.",
+    "Considera los casos mejor, medio y peor.",
+    "Propón casos ideales, normales y patológicos."
 ) }}
 
-## TODO
 
-- 3 algoritmos: fácil = búsqueda lineal (`rastreo`); difícil = inserción ordenada (`ensamblaje`); imposible (peor≈medio) = búsqueda binaria (`rastreo`).
-- Reutilizar el framework de medición de `carrera`.
-- PIN: futuro cuestionario/juego sobre complejidades (fuera de esta campaña por ahora).
+## Reglamento
+
+En esta prueba, juego limpio significa vectores de entrada
+con valores aleatorios (uniformemente distribuidos)
+en \( [-V,V] \), con \( V = 10000 \).
+
+El primer sospechoso es el generador de números aleatorios:
+podría estar viciado. La primera tarea de investigación
+es reproducir la generación de secuencias y analizarlas estadísticamente.
+
+La frecuencia relativa de cada valor se calcula igual que en
+{{ quest_link("recuento") }}.
+
+{{ snippet_box("generate_random", declaration=True, open=False) }}
+
+{{ snippet_box("analyze_random", declaration=True, open=False) }}
+
+!!! questions
+
+    * Utilizando el `Random::get_int` de `src/random.h`,
+      implementa `generate_random` en `investigation.cpp`.
+
+    * Implementa `analyze_random` (también en `investigation.cpp`),
+      que calcula la frecuencia relativa de cada valor de
+      \( [-V,V] \) en la secuencia generada, en orden.
+
+    * Obtén la frecuencia mínima y máxima del resultado. ¿Cuánto se
+      distancian entre sí? ¿Qué te dice esto sobre el generador?
+
+{{ help_links("std_vector", "vector_operations") }}
+
+## Cámara lenta
+
+La investigación continúa. Necesitamos estudiar los tiempos de ejecución
+de `linear_search` parecido al quest {{ quest_link("carrera") }}.
+
+Genera secuencias aleatorias de N elementos, \( V = 10000 \),
+para valores crecientes de N. Después:
+
+* Obtén los tiempos de ejecución para encontrar el valor \( x = 0 \) en cada secuencia.
+* Obtén también los tiempos para el valor 88888 (siempre ausente).
+* Compara los resultados con `LinePlot` disponible en `src/plot.h`.
+
+!!! questions
+
+    * ¿Corresponden los resultados a lo esperado?
+    * ¿Qué relación hay entre las dos líneas?
+    * ¿Qué papel juega \( x \) en los tiempos?
+    * ¿Qué papel juega \( V \) en los tiempos?
+
+## Fraude
+
+Por descarte, el último elemento bajo sospecha es la elección de los elementos de búsqueda.
+
+Queremos repetir las mediciones, eligiendo el valor de búsqueda de tres maneras:
+
+* En un caso, se elige el valor menos conveniente para `linear_search`.
+* En otro caso, se elige el valor más conveniente para `linear_search`.
+* En el último caso, se elige un valor aleatorio en \( [-V,V] \) cada vez.
+
+!!! questions
+
+    * ¿Qué relación hay entre las líneas que muestras?
+      ¿Es posible hacer trampas en la carrera?
+
+    * ¿Qué ocurre si cambiamos `linear_search` por `is_ascending`?
+      ¿Cambian nuestras opciones de hacer trampa?
+
+    * ¿Qué tiene más sentido analizar:
+      el {{ def("caso peor", text="caso peor") }},
+      el {{ def("caso medio", text="caso medio") }}
+      o el {{ def("caso ideal", text="caso ideal") }}?
