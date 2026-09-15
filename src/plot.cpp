@@ -468,11 +468,7 @@ void HistogramPlot::save() {
     float area_height = plot_height();
 
     std::string svg = draw_header();
-    svg += "<defs>"
-        "<linearGradient id=\"histBar\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">"
-        "<stop offset=\"0%\" stop-color=\"#ffb199\"/>"
-        "<stop offset=\"100%\" stop-color=\"" + std::string(PlotStyle::PALETTE[1]) + "\"/></linearGradient>" +
-        PlotStyle::glow_filter("histGlow", PlotStyle::PALETTE[1]) + "</defs>";
+    svg += "<defs>" + PlotStyle::glow_filter("histGlow", PlotStyle::PALETTE[0]) + "</defs>";
 
     draw_axes(svg);
 
@@ -517,7 +513,8 @@ void HistogramPlot::save() {
             float by = top + area_height - bar_height;
             svg += "<rect x=\"" + SvgBuilder::format_number(bx) + "\" y=\"" + SvgBuilder::format_number(by) +
                 "\" width=\"" + SvgBuilder::format_number(bar_width) + "\" height=\"" +
-                SvgBuilder::format_number(bar_height) + "\" rx=\"3\" fill=\"url(#histBar)\"/>";
+                SvgBuilder::format_number(bar_height) + "\" rx=\"3\" fill=\"" +
+                std::string(PlotStyle::PALETTE[0]) + "\"/>";
         }
         svg += "</g>";
 
