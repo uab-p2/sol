@@ -141,7 +141,7 @@ Estudia el código anterior y extrapola:
         ¿qué ficheros necesitaríamos cambiar? ¿Pasa algo si ya hemos distribuido
         el código y lo están usando otras personas?
 
-{{ codex_links("class_what", "class_why", "diagrams") }}
+{{ help_links("class_what", "class_why", "diagrams") }}
 
 ### Tiras LED
 
@@ -181,7 +181,7 @@ classDiagram
 
 * Clase `std::vector<string>`: lista dinámica de objetos `string`.
 
-       - Método `size()`: obtiene la longitud actual de la secuencia (número de objetos en la lista) 
+       - Método `size()`: obtiene la longitud actual de la secuencia (número de objetos en la lista). 
 
        - Corchetes `[i]`: permiten acceder directamente al i-ésimo elemento de la secuencia.
 
@@ -239,7 +239,7 @@ int main() {
 
 {{ snippet_box("receive_lights", declaration=True, open=True) }}
 
-{{ codex_links("std_cin_cout", "std_string", "std_vector") }}
+{{ help_links("std_cin_cout", "std_string", "std_vector") }}
 
 ## Light Jockey
 

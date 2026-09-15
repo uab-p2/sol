@@ -54,7 +54,7 @@ Una vez creado un tanque, quien lo use sólo debe poder hacer dos cosas:
     * ¿Qué tipo de protección ofreces para evitar que se manipule la cantidad de aire sin permiso:
       ¿en tiempo de compilación, o en tiempo de ejecución? ¿Cuál es la diferencia?
 
-{{ codex_links("class_constructor_destructor", "class_encapsulation") }}
+{{ help_links("class_constructor_destructor", "class_encapsulation") }}
 
 ## Puntos de dispensación
 
@@ -138,4 +138,4 @@ int main() {
 :::compile_and_run solution
 :::
 
-{{ codex_links("std_map", "class_constructor_destructor") }}
+{{ help_links("std_map", "class_constructor_destructor") }}

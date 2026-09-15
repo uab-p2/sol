@@ -1,7 +1,7 @@
 #include <chrono>
 #include <iostream>
 
-/// Quest entry point
+/// Use this main for your demo
 int main() {
     constexpr int iteration_count = 250'000'000;
     constexpr double reference_seconds = 1.9360;

@@ -38,8 +38,21 @@ jobs:
         run: |
           sudo apt update -y
           sudo apt install -y $(grep -Ev '^\s*(#|$)' luna.git/requirements_apt.txt)
+          # cmake/valgrind: needed to actually compile and grade a solution,
+          # for the gradescope_report_example macro (luna.gradescope._LocalHarness) --
+          # g++ isn't installed explicitly since ubuntu-latest ships build-essential.
+          sudo apt install -y cmake valgrind
           python -m pip install --upgrade pip
           cd luna.git && python -m pip install -e luna-plugin
+
+      # luna.gradescope._LocalHarness (gradescope/local_harness.py, the
+      # gradescope_report_example macro) needs these two pre-existing and
+      # owned by the current user -- it refuses to create or chown them
+      # itself, so CI is the one place allowed to.
+      - name: Prepare gradescope example-report sandbox
+        run: |
+          sudo mkdir -p /eclipse /autograder
+          sudo chown "$(id -u):$(id -g)" /eclipse /autograder
 
       - name: Locate libclang and export env
         run: |

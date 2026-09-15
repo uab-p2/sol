@@ -25,7 +25,7 @@ de enteros (`std::vector<int>`).
 
 Te damos la cabecera de la clase `IntVectorSkills`
 en `src/`, pero no la implementación. Hemos agrupado las habilidades en categorías, y las hemos descrito en detalle
-en {{ codex_link ("vector_operations") }}. 
+en {{ help_link ("vector_operations") }}. 
 
 El objetivo es completar todos los ejercicios del gimnasio usando 
 los métodos apropiados de `IntVectorSkills` en cada caso.
@@ -40,7 +40,7 @@ solucionar cada quest.
       a medida que las necesites en los quests siguientes.
 
 
-{{ codex_links ("std_vector", "vector_operations") }}
+{{ help_links ("std_vector", "vector_operations") }}
 
 ## Calentamiento 
 

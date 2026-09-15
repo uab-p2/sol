@@ -65,7 +65,7 @@ tus respuestas en `test.cpp`.
 
 {{ snippet_box("document.cpp") }}
 
-{{ codex_links(
+{{ help_links(
     "class_encapsulation", 
     "class_copy_constructor",
 ) }}
@@ -185,7 +185,7 @@ int main() {
       sus tests asociados en `test.cpp`. No implementes `inspect` todavía
       (deja una implementación vacía que compile).
 
-{{ codex_links(
+{{ help_links(
     "class_value_reference",
     "class_const",
 ) }}
@@ -230,6 +230,8 @@ int main() {
 
     * Implementa estos métodos con la funcionalidad requerida.
 
+    * Implementa una demo en `main.cpp` que muestre el funcionamiento.
+
     * Explica lo observado en los dos siguientes casos, y extrapola al resto
       de combinaciones.
 
@@ -264,6 +266,6 @@ const Document document("content", "id666");
 :::
 
 
-{{ codex_links(
+{{ help_links(
   "std_map",
 ) }}

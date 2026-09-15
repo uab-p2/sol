@@ -20,21 +20,21 @@ compilar el código de tu primer quest del proyecto SOL.
 !!! questions
 
     * Elige tu(s) sistema(s) operativo(s) y sigue las instrucciones
-      para instalar tu plataforma de desarrollo: {{ codex_link("plataforma") }}.
+      para instalar tu plataforma de desarrollo: {{ help_link("plataforma") }}.
 
 ## Código del proyecto SOL
 
 !!! questions
 
     * Consigue el código completo del proyecto SOL de cualquiera de las 
-      maneras propuestas: {{ codex_link("clone_project") }}.
+      maneras propuestas: {{ help_link("clone_project") }}.
       A continuación, cierra tu entorno de desarrollo (IDE).
 
 ## Quest 'Silicio y titanio'
 
 !!! questions
 
-    * Sigue las instrucciones en {{ codex_link("open_quest") }} 
+    * Sigue las instrucciones en {{ help_link("open_quest") }} 
       para abrir este quest (`silicio_y_titanio`) en tu IDE.
 
 ## Paso 4/4: Prueba de humo
@@ -46,7 +46,7 @@ compilar el código de tu primer quest del proyecto SOL.
       prueba de humo para tu nuevo y flamante plataforma de desarrollo: compilar
       y ejecutar el código de este quest (`silicio_y_titanio`).
     
-    * Siguiendo las instrucciones en {{ codex_link("run_quest") }}, podrás 
+    * Siguiendo las instrucciones en {{ help_link("run_quest") }}, podrás 
       ver un mensaje indicando cómo se compara
       la velocidad de tu máquina con la de la mía.
       ¿Cuál de las dos nos lleva más rápido?

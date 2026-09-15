@@ -100,7 +100,7 @@ siguientes partes:
 
 {{ snippet_box("Scene::action", declaration=True, open=False) }}
 
-{{ codex_links("class_constructor_destructor", "class_encapsulation", "class_composition") }}
+{{ help_links("class_constructor_destructor", "class_encapsulation", "class_composition") }}
 
 ## Piloto
 

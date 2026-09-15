@@ -1,4 +1,4 @@
-/// Your tests here
+/// Use this main for testing all your code
 #include <iostream>
 
 int main() {

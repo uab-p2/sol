@@ -1,5 +1,5 @@
 ---
-tags: [en_ruta:7, session:5]
+tags: [en_ruta:7, session:7]
 ---
 # Extracción
 
@@ -53,7 +53,7 @@ con estas restricciones:
 
 Todas las naves de minería deben tener un 
 {{ def("constructor por defecto", text="constructor por defecto") }} 
-método `mine` que:
+y un método `mine` que:
 
 - Acepte como único parámetro una {{ def("referencia", text="referencia") }} 
   a cualquier tipo de asteroide.
@@ -82,12 +82,12 @@ como la siguiente y usarla con nuestra jerarquía.
       * ¿Hace falta cambiar algo para que `describe_mining` permita minar
          diferentemente cada tipo de asteroide?
 
-{{ codex_link("class_inheritance") }}
+{{ help_link("class_inheritance") }}
 
 ## Minado en dos tiempos
 
 Para completar el paquete de funcionalidad, sólo falta crear la clase `Mine`.
-Esta mina usará dos naves mineras de tipo `MineA` y `MineB` alternativamente
+Esta mina usará dos naves mineras de tipo `MinerA` y `MinerB` alternativamente
 para trabajar los asteroides cercanos.
 
 !!! questions
@@ -125,4 +125,4 @@ para trabajar los asteroides cercanos.
 
 {{ snippet_box("Mine::get_next_miner", declaration=True, frame=False, indent=1) }}
 
-{{ codex_links("class_composition", "std_vector") }}
+{{ help_links("class_composition", "std_vector") }}

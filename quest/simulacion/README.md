@@ -1,5 +1,5 @@
 ---
-tags: [en_ruta:5, session:5]
+tags: [en_ruta:5, session:6]
 ---
 # Simulación
 
@@ -47,7 +47,7 @@ int main() {
 }
 :::
 
-{{ codex_links("class_constructor_destructor", "class_encapsulation") }}
+{{ help_links("class_constructor_destructor", "class_encapsulation") }}
 
 ## Especialización
 
@@ -152,7 +152,7 @@ int main() {
 }
 :::
 
-{{ codex_links("class_inheritance") }}
+{{ help_links("class_inheritance") }}
 
 ## Generalización
     

@@ -1,5 +1,5 @@
 ---
-tags: [en_ruta:5, session:4]
+tags: [en_ruta:5, session:5]
 ---
 # Clonación
 
@@ -72,7 +72,7 @@ int main(void) {
     * Implementa este diseño básico en `android.h` y `android.cpp`
       y verifica su funcionamiento localmente.
 
-{{ codex_links("class_constructor_destructor") }}
+{{ help_links("class_constructor_destructor") }}
 
 ### Clonación
 
@@ -139,7 +139,7 @@ int main() {
       requisitos anteriores.
 
 
-{{ codex_links("class_constructor_destructor", "class_copy_constructor", "class_assignment") }}
+{{ help_links("class_constructor_destructor", "class_copy_constructor", "class_assignment") }}
 
 ## Multiclonación
 

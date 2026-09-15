@@ -1,5 +1,5 @@
 ---
-tags: [vector_gym:3, homework:3-7]
+tags: [vector_gym:3, homework:3-8]
 ---
 # Recuento
 
@@ -34,8 +34,10 @@ Cuando necesitan contarse, los nanobots hacen lo siguiente:
     * Implementa la función `headcount_distribution` en `headcount.cpp`
       usando los métodos de `IntVectorSkills`.
 
-Hemos preparado por ti la función `Histogram::print` en `src/histogram.h|cpp` para que puedas
+Hemos preparado por ti la clase `HistogramPlot` en `src/plot.h|cpp` para que puedas
 visualizar la distribución de las entradas como aquí:
 
-:::compile_and_run solution highlight=(17,18)
+:::compile_and_run solution highlight=(25,28)
 :::
+
+{{ help_links("std_vector", "vector_operations") }}

@@ -63,7 +63,7 @@ int main() {
 }
 ::: 
 
-{{ codex_links("class_what", "class_constructor_destructor") }}
+{{ help_links("class_what", "class_constructor_destructor") }}
 
 ### Inalcanzables
 
@@ -81,7 +81,7 @@ reglas y sintaxis de este sistema llamado {{ def("encapsulamiento") }}.
       * Dibuja un {{ def("diagrama de clase") }} para `Star`.
       * Discute ventajas e inconvenientes de usar encapsulamiento.
 
-{{ codex_links("class_encapsulation") }}
+{{ help_links("class_encapsulation") }}
 
 ## Brújula celeste
 
@@ -123,4 +123,4 @@ classDiagram
 :::compile_and_run solution
 :::
 
-{{ codex_links("std_vector") }}
+{{ help_links("std_vector") }}
