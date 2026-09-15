@@ -344,7 +344,8 @@ void LinePlot::save() {
 
     svg += "<defs>";
     for (int i = 0; i < 4; i++) {
-        svg += PlotStyle::glow_filter("glow" + SvgBuilder::format_number(i), PlotStyle::PALETTE[i]);
+        svg += PlotStyle::glow_filter(
+            "glow" + SvgBuilder::format_number(static_cast<float>(i)), PlotStyle::PALETTE[i]);
     }
     svg += "</defs>";
 
@@ -370,7 +371,8 @@ void LinePlot::save() {
     std::vector<float> yticks = m_yticks;
     if (yticks.empty()) {
         for (int t = 0; t < TICK_COUNT; t++) {
-            yticks.push_back(y_min + y_range * t / (TICK_COUNT - 1));
+            yticks.push_back(
+                y_min + y_range * static_cast<float>(t) / static_cast<float>(TICK_COUNT - 1));
         }
     }
     for (size_t t = 0; t < yticks.size(); t++) {
@@ -384,7 +386,8 @@ void LinePlot::save() {
     std::vector<float> xticks = m_xticks;
     if (xticks.empty()) {
         for (int t = 0; t < TICK_COUNT; t++) {
-            xticks.push_back(x_min + x_range * t / (TICK_COUNT - 1));
+            xticks.push_back(
+                x_min + x_range * static_cast<float>(t) / static_cast<float>(TICK_COUNT - 1));
         }
     }
     for (size_t t = 0; t < xticks.size(); t++) {
@@ -410,7 +413,8 @@ void LinePlot::save() {
             markers += "<circle cx=\"" + SvgBuilder::format_number(px) + "\" cy=\"" +
                 SvgBuilder::format_number(py) + "\" r=\"7\" fill=\"" + color + "\"/>";
         }
-        svg += "<g filter=\"url(#glow" + SvgBuilder::format_number(curve % 4) + ")\">";
+        svg += "<g filter=\"url(#glow" +
+            SvgBuilder::format_number(static_cast<float>(curve % 4)) + ")\">";
         svg += "<polyline points=\"" + points + "\" fill=\"none\" stroke=\"" + color +
             "\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>";
         svg += markers;
@@ -496,7 +500,7 @@ void HistogramPlot::save() {
         }
 
         for (int t = 0; t < TICK_COUNT; t++) {
-            float value = max_frequency * t / (TICK_COUNT - 1);
+            float value = max_frequency * static_cast<float>(t) / static_cast<float>(TICK_COUNT - 1);
             float py = top + area_height - value / max_frequency * area_height;
             svg += SvgBuilder::line(left, py, left + area_width, py, PlotStyle::GRID_COLOR, 1);
             svg += SvgBuilder::text(left - 12, py + 6, SvgBuilder::format_number(value), "end", FONT_SIZE,
