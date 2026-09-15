@@ -29,7 +29,7 @@ mide el tiempo de `prepare_assembly` para entradas cada vez más grandes.
 !!! questions
 
     * Compara en un único plot los tiempos de ejecución para entradas
-      de \(N\) elementos, con \(N \in \{1000,\,2000,\,\ldots,\,10\;000\}\).
+      de \(N\) elementos, con \(N \in \{1000,\,2000,\,\ldots,\,10000\}\).
 
     * Considera el tiempo para \(N=5000\) entradas. Calcula también los tiempos para
       \(N=10000\) (el doble), y \(N=15000\) (el triple). ¿Qué patrón observas?
@@ -65,7 +65,7 @@ Implementa la función `sum_race` que repite \( R = 3000 \) veces:
     * Compara los tiempos de `prepare_assembly` y `sum_race` en el mismo plot
       (llama al método `plot` dos veces). ¿Es la evolución que esperabas?
 
-    * ¿Qué ocurre para \( N = 10\;000 \) y \( N = 15\;000 \) (el doble y el triple) elementos de entrada?
+    * ¿Qué ocurre para \( N = 10000 \) y \( N = 15000 \) (el doble y el triple) elementos de entrada?
       ¿Qué {{ def("complejidad", text="complejidad") }} le asignarías?
 
 ## Tercera noche
