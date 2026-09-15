@@ -1,5 +1,5 @@
 ---
-tags: [ vector_gym:5, session:6 ]
+tags: [ vector_gym:4, session:6 ]
 ---
 
 # Escondite

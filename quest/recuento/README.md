@@ -1,5 +1,5 @@
 ---
-tags: [vector_gym:4, homework:3-8]
+tags: [vector_gym:3, homework:3-8]
 ---
 # Recuento
 
