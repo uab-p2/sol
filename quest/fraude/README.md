@@ -1,24 +1,25 @@
 ---
 tags: [vector_gym:9, session:9]
 ---
-# Sabotaje
+# Fraude
 
-Durante la última carrera `linear_race` hubo un accidente,
-y se cree que fue juego sucio.
+Durante la última prueba tipo `linear_race`
+en el quest anterior ({{ quest_link("carrera") }})
+hubo acusaciones de fraude.
 Únete a la investigación y forma tu propia opinión.
 
-{{ img_badge("sabotage.png") }}
+{{ img_badge("cheating.png") }}
 
 {{ goals(
-    "Considera los casos mejor, medio y peor.",
-    "Propón casos ideales, normales y patológicos."
+    "Compara casos mejor, peor, medio.",
+    "Diseña casos ideales, normales y patológicos."
 ) }}
 
 
 ## Reglamento
 
 En esta prueba, juego limpio significa vectores de entrada
-con valores aleatorios (uniformemente distribuidos)
+con valores aleatorios *uniformemente distribuidos*
 en \( [-V,V] \), con \( V = 10000 \).
 
 El primer sospechoso es el generador de números aleatorios:
@@ -60,7 +61,8 @@ para valores crecientes de N. Después:
 
 !!! questions
 
-    * ¿Corresponden los resultados a lo esperado?
+    * ¿Qué {{ def("complejidad", text="complejidad") }} observas?
+      ¿Cuál esperabas?
     * ¿Qué relación hay entre las dos líneas?
     * ¿Qué papel juega \( x \) en los tiempos?
     * ¿Qué papel juega \( V \) en los tiempos?
@@ -77,11 +79,13 @@ Queremos repetir las mediciones, eligiendo el valor de búsqueda de tres maneras
 
 !!! questions
 
+    * ¿Qué valores son los más y menos convenientes?
+
     * ¿Qué relación hay entre las líneas que muestras?
       ¿Es posible hacer trampas en la carrera?
 
     * ¿Qué ocurre si cambiamos `linear_search` por `is_ascending`?
-      ¿Cambian nuestras opciones de hacer trampa?
+      ¿Cambian nuestras opciones de hacer trampa o sabotear?
 
     * ¿Qué tiene más sentido analizar:
       el {{ def("caso peor", text="caso peor") }},
