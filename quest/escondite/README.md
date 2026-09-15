@@ -39,51 +39,7 @@ La fila resultante tiene que seguir estando ordenada.
 Importante: utiliza una búsqueda optimizada aprovechando el orden
 de la entrada. Considera los siguientes tiempos:
 
-:::compile_and_run title="Comparativa tiempos" highlight=((26,29),(37,40))
-#include <iostream>
-#include <vector>
-#include "clock.h"
-#include "hunt.h"
-#include "int_vector_skills.h"
-using namespace std;
-
-/// Build a row of 20M nanobots.
-vector<int> get_nanobot_row() {
-    const int NANOBOT_COUNT = 20'000'000;
-    vector<int> ids(NANOBOT_COUNT);
-    for (int i = 0; i < NANOBOT_COUNT; i++) {
-        ids[i] = i;
-    }
-    return ids;
-}
-
-int main() {
-    const int SEARCH_COUNT = 10;
-
-    // First case
-    {
-        vector<int> ids = get_nanobot_row();
-        WallClock clock;
-        clock.start();
-        for (int i = 0; i < SEARCH_COUNT; i++) {
-            hunt_unordered(ids, ids.size()); // does not exist
-        }
-        cout << "Time case 1: " << fixed << clock.get_seconds() << " s" << endl;         
-    }
-
-    // Second case
-    {
-        vector<int> ids = get_nanobot_row();
-        WallClock clock;
-        clock.start();
-        for (int i = 0; i < SEARCH_COUNT; i++) {
-            hunt_ascending(ids, ids.size()); // does not exist
-        }
-        cout << "Time case 2: " << fixed << clock.get_seconds() << " s" << endl;         
-    }
-
-    return 0;
-}
+:::compile_and_run title="Comparativa tiempos" highlight=((26,29),(37,40)) quest
 :::
 
 
@@ -95,10 +51,8 @@ int main() {
     * Implementa las funciones `hunt_unordered` y `hunt_ascending` en `hunt.h|cpp`,
       usando los métodos de `IntVectorSkills`.
 
-    * Implementa una demo en `main.cpp` que mida, con `WallClock`, los tiempos de tus dos
-      búsquedas sobre filas de \(10^n\) nanobots, y muestre cómo evolucionan al crecer \(n\).
-
-    * Explica las diferencias de tiempos de ejecución que obtienes.
+    * Mide, con `WallClock`, los tiempos de tus dos búsquedas sobre filas
+      de \(10^n\) nanobots, y explica cómo evolucionan al crecer \(n\).
 
 :::compile_and_run solution
 :::

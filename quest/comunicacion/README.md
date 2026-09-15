@@ -230,6 +230,8 @@ int main() {
 
     * Implementa estos métodos con la funcionalidad requerida.
 
+    * Implementa una demo en `main.cpp` que muestre el funcionamiento.
+
     * Explica lo observado en los dos siguientes casos, y extrapola al resto
       de combinaciones.
 
